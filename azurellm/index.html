@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <title>reveal-md</title>
+    <link rel="shortcut icon" href="./favicon.ico" />
+    <link rel="stylesheet" href="./dist/reset.css" />
+    <link rel="stylesheet" href="./dist/reveal.css" />
+    <link rel="stylesheet" href="./dist/theme/black.css" id="theme" />
+    <link rel="stylesheet" href="./css/highlight/base16/zenburn.css" />
+
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section data-markdown data-separator="\r?\n---\r?\n" data-separator-vertical="\r?\n----\r?\n">
+          <textarea data-template>
+            ### How to get started with LLMs
+*Through the CCLS / Azure Infrastructure*
+
+
+(Last Update: 10.10.2024)
+
+---
+
+## Terminology
+
+- Azure is Microsofts Cloud Computing Platform
+- Access through the CCLS / UKA <!-- .element: class="fragment" --> 
+- Includes OpenAI and many more <!-- .element: class="fragment" -->
+- Data Privacy is better, but not perfect <!-- .element: class="fragment" -->
+
+
+---
+
+## Getting Access
+
+- Access through your UKA Account
+- Already setup by Marc <!-- .element: class="fragment" -->
+- Should work "out of the box" <!-- .element: class="fragment" -->
+
+---
+
+## Running LLMs (Pt. 1)
+
+- Provides a Web-Interface
+    - Similar to OpenAI <!-- .element: class="fragment" -->
+    - Contains Chatbots, Assistants, Audio Transcription, Image Generation, ... <!-- .element: class="fragment" -->
+    - Shared resource -> Shared data <!-- .element: class="fragment" -->
+    - Easy way to get sample code <!-- .element: class="fragment" -->
+
+---
+
+![](chatplayground.png)
+
+Notes:  View Code
+---
+
+## Running LLMs (Pt. 2)
+
+- Sample code for various languages
+- Default OpenAI API <!-- .element: class="fragment" -->
+- Straightforward to integrate into projects <!-- .element: class="fragment" -->
+
+---
+
+## Environmental Variables
+
+- Ensure you do not store credentials in code
+- DO NOT STORE CREDENTIALS IN CODE <!-- .element: class="fragment" -->
+<li class='fragment'>
+Set environmental variables, for example in *.zshrc* </li>
+```export AZURE_KEY="your_key"``` <!-- .element: class="fragment" data-fragment-index:2 -->
+
+---
+
+#### Python Example
+
+```python [1,2|4-6|9-13|15-24|26]
+import os
+from openai import AzureOpenAI
+
+endpoint = os.getenv("ENDPOINT_URL", "https://ukakisp01.openai.azure.com/")
+deployment = os.getenv("DEPLOYMENT_NAME", "gpt-4-32k")
+subscription_key = os.getenv("AZURE_KEY")
+
+# Initialize Azure OpenAI client with key-based authentication
+client = AzureOpenAI(
+    azure_endpoint = endpoint,
+    api_key = subscription_key,
+    api_version = "2024-05-01-preview",
+)
+
+completion = client.chat.completions.create(
+    model=deployment,
+    messages= [
+    {
+        "role": "system",
+        "content": "You are a cool AI Assistant."
+    }
+    ],
+    temperature=0.7 #Add optional parameters here
+)
+
+print(completion.to_json())
+```
+
+---
+
+### How to Dialogue?
+- The API is stateless
+- Every call needs to include the history: <!-- .element: class="fragment" -->
+- A list of previous messages containing: <!-- .element: class="fragment" -->
+    - Role: user/assistant/system <!-- .element: class="fragment" -->
+    - Content: the messages and replies <!-- .element: class="fragment" -->
+
+---
+
+### Conversation Example
+
+```python [3-10|12-19|21,22]
+[...]
+
+def chat_with_openai(user_input, conversation_history):
+    response = openai.ChatCompletion.create(
+        model=deployment,
+        messages=conversation_history + [{"role": "user", "content": user_input}]
+    )
+    reply = response['choices'][0]['message']['content']
+    conversation_history.append({"role": "assistant", "content": reply})
+    return reply
+
+def main():
+    conversation_history = [{"role": "system", "content": "You are a helpful assistant."}]
+    print("Start chatting with OpenAI:")
+    
+    while True:
+        user_input = input("You: ")
+        reply = chat_with_openai(user_input, conversation_history)
+        print(f"AI: {reply}")
+
+if __name__ == "__main__":
+    main()
+```
+
+---
+
+## Summary
+
+> Coffee in my cup,  
+> Papers scattered all around,  
+> Deadline creeps too close.
+
+***You now have the knowledge to generate daily Haikus to keep you motivated***
+
+---
+
+## Summary
+
+- Quick and easy access through the web interface (Azure AI Studio)
+- Code Snippets can be generated from there and quickly integrated
+- Advanced: 
+    - Add papers to the document storage and quickly answer questions from them
+    
+---
+
+# Q&A
+          </textarea>
+        </section>
+      </div>
+    </div>
+
+    <script src="./dist/reveal.js"></script>
+
+    <script src="./mermaid/dist/mermaid.min.js"></script>
+
+    <script src="./plugin/markdown/markdown.js"></script>
+    <script src="./plugin/highlight/highlight.js"></script>
+    <script src="./plugin/zoom/zoom.js"></script>
+    <script src="./plugin/notes/notes.js"></script>
+    <script src="./plugin/math/math.js"></script>
+    <script>
+      function extend() {
+        var target = {};
+        for (var i = 0; i < arguments.length; i++) {
+          var source = arguments[i];
+          for (var key in source) {
+            if (source.hasOwnProperty(key)) {
+              target[key] = source[key];
+            }
+          }
+        }
+        return target;
+      }
+
+      // default options to init reveal.js
+      var defaultOptions = {
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+        transition: 'default', // none/fade/slide/convex/concave/zoom
+        slideNumber: true,
+        highlight: {
+          highlightOnLoad: false
+        },
+        plugins: [
+          RevealMarkdown,
+          RevealHighlight,
+          RevealZoom,
+          RevealNotes,
+          RevealMath
+        ]
+      };
+
+      // options from URL query string
+      var queryOptions = Reveal().getQueryHash() || {};
+
+      var options = extend(defaultOptions, {"_":["slides.md"],"static":"_site"}, queryOptions);
+    </script>
+
+
+    <script>
+      Reveal.initialize(options);
+      Reveal.addEventListener('ready', function (event) {
+        const blocks = Reveal.getRevealElement().querySelectorAll('pre code:not(.mermaid)');
+        const hlp = Reveal.getPlugin('highlight');
+        blocks.forEach(hlp.highlightBlock);
+      });
+    </script>
+
+    <script>
+      const mermaidOptions = extend({ startOnLoad: false }, {});
+      mermaid.startOnLoad = false;
+      mermaid.initialize(mermaidOptions);
+      const cb = function (event) { mermaid.init(mermaidOptions, '.stack.present>.present pre code.mermaid'); };
+      Reveal.addEventListener('ready', cb);
+      Reveal.addEventListener('slidetransitionend', cb);
+    </script>
+  </body>
+</html>
