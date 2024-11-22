@@ -10,76 +10,129 @@ revealOptions:
 
 ## Getting started with High Performance Computing in Research
 _Richard Polzin <rpolzin@ukaachen.de\>_  
-###### Last Updated: 24. July 2024  
-
-Note: test note
+###### Last Updated: 14. Nov 2024  
 
 ---
 
-# Table of Content
+### Table of Content
 
-1. The What, Why, and How of HPC <!-- .element: class="fragment" data-fragment-index="1" -->
-2. Linux Crashcourse <!-- .element: class="fragment" data-fragment-index="2" -->
-3. RWTH Compute Cluster <!-- .element: class="fragment" data-fragment-index="3" -->
-4. Tips and Tricks <!-- .element: class="fragment" data-fragment-index="4" -->
-5. SLURM Job Manager <!-- .element: class="fragment" data-fragment-index="5" -->
-6. Compute Time Application <!-- .element: class="fragment" data-fragment-index="6" -->
+1. Introduction to HPC <!-- .element: class="fragment" data-fragment-index="1" -->
+2. Working in the HPC Environment <!-- .element: class="fragment" data-fragment-index="2" -->
+3. Job Management and Parallel Computing <!-- .element: class="fragment" data-fragment-index="3" -->
+4. Best Practices, Support, and Next Steps <!-- .element: class="fragment" data-fragment-index="4" -->
 
 ---
 
-## The What, ~Why, and How~ of HPC
-
-- **What** is HPC?
-    - **H**igh **P**erformance **C**omputing: Systems thousands of times faster than your laptop 
-    - Large bandwidth, store hundreds of GB in RAM, Massive parallelization, ...
-    - Usually running some form of Linux
+# Introduction to HPC
 
 <!--v-->
 
-## The ~What,~ Why, ~and How~ of HPC
+### Objectives
+- Understand what HPC is
+- Learn why HPC is essential for modern research
+- Discover available HPC resources
+- Walk through a project application process
 
-- **Why** would you want HPC?
-    - Basically: If you could profit from your programs running faster or with more data
-    - Highly Parallelizable, runs  "in the background"
-    - 96 CPU cores per node, 1.5TB SSDs, up to 1TB RAM, 4 GPUs ...
 <!--v-->
-
-## The ~What, Why, and~ How of HPC
-
--  **How** do you get access to HPC?
-    - All RWTH-affiliates are granted access to some extend
-    - NHR-Verbund offers free compute resources for scientists working at universities in Germany
-
----
-
-![alt text](image-1.png)
-
----
-
 <!-- .slide: data-auto-animate -->
+## What is HPC?<!-- .element: data-id="code-animation"-->
 
-### RWTH Compute Cluster <!-- .element: data-id="code-animation"-->
-#### Account Creation
+- **H**igh **P**erformance **C**omputing involves the use of supercomputers and parallel processing techniques to solve complex computational problems
+- Combines computing resources for higher performance
+- HPC Systems consist of clusters with interconnected nodes
+- Enable processing larger datasets and complex simulations
+
+<!--v-->
+<!-- .slide: data-auto-animate -->
+## What is HPC?<!-- .element: data-id="code-animation"-->
+
+![](claix23.png)
+
+<!--v-->
+
+## Why is HPC Essential?
+
+- **Speed:** Reduces time to results
+- **Capacity:** Handle large scale data and simulation
+- **Complexity:** Solve problems to complex for standard computers
+
+<!--v-->
+<!-- .slide: data-auto-animate -->
+## HPC Resources<!-- .element: data-id="code-animation"-->
+
+- **State of the art** HPC facilities are available through the National High Performance Computing (NHR) network
+- Including Compute Clusters, Large Scale Storage, and advanced networking infrastructure
+
+<!--v-->
+
+## Access Eligibility and Requirements
+
+- Researchers, students, and collaborators from German Universities
+- University credentials (TIM-ID) are required
+- Compliance with university and HPC usage policy is expected
+- Resources are to be used responsible
+
+<!--v-->
+<!-- .slide: data-auto-animate -->
+## HPC Resources<!-- .element: data-id="code-animation"-->
+
+![](nhr.png)
+
+<!--v-->
+<!-- .slide: data-auto-animate -->
+## The RWTH Compute Cluster <!-- .element: data-id="code-animation"-->
+
+Per Node:
+  - 2x Intel Xeon 8468 (48 core CPU)
+  - 1.5 TB local SSD Storage
+  - 256GB - 1,024GB of RAM
+  - 632 such notes available
+
+<!--v-->
+<!-- .slide: data-auto-animate -->
+## The RWTH Compute Cluster <!-- .element: data-id="code-animation"-->
+
+Per Node (ML):
+  - 2x Intel Xeon 8468
+  - 695 GB local SSD Storage
+  - 512GB of RAM
+  - 4 x NVIDIA H100 GPU (96GB HBM2e)
+  - 52 such notes available
+
+<!--v-->
+
+### Account Creation
 
 Use Selfservice to create your account   
 (https://idm.rwth-aachen.de/selfservice/)
 1. Accounts and Passwords
 2. Account Overview
-3. Create Account
+3. Create HPC Account
 
 <!--v-->
 
 <!-- .slide: data-auto-animate -->
-### RWTH Compute Cluster <!-- .element: data-id="code-animation"-->
-#### Login
+### Login
 
 ```zsh
 ssh ab1234@login23-1.hpc-itc.rwth-aachen.de
 ```
 
 - Login with secure shell (ssh): **ssh tim@host**
+- Needs VPN if not connected to eduroam
+- d*Different nodes available for different use cases*
 
-*Different nodes available for different use cases*
+<!--v-->
+
+### Cluster Access Nodes
+
+Use the appropriate node for your task.  
+Be considerate of shared resources.
+
+- Login Nodes
+  - lightweight tasks (script editing, testing)
+- Copy Nodes
+  - Optimized for data transfer
 
 <!--v-->
 
@@ -87,19 +140,27 @@ ssh ab1234@login23-1.hpc-itc.rwth-aachen.de
 
 <!--v-->
 
-<!-- .slide: data-auto-animate -->
-### RWTH Compute Cluster <!-- .element: data-id="code-animation"-->
-#### File Systems
+### The File Systems
 
-![](filesystems.png)
-
-- `$HOME` for code/configuration, `$WORK` for output and working data, `$HPCWORK` for large data
+- **$HOME:** Small quote, backed up. For scripts and small files.
+- **$WORK:** Large quote, not backed up. For working with many small files.
+- **$HPCWORK:** Largest quote, not backed up. For I/O intense jobs and large files.
 
 <!--v-->
 
-<!-- .slide: data-auto-animate -->
-### RWTH Compute Cluster <!-- .element: data-id="code-animation"-->
-#### Project Management
+![](filesystems.png)
+
+<!--v-->
+
+### Data Transfer Methods
+
+- Use copy nodes for data transfer
+- Consider data security and encryption
+- Terminal: *scp* or *rsync*
+- Mount as folder: *sshfs*
+
+<!--v-->
+### Project Management
 
 - Groups are created for every project
 - Every group consists of owners (PC/PI), Managers and Members
@@ -107,10 +168,7 @@ ssh ab1234@login23-1.hpc-itc.rwth-aachen.de
 - In Aachen project storage is deleted **8 months** after a project's conclusion. Make sure you migrate the data by then!
 
 <!--v-->
-
-<!-- .slide: data-auto-animate -->
-### RWTH Compute Cluster <!-- .element: data-id="code-animation"-->
-#### Project Management
+### Project Management
 
 Users can be added to and removed from groups/projects using their TIM-ID.
 ```sh
@@ -119,6 +177,234 @@ member delete --name <project-id> <user-id>
 member finger # view group affiliations
 ```
 - append **--manager** to any command above to assign or revoke the manager role
+
+<!--v-->
+### Summary of this Chapter
+- HPC enables advanced computational research
+- NHR provides access to free HPC resources
+- Account creation and cluster access
+- File System and Project management
+
+<!--v-->
+
+# Q & A Session
+Chapter 1 of 4 Completed
+---
+
+# Working in the HPC Environment
+
+<!--v-->
+
+## Objectives
+- Understand the basics of Linux commands and shell navigation.
+- Learn about the file system structure and permissions.
+- Get introduced to essential text editors (vi, nano, emacs).
+- Comprehend the components of the cluster environment.
+- Manage software using environment modules.
+- Learn about data management and transfer techniques.
+- Introduction to containers with Singularity.
+
+
+<!--v-->
+
+## Importance of Linux in HPC
+
+- Linux is the predominant operating system for HPC environments.
+- Familiarity with Linux commands is essential for effective cluster usage.
+- Enables automation, scripting, and efficient resource management.
+
+
+<!--v-->
+
+## Basic Linux Commands
+
+- **Common Commands**:
+    - **Navigating Directories**:
+        - `ls`: List directory contents.
+        - `cd`: Change directory.
+        - `pwd`: Print working directory.
+    - **File Operations**:
+        - `cp`: Copy files or directories.
+        - `mv`: Move or rename files.
+        - `rm`: Remove files or directories.
+        - `mkdir`: Create a new directory.
+    - **Viewing File Contents**:
+        - `cat`: Concatenate and display file content.
+        - `less / more`: View files page by page.
+        - `head / tail`: View the start or end of files.
+
+<!--v-->
+
+## Shell Navigation and Shortcuts
+
+- **Navigating Efficiently**:
+    - **Tab Completion**: Auto-complete commands and file names.
+    - **History Navigation**:
+        - Use the up/down arrow keys to navigate command history.
+        - `history` command to list previous commands.
+    - **Useful Shortcuts**:
+        - `Ctrl + C`: Cancel the current command.
+        - `Ctrl + Z`: Suspend the current process.
+        - `Ctrl + A/E`: Move cursor to the beginning/end of the line.
+- **Aliases**:
+    - Create shortcuts for commands.
+        - `alias ll='ls -alF'`
+- **Customizing the Shell**:
+    - Modify `.bashrc` or `.bash_profile` for persistent changes.
+
+<!--v-->
+
+## Understanding the Linux File System
+
+- **File System Hierarchy**:
+    - **Root Directory**: /
+    - **Home Directory**: /home/yourTIMID
+    - **Key Directories**:
+        - `/bin, /usr/bin`: Executable files.
+        - `/etc`: Configuration files.
+        - `/tmp`: Temporary files.
+- **Path Types**:
+    - Absolute Paths: Start from the root directory (/).
+    - Relative Paths: Start from the current directory.
+- **Visual**:
+    - Diagram of the Linux file system hierarchy.
+
+<!--v-->
+
+## File Permissions and Ownership
+
+- **Understanding Permissions**:
+    - **Permission Types**:
+        - `r`: Read
+        - `w`: Write
+        - `x`: Execute
+    - **Permission Groups**:
+        - **User (u)**: Owner
+        - **Group (g)**: Group members
+        - **Others (o)**: Everyone else
+- **Viewing Permissions**:
+    - Use `ls -l` to display permissions.
+        ```
+        -rw-r--r--  1 user group  size date file
+        ```
+- **Changing Permissions**:
+    - `chmod`: Modify permissions.
+        - `chmod u+x filename`      # Add execute permission for the user
+        - `chmod 755 filename`      # Set permissions using octal notation
+- **Changing Ownership**:
+    - `chown`: Change file owner and group.
+        - `chown user:group filename`
+- **Security Best Practices**:
+    - Only grant necessary permissions.
+    - Be cautious with `chmod 777` and similar commands.
+
+<!--v-->
+
+## Introduction to Text Editors
+
+- **Importance of Text Editors**:
+    - Essential for creating and editing scripts, configuration files, and code.
+- **Common Editors**:
+    - **nano**:
+        - User-friendly, good for beginners.
+    - **vi / vim**:
+        - Powerful editor with modal interface.
+    - **emacs**:
+        - Extensible and customizable.
+- **Recommendation**:
+    - Choose the editor you're most comfortable with.
+
+<!--v-->
+
+
+## Understanding Cluster Components
+
+- **Key Components**:
+    - **Login Nodes**: For connecting to the cluster and preparing jobs.
+    - **Compute Nodes**: Execute computational jobs.
+    - **Storage Systems**:
+        - Shared Storage
+        - Local Storage
+- **Resource Allocation**:
+    - Managed by a job scheduler (SLURM).
+
+<!--v-->
+
+## The Module System
+
+- **Purpose of Environment Modules**:
+    - Manages the user's environment dynamically.
+- **Common Commands**:
+    - List Available Modules: `module avail`
+    - Load a Module: `module load software_name/version`
+    - Unload a Module: `module unload software_name`
+    - List Loaded Modules: `module list`
+- **Using Modules in Job Scripts**:
+    - Include module commands in your job scripts.
+
+<!--v-->
+
+## Installing Custom Software
+
+- **Reasons to Install Custom Software**:
+    - Required software not available via modules.
+- **Methods**:
+    - Local Installation in `$WORK` or `$HPCWORK`.
+    - Use virtual environments for Python.
+- **Considerations**:
+    - Check software dependencies.
+    - Ensure compliance with licensing agreements.
+
+<!--v-->
+
+## Introduction to Containers with Singularity
+
+- **What is Singularity?**
+    - A container platform designed for HPC.
+- **Benefits**:
+    - Portability, Reproducibility, and Compliance.
+- **Basic Usage**:
+    - Running a Container: `singularity run my_container.sif`
+    - Pulling Images from Repositories: `singularity pull library://alpine:latest`
+
+<!--v-->
+
+## Efficient Data Transfer Techniques
+
+- **Using scp for File Transfers**:
+    - `scp localfile yourTIMID@copyXXnode.hpc.itc.rwth-aachen.de:/remote/path`
+- **Using rsync for Synchronization**:
+    - `rsync -avz localdir yourTIMID@copyXXnode.hpc.itc.rwth-aachen.de:/remote/path`
+- **Mounting Remote Filesystems with sshfs**:
+    - `sshfs yourTIMID@copyXXnode.hpc.itc.rwth-aachen.de:/remote/path /local/mountpoint`
+
+<!--v-->
+
+## Data Security and Compliance
+
+- **Data Protection Policies**:
+    - Adhere to RWTH and legal regulations.
+- **Data Encryption**:
+    - Use encrypted connections for data transfer.
+- **Access Control**:
+    - Set appropriate file permissions.
+- **Data Backups**:
+    - Backup important data to secure locations.
+
+<!--v-->
+
+## Recap
+
+- Navigated basic Linux commands and shell operations.
+- Explored the Linux file system and permissions.
+- Learned about essential text editors for file manipulation.
+- Understood cluster components and storage options.
+- Managed software using environment modules.
+- Got introduced to containers with Singularity.
+- Learned data transfer techniques and best practices.
+
+<!--v-->
+
 ---
 
 <!-- .slide: data-auto-animate -->
