@@ -10,20 +10,22 @@ revealOptions:
 
 ## Getting started with High Performance Computing in Research
 _Richard Polzin <rpolzin@ukaachen.de\>_  
-###### Last Updated: 14. Nov 2024  
+###### Last Updated: 27. Nov 2024  
 
 ---
 
 ### Table of Content
 
-1. Introduction to HPC <!-- .element: class="fragment" data-fragment-index="1" -->
-2. Working in the HPC Environment <!-- .element: class="fragment" data-fragment-index="2" -->
-3. Job Management and Parallel Computing <!-- .element: class="fragment" data-fragment-index="3" -->
-4. Best Practices, Support, and Next Steps <!-- .element: class="fragment" data-fragment-index="4" -->
+1. Introduction <!-- .element: class="fragment" data-fragment-index="1" -->
+2. HPC.NRW Linux Basics for HPC <!-- .element: class="fragment" data-fragment-index="2" -->
+3. Tips and Tricks <!-- .element: class="fragment" data-fragment-index="3" -->
+4. SLURM Job Manager <!-- .element: class="fragment" data-fragment-index="4" -->
+5. Compute Time Application <!-- .element: class="fragment" data-fragment-index="4" -->
+
 
 ---
 
-# Introduction to HPC
+# Introduction
 
 <!--v-->
 
@@ -185,226 +187,182 @@ member finger # view group affiliations
 - Account creation and cluster access
 - File System and Project management
 
-<!--v-->
-
-# Q & A Session
-Chapter 1 of 4 Completed
 ---
-
-# Working in the HPC Environment
-
+> The following slides are adapted from the HPC.NRW Competency Network under the CC-BY-SA license. Check out their work at https://hpc-wiki.info/hpc/HPC_Wiki
+---
+## Background and History
 <!--v-->
-
-## Objectives
-- Understand the basics of Linux commands and shell navigation.
-- Learn about the file system structure and permissions.
-- Get introduced to essential text editors (vi, nano, emacs).
-- Comprehend the components of the cluster environment.
-- Manage software using environment modules.
-- Learn about data management and transfer techniques.
-- Introduction to containers with Singularity.
-
-
+![](hpc.nrw/01_0002.png)
 <!--v-->
-
-## Importance of Linux in HPC
-
-- Linux is the predominant operating system for HPC environments.
-- Familiarity with Linux commands is essential for effective cluster usage.
-- Enables automation, scripting, and efficient resource management.
-
-
+![](hpc.nrw/01_0003.png)
 <!--v-->
-
-## Basic Linux Commands
-
-- **Common Commands**:
-    - **Navigating Directories**:
-        - `ls`: List directory contents.
-        - `cd`: Change directory.
-        - `pwd`: Print working directory.
-    - **File Operations**:
-        - `cp`: Copy files or directories.
-        - `mv`: Move or rename files.
-        - `rm`: Remove files or directories.
-        - `mkdir`: Create a new directory.
-    - **Viewing File Contents**:
-        - `cat`: Concatenate and display file content.
-        - `less / more`: View files page by page.
-        - `head / tail`: View the start or end of files.
-
+![](hpc.nrw/01_0004.png)
 <!--v-->
-
-## Shell Navigation and Shortcuts
-
-- **Navigating Efficiently**:
-    - **Tab Completion**: Auto-complete commands and file names.
-    - **History Navigation**:
-        - Use the up/down arrow keys to navigate command history.
-        - `history` command to list previous commands.
-    - **Useful Shortcuts**:
-        - `Ctrl + C`: Cancel the current command.
-        - `Ctrl + Z`: Suspend the current process.
-        - `Ctrl + A/E`: Move cursor to the beginning/end of the line.
-- **Aliases**:
-    - Create shortcuts for commands.
-        - `alias ll='ls -alF'`
-- **Customizing the Shell**:
-    - Modify `.bashrc` or `.bash_profile` for persistent changes.
-
+![](hpc.nrw/01_0005.png)
+---
+## The Command Line
 <!--v-->
-
-## Understanding the Linux File System
-
-- **File System Hierarchy**:
-    - **Root Directory**: /
-    - **Home Directory**: /home/yourTIMID
-    - **Key Directories**:
-        - `/bin, /usr/bin`: Executable files.
-        - `/etc`: Configuration files.
-        - `/tmp`: Temporary files.
-- **Path Types**:
-    - Absolute Paths: Start from the root directory (/).
-    - Relative Paths: Start from the current directory.
-- **Visual**:
-    - Diagram of the Linux file system hierarchy.
-
+![](hpc.nrw/02_0002.png)
 <!--v-->
-
-## File Permissions and Ownership
-
-- **Understanding Permissions**:
-    - **Permission Types**:
-        - `r`: Read
-        - `w`: Write
-        - `x`: Execute
-    - **Permission Groups**:
-        - **User (u)**: Owner
-        - **Group (g)**: Group members
-        - **Others (o)**: Everyone else
-- **Viewing Permissions**:
-    - Use `ls -l` to display permissions.
-        ```
-        -rw-r--r--  1 user group  size date file
-        ```
-- **Changing Permissions**:
-    - `chmod`: Modify permissions.
-        - `chmod u+x filename`      # Add execute permission for the user
-        - `chmod 755 filename`      # Set permissions using octal notation
-- **Changing Ownership**:
-    - `chown`: Change file owner and group.
-        - `chown user:group filename`
-- **Security Best Practices**:
-    - Only grant necessary permissions.
-    - Be cautious with `chmod 777` and similar commands.
-
+![](hpc.nrw/02_0003.png)
 <!--v-->
-
-## Introduction to Text Editors
-
-- **Importance of Text Editors**:
-    - Essential for creating and editing scripts, configuration files, and code.
-- **Common Editors**:
-    - **nano**:
-        - User-friendly, good for beginners.
-    - **vi / vim**:
-        - Powerful editor with modal interface.
-    - **emacs**:
-        - Extensible and customizable.
-- **Recommendation**:
-    - Choose the editor you're most comfortable with.
-
+![](hpc.nrw/02_0004.png)
 <!--v-->
-
-
-## Understanding Cluster Components
-
-- **Key Components**:
-    - **Login Nodes**: For connecting to the cluster and preparing jobs.
-    - **Compute Nodes**: Execute computational jobs.
-    - **Storage Systems**:
-        - Shared Storage
-        - Local Storage
-- **Resource Allocation**:
-    - Managed by a job scheduler (SLURM).
-
+![](hpc.nrw/02_0005.png)
 <!--v-->
-
-## The Module System
-
-- **Purpose of Environment Modules**:
-    - Manages the user's environment dynamically.
-- **Common Commands**:
-    - List Available Modules: `module avail`
-    - Load a Module: `module load software_name/version`
-    - Unload a Module: `module unload software_name`
-    - List Loaded Modules: `module list`
-- **Using Modules in Job Scripts**:
-    - Include module commands in your job scripts.
-
+![](hpc.nrw/02_0006.png)
 <!--v-->
-
-## Installing Custom Software
-
-- **Reasons to Install Custom Software**:
-    - Required software not available via modules.
-- **Methods**:
-    - Local Installation in `$WORK` or `$HPCWORK`.
-    - Use virtual environments for Python.
-- **Considerations**:
-    - Check software dependencies.
-    - Ensure compliance with licensing agreements.
-
+![](hpc.nrw/02_0007.png)
 <!--v-->
-
-## Introduction to Containers with Singularity
-
-- **What is Singularity?**
-    - A container platform designed for HPC.
-- **Benefits**:
-    - Portability, Reproducibility, and Compliance.
-- **Basic Usage**:
-    - Running a Container: `singularity run my_container.sif`
-    - Pulling Images from Repositories: `singularity pull library://alpine:latest`
-
+![](hpc.nrw/02_0008.png)
 <!--v-->
-
-## Efficient Data Transfer Techniques
-
-- **Using scp for File Transfers**:
-    - `scp localfile yourTIMID@copyXXnode.hpc.itc.rwth-aachen.de:/remote/path`
-- **Using rsync for Synchronization**:
-    - `rsync -avz localdir yourTIMID@copyXXnode.hpc.itc.rwth-aachen.de:/remote/path`
-- **Mounting Remote Filesystems with sshfs**:
-    - `sshfs yourTIMID@copyXXnode.hpc.itc.rwth-aachen.de:/remote/path /local/mountpoint`
-
+![](hpc.nrw/02_0009.png)
+---
+## Directory Structure
 <!--v-->
-
-## Data Security and Compliance
-
-- **Data Protection Policies**:
-    - Adhere to RWTH and legal regulations.
-- **Data Encryption**:
-    - Use encrypted connections for data transfer.
-- **Access Control**:
-    - Set appropriate file permissions.
-- **Data Backups**:
-    - Backup important data to secure locations.
-
+![](hpc.nrw/03_0002.png)
 <!--v-->
-
-## Recap
-
-- Navigated basic Linux commands and shell operations.
-- Explored the Linux file system and permissions.
-- Learned about essential text editors for file manipulation.
-- Understood cluster components and storage options.
-- Managed software using environment modules.
-- Got introduced to containers with Singularity.
-- Learned data transfer techniques and best practices.
-
+![](hpc.nrw/03_0003.png)
 <!--v-->
-
+![](hpc.nrw/03_0004.png)
+<!--v-->
+![](hpc.nrw/03_0005.png)
+<!--v-->
+![](hpc.nrw/03_0006.png)
+<!--v-->
+![](hpc.nrw/03_0007.png)
+<!--v-->
+![](hpc.nrw/03_0008.png)
+---
+## Files
+<!--v-->
+![](hpc.nrw/04_0002.png)
+<!--v-->
+![](hpc.nrw/04_0003.png)
+<!--v-->
+![](hpc.nrw/04_0004.png)
+<!--v-->
+![](hpc.nrw/04_0005.png)
+<!--v-->
+![](hpc.nrw/04_0006.png)
+<!--v-->
+![](hpc.nrw/04_0007.png)
+---
+## Text Display and Search
+<!--v-->
+![](hpc.nrw/05_0002.png)
+<!--v-->
+![](hpc.nrw/05_0003.png)
+<!--v-->
+![](hpc.nrw/05_0004.png)
+<!--v-->
+![](hpc.nrw/05_0005.png)
+<!--v-->
+![](hpc.nrw/05_0006.png)
+<!--v-->
+![](hpc.nrw/05_0007.png)
+---
+## Users and Permissions
+<!--v-->
+![](hpc.nrw/06_0002.png)
+<!--v-->
+![](hpc.nrw/06_0003.png)
+<!--v-->
+![](hpc.nrw/06_0004.png)
+<!--v-->
+![](hpc.nrw/06_0005.png)
+<!--v-->
+![](hpc.nrw/06_0006.png)
+<!--v-->
+![](hpc.nrw/06_0007.png)
+---
+## Processes
+<!--v-->
+![](hpc.nrw/07_0002.png)
+<!--v-->
+![](hpc.nrw/07_0003.png)
+<!--v-->
+![](hpc.nrw/07_0004.png)
+<!--v-->
+![](hpc.nrw/07_0005.png)
+---
+## The vim Text editor
+<!--v-->
+![](hpc.nrw/08_0002.png)
+<!--v-->
+![](hpc.nrw/08_0003.png)
+<!--v-->
+![](hpc.nrw/08_0004.png)
+<!--v-->
+![](hpc.nrw/08_0005.png)
+<!--v-->
+![](hpc.nrw/08_0006.png)
+<!--v-->
+![](hpc.nrw/08_0007.png)
+<!--v-->
+![](hpc.nrw/08_0008.png)
+<!--v-->
+![](hpc.nrw/08_0009.png)
+---
+## Shell Scripts
+<!--v-->
+![](hpc.nrw/09_0002.png)
+<!--v-->
+![](hpc.nrw/09_0003.png)
+<!--v-->
+![](hpc.nrw/09_0004.png)
+<!--v-->
+![](hpc.nrw/09_0005.png)
+<!--v-->
+![](hpc.nrw/09_0006.png)
+<!--v-->
+![](hpc.nrw/09_0007.png)
+<!--v-->
+![](hpc.nrw/09_0008.png)
+---
+## Environment Variables
+<!--v-->
+![](hpc.nrw/10_0002.png)
+<!--v-->
+![](hpc.nrw/10_0003.png)
+<!--v-->
+![](hpc.nrw/10_0004.png)
+<!--v-->
+![](hpc.nrw/10_0005.png)
+<!--v-->
+![](hpc.nrw/10_0006.png)
+---
+## System Configuration
+<!--v-->
+![](hpc.nrw/11_0002.png)
+<!--v-->
+![](hpc.nrw/11_0003.png)
+<!--v-->
+![](hpc.nrw/11_0004.png)
+<!--v-->
+![](hpc.nrw/11_0005.png)
+<!--v-->
+![](hpc.nrw/11_0006.png)
+<!--v-->
+![](hpc.nrw/11_0007.png)
+---
+## SSH Connections
+<!--v-->
+![](hpc.nrw/12_0002.png)
+<!--v-->
+![](hpc.nrw/12_0003.png)
+<!--v-->
+![](hpc.nrw/12_0004.png)
+<!--v-->
+![](hpc.nrw/12_0005.png)
+<!--v-->
+![](hpc.nrw/12_0006.png)
+<!--v-->
+![](hpc.nrw/12_0007.png)
+<!--v-->
+![](hpc.nrw/12_0008.png)
+<!--v-->
+![](hpc.nrw/12_0009.png)
 ---
 
 <!-- .slide: data-auto-animate -->
@@ -732,14 +690,18 @@ HPC resources in Germany are arranged hierarchically in the HPC Performance Pyra
 
 ![](nhrprocess.jpg)
 
----
+<!--v-->
 
 ### Acknowledgement (RWTH/JARA)
 
 *Computations were performed with computing resources granted by RWTH Aachen University under project <ID of your project>.*
 
----
+<!--v-->
 
 ### Acknowledgement (RWTH/JARA)
 
 *The authors gratefully acknowledge the computing time provided to them at the NHR Center NHR4CES at RWTH Aachen University (project number <your-project-id: p0020XXX>). This is funded by the Federal Ministry of Education and Research, and the state governments participating on the basis of the resolutions of the GWK for national high performance computing at universities (www.nhr-verein.de/unsere-partner).*
+
+---
+
+### Any Questions?
