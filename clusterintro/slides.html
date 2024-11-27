@@ -21,76 +21,131 @@
 
 ## Getting started with High Performance Computing in Research
 _Richard Polzin <rpolzin@ukaachen.de\>_  
-###### Last Updated: 24. July 2024  
-
-Note: test note
+###### Last Updated: 27. Nov 2024  
 
 ---
 
-# Table of Content
+### Table of Content
 
-1. The What, Why, and How of HPC <!-- .element: class="fragment" data-fragment-index="1" -->
-2. Linux Crashcourse <!-- .element: class="fragment" data-fragment-index="2" -->
-3. RWTH Compute Cluster <!-- .element: class="fragment" data-fragment-index="3" -->
-4. Tips and Tricks <!-- .element: class="fragment" data-fragment-index="4" -->
-5. SLURM Job Manager <!-- .element: class="fragment" data-fragment-index="5" -->
-6. Compute Time Application <!-- .element: class="fragment" data-fragment-index="6" -->
+1. Introduction <!-- .element: class="fragment" data-fragment-index="1" -->
+2. HPC.NRW Linux Basics for HPC <!-- .element: class="fragment" data-fragment-index="2" -->
+3. Tips and Tricks <!-- .element: class="fragment" data-fragment-index="3" -->
+4. SLURM Job Manager <!-- .element: class="fragment" data-fragment-index="4" -->
+5. Compute Time Application <!-- .element: class="fragment" data-fragment-index="4" -->
+
 
 ---
 
-## The What, ~Why, and How~ of HPC
-
-- **What** is HPC?
-    - **H**igh **P**erformance **C**omputing: Systems thousands of times faster than your laptop 
-    - Large bandwidth, store hundreds of GB in RAM, Massive parallelization, ...
-    - Usually running some form of Linux
+# Introduction
 
 <!--v-->
 
-## The ~What,~ Why, ~and How~ of HPC
+### Objectives
+- Understand what HPC is
+- Learn why HPC is essential for modern research
+- Discover available HPC resources
+- Walk through a project application process
 
-- **Why** would you want HPC?
-    - Basically: If you could profit from your programs running faster or with more data
-    - Highly Parallelizable, runs  "in the background"
-    - 96 CPU cores per node, 1.5TB SSDs, up to 1TB RAM, 4 GPUs ...
 <!--v-->
-
-## The ~What, Why, and~ How of HPC
-
--  **How** do you get access to HPC?
-    - All RWTH-affiliates are granted access to some extend
-    - NHR-Verbund offers free compute resources for scientists working at universities in Germany
-
----
-
-![alt text](image-1.png)
-
----
-
 <!-- .slide: data-auto-animate -->
+## What is HPC?<!-- .element: data-id="code-animation"-->
 
-### RWTH Compute Cluster <!-- .element: data-id="code-animation"-->
-#### Account Creation
+- **H**igh **P**erformance **C**omputing involves the use of supercomputers and parallel processing techniques to solve complex computational problems
+- Combines computing resources for higher performance
+- HPC Systems consist of clusters with interconnected nodes
+- Enable processing larger datasets and complex simulations
+
+<!--v-->
+<!-- .slide: data-auto-animate -->
+## What is HPC?<!-- .element: data-id="code-animation"-->
+
+![](claix23.png)
+
+<!--v-->
+
+## Why is HPC Essential?
+
+- **Speed:** Reduces time to results
+- **Capacity:** Handle large scale data and simulation
+- **Complexity:** Solve problems to complex for standard computers
+
+<!--v-->
+<!-- .slide: data-auto-animate -->
+## HPC Resources<!-- .element: data-id="code-animation"-->
+
+- **State of the art** HPC facilities are available through the National High Performance Computing (NHR) network
+- Including Compute Clusters, Large Scale Storage, and advanced networking infrastructure
+
+<!--v-->
+
+## Access Eligibility and Requirements
+
+- Researchers, students, and collaborators from German Universities
+- University credentials (TIM-ID) are required
+- Compliance with university and HPC usage policy is expected
+- Resources are to be used responsible
+
+<!--v-->
+<!-- .slide: data-auto-animate -->
+## HPC Resources<!-- .element: data-id="code-animation"-->
+
+![](nhr.png)
+
+<!--v-->
+<!-- .slide: data-auto-animate -->
+## The RWTH Compute Cluster <!-- .element: data-id="code-animation"-->
+
+Per Node:
+  - 2x Intel Xeon 8468 (48 core CPU)
+  - 1.5 TB local SSD Storage
+  - 256GB - 1,024GB of RAM
+  - 632 such notes available
+
+<!--v-->
+<!-- .slide: data-auto-animate -->
+## The RWTH Compute Cluster <!-- .element: data-id="code-animation"-->
+
+Per Node (ML):
+  - 2x Intel Xeon 8468
+  - 695 GB local SSD Storage
+  - 512GB of RAM
+  - 4 x NVIDIA H100 GPU (96GB HBM2e)
+  - 52 such notes available
+
+<!--v-->
+
+### Account Creation
 
 Use Selfservice to create your account   
 (https://idm.rwth-aachen.de/selfservice/)
 1. Accounts and Passwords
 2. Account Overview
-3. Create Account
+3. Create HPC Account
 
 <!--v-->
 
 <!-- .slide: data-auto-animate -->
-### RWTH Compute Cluster <!-- .element: data-id="code-animation"-->
-#### Login
+### Login
 
 ```zsh
 ssh ab1234@login23-1.hpc-itc.rwth-aachen.de
 ```
 
 - Login with secure shell (ssh): **ssh tim@host**
+- Needs VPN if not connected to eduroam
+- d*Different nodes available for different use cases*
 
-*Different nodes available for different use cases*
+<!--v-->
+
+### Cluster Access Nodes
+
+Use the appropriate node for your task.  
+Be considerate of shared resources.
+
+- Login Nodes
+  - lightweight tasks (script editing, testing)
+- Copy Nodes
+  - Optimized for data transfer
 
 <!--v-->
 
@@ -98,19 +153,27 @@ ssh ab1234@login23-1.hpc-itc.rwth-aachen.de
 
 <!--v-->
 
-<!-- .slide: data-auto-animate -->
-### RWTH Compute Cluster <!-- .element: data-id="code-animation"-->
-#### File Systems
+### The File Systems
 
-![](filesystems.png)
-
-- `$HOME` for code/configuration, `$WORK` for output and working data, `$HPCWORK` for large data
+- **$HOME:** Small quote, backed up. For scripts and small files.
+- **$WORK:** Large quote, not backed up. For working with many small files.
+- **$HPCWORK:** Largest quote, not backed up. For I/O intense jobs and large files.
 
 <!--v-->
 
-<!-- .slide: data-auto-animate -->
-### RWTH Compute Cluster <!-- .element: data-id="code-animation"-->
-#### Project Management
+![](filesystems.png)
+
+<!--v-->
+
+### Data Transfer Methods
+
+- Use copy nodes for data transfer
+- Consider data security and encryption
+- Terminal: *scp* or *rsync*
+- Mount as folder: *sshfs*
+
+<!--v-->
+### Project Management
 
 - Groups are created for every project
 - Every group consists of owners (PC/PI), Managers and Members
@@ -118,10 +181,7 @@ ssh ab1234@login23-1.hpc-itc.rwth-aachen.de
 - In Aachen project storage is deleted **8 months** after a project's conclusion. Make sure you migrate the data by then!
 
 <!--v-->
-
-<!-- .slide: data-auto-animate -->
-### RWTH Compute Cluster <!-- .element: data-id="code-animation"-->
-#### Project Management
+### Project Management
 
 Users can be added to and removed from groups/projects using their TIM-ID.
 ```sh
@@ -130,6 +190,190 @@ member delete --name <project-id> <user-id>
 member finger # view group affiliations
 ```
 - append **--manager** to any command above to assign or revoke the manager role
+
+<!--v-->
+### Summary of this Chapter
+- HPC enables advanced computational research
+- NHR provides access to free HPC resources
+- Account creation and cluster access
+- File System and Project management
+
+---
+> The following slides are adapted from the HPC.NRW Competency Network under the CC-BY-SA license. Check out their work at https://hpc-wiki.info/hpc/HPC_Wiki
+---
+## Background and History
+<!--v-->
+![](hpc.nrw/01_0002.png)
+<!--v-->
+![](hpc.nrw/01_0003.png)
+<!--v-->
+![](hpc.nrw/01_0004.png)
+<!--v-->
+![](hpc.nrw/01_0005.png)
+---
+## The Command Line
+<!--v-->
+![](hpc.nrw/02_0002.png)
+<!--v-->
+![](hpc.nrw/02_0003.png)
+<!--v-->
+![](hpc.nrw/02_0004.png)
+<!--v-->
+![](hpc.nrw/02_0005.png)
+<!--v-->
+![](hpc.nrw/02_0006.png)
+<!--v-->
+![](hpc.nrw/02_0007.png)
+<!--v-->
+![](hpc.nrw/02_0008.png)
+<!--v-->
+![](hpc.nrw/02_0009.png)
+---
+## Directory Structure
+<!--v-->
+![](hpc.nrw/03_0002.png)
+<!--v-->
+![](hpc.nrw/03_0003.png)
+<!--v-->
+![](hpc.nrw/03_0004.png)
+<!--v-->
+![](hpc.nrw/03_0005.png)
+<!--v-->
+![](hpc.nrw/03_0006.png)
+<!--v-->
+![](hpc.nrw/03_0007.png)
+<!--v-->
+![](hpc.nrw/03_0008.png)
+---
+## Files
+<!--v-->
+![](hpc.nrw/04_0002.png)
+<!--v-->
+![](hpc.nrw/04_0003.png)
+<!--v-->
+![](hpc.nrw/04_0004.png)
+<!--v-->
+![](hpc.nrw/04_0005.png)
+<!--v-->
+![](hpc.nrw/04_0006.png)
+<!--v-->
+![](hpc.nrw/04_0007.png)
+---
+## Text Display and Search
+<!--v-->
+![](hpc.nrw/05_0002.png)
+<!--v-->
+![](hpc.nrw/05_0003.png)
+<!--v-->
+![](hpc.nrw/05_0004.png)
+<!--v-->
+![](hpc.nrw/05_0005.png)
+<!--v-->
+![](hpc.nrw/05_0006.png)
+<!--v-->
+![](hpc.nrw/05_0007.png)
+---
+## Users and Permissions
+<!--v-->
+![](hpc.nrw/06_0002.png)
+<!--v-->
+![](hpc.nrw/06_0003.png)
+<!--v-->
+![](hpc.nrw/06_0004.png)
+<!--v-->
+![](hpc.nrw/06_0005.png)
+<!--v-->
+![](hpc.nrw/06_0006.png)
+<!--v-->
+![](hpc.nrw/06_0007.png)
+---
+## Processes
+<!--v-->
+![](hpc.nrw/07_0002.png)
+<!--v-->
+![](hpc.nrw/07_0003.png)
+<!--v-->
+![](hpc.nrw/07_0004.png)
+<!--v-->
+![](hpc.nrw/07_0005.png)
+---
+## The vim Text editor
+<!--v-->
+![](hpc.nrw/08_0002.png)
+<!--v-->
+![](hpc.nrw/08_0003.png)
+<!--v-->
+![](hpc.nrw/08_0004.png)
+<!--v-->
+![](hpc.nrw/08_0005.png)
+<!--v-->
+![](hpc.nrw/08_0006.png)
+<!--v-->
+![](hpc.nrw/08_0007.png)
+<!--v-->
+![](hpc.nrw/08_0008.png)
+<!--v-->
+![](hpc.nrw/08_0009.png)
+---
+## Shell Scripts
+<!--v-->
+![](hpc.nrw/09_0002.png)
+<!--v-->
+![](hpc.nrw/09_0003.png)
+<!--v-->
+![](hpc.nrw/09_0004.png)
+<!--v-->
+![](hpc.nrw/09_0005.png)
+<!--v-->
+![](hpc.nrw/09_0006.png)
+<!--v-->
+![](hpc.nrw/09_0007.png)
+<!--v-->
+![](hpc.nrw/09_0008.png)
+---
+## Environment Variables
+<!--v-->
+![](hpc.nrw/10_0002.png)
+<!--v-->
+![](hpc.nrw/10_0003.png)
+<!--v-->
+![](hpc.nrw/10_0004.png)
+<!--v-->
+![](hpc.nrw/10_0005.png)
+<!--v-->
+![](hpc.nrw/10_0006.png)
+---
+## System Configuration
+<!--v-->
+![](hpc.nrw/11_0002.png)
+<!--v-->
+![](hpc.nrw/11_0003.png)
+<!--v-->
+![](hpc.nrw/11_0004.png)
+<!--v-->
+![](hpc.nrw/11_0005.png)
+<!--v-->
+![](hpc.nrw/11_0006.png)
+<!--v-->
+![](hpc.nrw/11_0007.png)
+---
+## SSH Connections
+<!--v-->
+![](hpc.nrw/12_0002.png)
+<!--v-->
+![](hpc.nrw/12_0003.png)
+<!--v-->
+![](hpc.nrw/12_0004.png)
+<!--v-->
+![](hpc.nrw/12_0005.png)
+<!--v-->
+![](hpc.nrw/12_0006.png)
+<!--v-->
+![](hpc.nrw/12_0007.png)
+<!--v-->
+![](hpc.nrw/12_0008.png)
+<!--v-->
+![](hpc.nrw/12_0009.png)
 ---
 
 <!-- .slide: data-auto-animate -->
@@ -457,17 +701,22 @@ HPC resources in Germany are arranged hierarchically in the HPC Performance Pyra
 
 ![](nhrprocess.jpg)
 
----
+<!--v-->
 
 ### Acknowledgement (RWTH/JARA)
 
 *Computations were performed with computing resources granted by RWTH Aachen University under project <ID of your project>.*
 
----
+<!--v-->
 
 ### Acknowledgement (RWTH/JARA)
 
 *The authors gratefully acknowledge the computing time provided to them at the NHR Center NHR4CES at RWTH Aachen University (project number <your-project-id: p0020XXX>). This is funded by the Federal Ministry of Education and Research, and the state governments participating on the basis of the resolutions of the GWK for national high performance computing at universities (www.nhr-verein.de/unsere-partner).*
+
+---
+
+### Any Questions?
+
           </textarea>
         </section>
       </div>
