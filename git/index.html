@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <title>Synthetic Data in Healthcare</title>
+    <link rel="shortcut icon" href="./favicon.ico" />
+    <link rel="stylesheet" href="./dist/reset.css" />
+    <link rel="stylesheet" href="./dist/reveal.css" />
+    <link rel="stylesheet" href="./dist/theme/moon.css" id="theme" />
+    <link rel="stylesheet" href="./css/highlight/base16/zenburn.css" />
+
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section data-markdown data-separator="---" data-separator-vertical="<!--v-->">
+          <textarea data-template>
+            ---
+            mermaid:
+              themeVariables:
+                lineColor: '#fff'
+            ---
+
+            ```mermaid
+            graph TD
+            A[Client] --> B[Load Balancer]
+            B --> C[Server01]
+            B --> D[Server02]
+            ```
+
+            ```js
+            const x = 1;
+            ```
+
+            ---
+            ## Version Control for Researchers
+            ***Richard Polzin***  
+            Institute for Computational Biomedicine, RWTH Aachen University  
+            *(Last Update 10.02.2025)*
+
+            ---
+
+            ## Why Version Control?
+
+            - Collaboration in research projects
+            - Tracking changes and ensuring reproducibility
+            - Avoiding "final_version_v3_revised_FINAL.docx"
+            - Backup and restoring previous versions
+
+            ---
+
+            ## What is Git?
+
+            - A distributed version control system
+            - Developed by Linus Torvalds for Linux development
+            - Tracks changes in code and text files
+            - Enables collaboration across different versions
+
+            ---
+
+            ## Key Git Concepts
+
+            - **Repository (Repo):** A directory containing all project files and history
+            - **Commit:** A snapshot of changes
+            - **Branch:** Parallel versions of the repository
+            - **Merge:** Combining different branches
+            - **Remote:** A repository hosted elsewhere (e.g., GitHub, GitLab)
+
+            ---
+
+            ## Setting Up Git
+
+            ```bash
+            # Install Git
+            sudo apt install git  # Linux
+            brew install git  # macOS
+            winget install --id Git.Git -e --source winget  # Windows
+
+            # Configure Git
+            git config --global user.name "Your Name"
+            git config --global user.email "your.email@example.com"
+            ```
+
+            ---
+
+            ## Creating a Repository
+
+            ```bash
+            # Initialize a new Git repository
+            git init my_project
+            cd my_project
+
+            # Create a file and commit it
+            echo "# My Research Project" > README.md
+            git add README.md
+            git commit -m "Initial commit"
+            ```
+
+            ---
+
+            ## Tracking Changes
+
+            ```bash
+            # View repository status
+            git status
+
+            # View commit history
+            git log
+
+            # Compare changes
+            git diff
+            ```
+
+            ---
+
+            ## Branching and Merging
+
+            ```bash
+            # Create and switch to a new branch
+            git checkout -b new_feature
+
+            # Merge changes back to main branch
+            git checkout main
+            git merge new_feature
+            ```
+
+            ---
+
+            ## Git History Visualization
+
+            ```mermaid
+            gitGraph
+              commit id: "Initial Commit"
+              branch feature-1
+              commit id: "Add feature A"
+              checkout main
+              commit id: "Minor fix"
+              branch feature-2
+              commit id: "Add feature B"
+              checkout main
+              merge feature-1
+              commit id: "Refactor feature A"
+              merge feature-2
+              commit id: "Final touches"
+            ```
+
+            ---
+
+            ## Collaborating with Remotes
+
+            ```bash
+            # Add a remote repository
+            git remote add origin https://github.com/username/repository.git
+
+            # Push local changes
+            git push -u origin main
+
+            # Pull updates from remote
+            git pull origin main
+            ```
+
+            ---
+
+            ## Best Practices for Researchers
+
+            - Use meaningful commit messages
+            - Keep repositories organized
+            - Use `.gitignore` for large files and temporary files
+            - Regularly push to a remote repository
+            - Use branches for experimental changes
+            - Automate documentation and backups
+
+            ---
+
+            ## GitHub, GitLab, and Alternatives
+
+            - **GitHub:** Popular for open-source and academic projects
+            - **GitLab:** Self-hosted options and CI/CD integration
+            - **Bitbucket:** Supports Mercurial and Git
+            - **Codeberg:** Privacy-friendly alternative
+
+            ---
+
+            ## Advanced Topics
+
+            - Using Git with Jupyter Notebooks
+            - Git Large File Storage (LFS) for datasets
+            - Continuous Integration (CI) for automating workflows
+            - Working with submodules for modular projects
+
+            ---
+
+            ## Summary
+
+            - Git helps manage research projects efficiently
+            - Enables collaboration and reproducibility
+            - Learning basic Git commands is a valuable skill
+            - Use hosted platforms for better sharing and tracking
+
+            ---
+
+            ## Q&A
+
+            (Feel free to ask questions!)
+
+
+          </textarea>
+        </section>
+      </div>
+    </div>
+
+    <script src="./dist/reveal.js"></script>
+
+    <script src="./mermaid/dist/mermaid.min.js"></script>
+
+    <script src="./plugin/markdown/markdown.js"></script>
+    <script src="./plugin/highlight/highlight.js"></script>
+    <script src="./plugin/zoom/zoom.js"></script>
+    <script src="./plugin/notes/notes.js"></script>
+    <script src="./plugin/math/math.js"></script>
+    <script>
+      function extend() {
+        var target = {};
+        for (var i = 0; i < arguments.length; i++) {
+          var source = arguments[i];
+          for (var key in source) {
+            if (source.hasOwnProperty(key)) {
+              target[key] = source[key];
+            }
+          }
+        }
+        return target;
+      }
+
+      // default options to init reveal.js
+      var defaultOptions = {
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+        transition: 'default', // none/fade/slide/convex/concave/zoom
+        slideNumber: true,
+        highlight: {
+          highlightOnLoad: false
+        },
+        plugins: [
+          RevealMarkdown,
+          RevealHighlight,
+          RevealZoom,
+          RevealNotes,
+          RevealMath
+        ]
+      };
+
+      // options from URL query string
+      var queryOptions = Reveal().getQueryHash() || {};
+
+      var options = extend(defaultOptions, {"transition":"slide","auto-animate":true,"_":["slides.md"],"static":"_site"}, queryOptions);
+    </script>
+
+
+    <script>
+      Reveal.initialize(options);
+      Reveal.addEventListener('ready', function (event) {
+        const blocks = Reveal.getRevealElement().querySelectorAll('pre code:not(.mermaid)');
+        const hlp = Reveal.getPlugin('highlight');
+        blocks.forEach(hlp.highlightBlock);
+      });
+    </script>
+
+    <script>
+      const mermaidOptions = extend({ startOnLoad: false }, {});
+      mermaid.startOnLoad = false;
+      mermaid.initialize(mermaidOptions);
+      const cb = function (event) { mermaid.init(mermaidOptions, '.stack.present>.present pre code.mermaid'); };
+      Reveal.addEventListener('ready', cb);
+      Reveal.addEventListener('slidetransitionend', cb);
+    </script>
+  </body>
+</html>

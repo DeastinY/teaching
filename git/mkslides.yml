@@ -1,0 +1,17 @@
+index:
+  title: Version Control for Researchers
+  theme: https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/theme/moon.min.css
+slides:
+  theme: https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/theme/moon.min.css
+  highlight_theme: https://cdnjs.cloudflare.com/ajax/libs/reveal.js/5.1.0/plugin/highlight/monokai.min.css
+  separator: ^\s*---\s*$
+  separator_vertical: ^\s*-v-\s*$
+  separator_notes: "^Notes?:"
+revealjs:
+  height: 1080
+  width: 1920
+  transition: fade
+plugins:
+  - name: RevealMermaid
+    extra_javascript:
+      - https://cdn.jsdelivr.net/npm/reveal.js-mermaid-plugin/plugin/mermaid/mermaid.min.js
