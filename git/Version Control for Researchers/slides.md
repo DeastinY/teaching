@@ -126,7 +126,7 @@ strong {
   :click-3="{ x: -1000, y: -100 }"
   :leave="{ y: 30, x: 0 }"
 >
-<img src="../repository.png" style="width: 60%;" alt="Repository Image" />
+<img src="/repository.png" style="width: 60%;" alt="Repository Image" />
 </div>
 <div v-click.hide="3">
 <arrow  v-click="2" x1="300" y1="300" x2="170" y2="320" color="#953" width="3" arrowSize="5" />
@@ -155,7 +155,7 @@ Date:   Mon Feb 3 13:37:57 2025 +0100
   :click-4="{ x: -1000, y: -400 }"
   :leave="{ x: -1000, y: -400 }"
 >
-<img src="../commit.png" style="width: 60%;"/>
+<img src="/commit.png" style="width: 60%;"/>
 </div>
 
 <div
@@ -383,7 +383,7 @@ gitGraph
 <br>
 
 <div v-click="6">
-```bash{1-2|1-2|4-6}
+```bash{1-2|1-2|1-2|4-6|4-6}
 # Create and switch to a new branch
 git checkout -b new_feature
 
@@ -393,11 +393,19 @@ git merge new_feature
 ```
 </div>
 
+<div v-click="7">
+<arrow  x1="500" y1="500" x2="570" y2="420" color="#953" width="3" arrowSize="5" />
+</div>
+
+<div v-click="9">
+<arrow  x1="900" y1="400" x2="800" y2="350" color="#953" width="3" arrowSize="5" />
+</div>
+
 <div
   v-motion
-  :initial="{ x: 0,  y: -100 }"
+  :initial="{ x:  1000,  y: -120 }"
   :click-6="{ x: 400, y: -120 }"
-  :leave="{ y: 30, x: 0 }"
+  :leave="{ x:400, y:-120 }"
 >
 ```mermaid {theme: 'dark', scale: 0.8}
 gitGraph
@@ -414,43 +422,101 @@ gitGraph
 
 
 ---
+layout: two-cols
+---
 
 ## Collaborating with Remotes
 
-```bash
+<v-clicks>
+<ul>
+  <li><strong style="color: goldenrod;">Remote Repository:</strong> A version of your project hosted on the internet.</li>
+  <li><strong style="color: goldenrod;">Push/Pull:</strong> Upload/Download changes to and from remote.</li>
+  <li><strong style="color: goldenrod;">Origin:</strong> The name of the remote repository.</li>
+  <li><strong style="color: goldenrod;">Clone:</strong> Create a local copy of a remote repository.</li>
+</ul>
+</v-clicks>
+
+<div
+  v-motion
+  :initial="{ x:  0,  y: 400 }"
+  :click-1="{ x: 0, y: 0 }"
+  :leave="{ x:0, y: 0 }"
+>
+```bash {1-2|1-2|4-8|4-8|10-11}{at:1}
 # Add a remote repository
-git remote add origin https://github.com/username/repository.git
+git remote add origin https://github.com/user/repo.git
 
 # Push local changes
 git push -u origin main
 
 # Pull updates from remote
 git pull origin main
+
+# Alternatively clone a remote repository
+git clone https://github.com/user/repo.git
 ```
+</div>
+
+::right::
+
+<div
+  v-motion
+  :initial="{ x:  600,  y: 0 }"
+  :click-1="{ x: 0, y: 0 }"
+  :leave="{ x:0, y: 0 }"
+>
+<img src="/virtpat.png"/>
+</div>
+
+<div
+  v-motion
+  :initial="{ x:  600,  y: -60 }"
+  :click-4="{ x: 20, y: -60 }"
+  :leave="{ x: 20, y: -60 }"
+>
+```bash
+$ git clone git@git.rwth-aache...
+> Cloning into 'virtual_patient_radiology'...
+> remote: Enumerating objects: 117, done.
+> remote: Counting objects: 100% (83/83), done.
+> remote: Compressing objects: 100% (83/83), done.
+> remote: Total 117 (delta 38), reused 0 (delta 0)
+> Receiving objects: 100% (117/117), 45.03 KiB | 5.00 Mbs
+> Resolving deltas: 100% (50/50), done.
+```
+</div>
 
 ---
+layout: center
+---
 
-## Best Practices for Researchers
+# Best Practices (for Researchers)
 
-- Use meaningful commit messages
-- Keep repositories organized
-- Use `.gitignore` for large files and temporary files
-- Regularly push to a remote repository
-- Use branches for experimental changes
-- Automate documentation and backups
+<v-clicks>
+<ul>
+  <li>📝 Use meaningful commit messages</li>
+  <li>📁 Keep repositories organized</li>
+  <li>🚫 Use <code>.gitignore</code> for large files and temporary files</li>
+  <li>🔄 Regularly push to a remote repository</li>
+  <li>🌿 Use branches for experimental changes</li>
+</ul>
+</v-clicks>
 
+---
+layout: center
 ---
 
 ## GitHub, GitLab, and Alternatives
 
-- **GitHub:** Popular for open-source and academic projects
-- **GitLab:** Self-hosted options and CI/CD integration
-- **Bitbucket:** Supports Mercurial and Git
-- **Codeberg:** Privacy-friendly alternative
+- **GitHub:** Popular for open-source projects, big publicity/community
+- **GitLab:** Itself Open-Source, available from RWTH-Aachen for Education only
+- **Gitlab-CE:** Same as above, but more free license, less features
 
 ---
+layout: center
+---
 
-## Advanced Topics
+## Advanced Topics (t.b.d.)
 
 - Using Git with Jupyter Notebooks
 - Git Large File Storage (LFS) for datasets
@@ -458,16 +524,19 @@ git pull origin main
 - Working with submodules for modular projects
 
 ---
+layout: two-cols
+---
 
-## Summary
+# Summary
 
-- Git helps manage research projects efficiently
+<br><br><br>
+- Version Control helps manage research projects efficiently
 - Enables collaboration and reproducibility
 - Learning basic Git commands is a valuable skill
 - Use hosted platforms for better sharing and tracking
+- Start early, commit often, write good commit messages
 
----
+::right::
 
-## Q&A
+![XKCD](/image.png)
 
-(Feel free to ask questions!)
