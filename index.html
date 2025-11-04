@@ -5,7 +5,58 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Richard Polzin</title>
+  <title>Richard Polzin - AI Researcher | Portfolio</title>
+  <meta name="description" content="Richard Polzin - AI Researcher specializing in predictive modeling, machine learning, and computational biomedicine. Explore my work in ARDS prediction, synthetic data, HPC, and research software development.">
+  <meta name="keywords" content="Richard Polzin, AI Researcher, Machine Learning, Computational Biomedicine, Predictive Modeling, HPC, Research Software Development, Synthetic Data">
+  <meta name="author" content="Richard Polzin">
+  <link rel="canonical" href="https://richardpolzin.com/">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://richardpolzin.com/">
+  <meta property="og:title" content="Richard Polzin - AI Researcher | Portfolio">
+  <meta property="og:description" content="AI Researcher specializing in predictive modeling, machine learning, and computational biomedicine.">
+  <meta property="og:image" content="./assets/images/my-avatar.png">
+  
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://richardpolzin.com/">
+  <meta property="twitter:title" content="Richard Polzin - AI Researcher | Portfolio">
+  <meta property="twitter:description" content="AI Researcher specializing in predictive modeling, machine learning, and computational biomedicine.">
+  <meta property="twitter:image" content="./assets/images/my-avatar.png">
+  
+  <!-- JSON-LD structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Richard Polzin",
+    "jobTitle": "AI Researcher",
+    "worksFor": {
+      "@type": "Organization",
+      "name": "Joint Research Center of Computational Biomedicine"
+    },
+    "url": "https://richardpolzin.com",
+    "sameAs": [
+      "https://www.instagram.com/weird.coffee.person/"
+    ],
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Aachen",
+      "addressCountry": "Germany"
+    },
+    "email": "mailto:mail@richardpolzin.com",
+    "description": "AI Researcher specializing in predictive modeling, machine learning, and computational biomedicine."
+  }
+  </script>
+  
+  <!-- Preload critical CSS -->
+  <link rel="preload" href="./assets/css/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="./assets/css/style.css"></noscript>
+  
+  <!-- Preload critical font -->
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap"></noscript>
 
   <!--
     - favicon
@@ -43,7 +94,7 @@
       <div class="sidebar-info">
 
         <figure class="avatar-box">
-          <img src="./assets/images/my-avatar.png" alt="Richard Polzin" width="80">
+          <img src="./assets/images/my-avatar.png" alt="Richard Polzin" width="80" loading="lazy">
         </figure>
 
         <div class="info-content">
@@ -154,28 +205,28 @@
         - #NAVBAR
       -->
 
-      <nav class="navbar">
+      <nav class="navbar" role="navigation" aria-label="Main navigation">
 
-        <ul class="navbar-list">
+        <ul class="navbar-list" role="tablist">
 
           <li class="navbar-item">
-            <button class="navbar-link  active" data-nav-link>About</button>
+            <button class="navbar-link  active" data-nav-link role="tab" aria-selected="true" aria-controls="about-panel" id="about-tab">About</button>
           </li>
 
           <li class="navbar-item">
-            <button class="navbar-link" data-nav-link>Resume</button>
+            <button class="navbar-link" data-nav-link role="tab" aria-selected="false" aria-controls="resume-panel" id="resume-tab">Resume</button>
           </li>
 
           <!--<li class="navbar-item">
-            <button class="navbar-link" data-nav-link>Blog</button>
+            <button class="navbar-link" data-nav-link role="tab" aria-selected="false">Blog</button>
           </li>-->
 
           <li class="navbar-item">
-            <button class="navbar-link" data-nav-link>Teaching</button>
+            <button class="navbar-link" data-nav-link role="tab" aria-selected="false" aria-controls="teaching-panel" id="teaching-tab">Teaching</button>
           </li>
 
           <li class="navbar-item">
-            <button class="navbar-link" data-nav-link>Contact</button>
+            <button class="navbar-link" data-nav-link role="tab" aria-selected="false" aria-controls="contact-panel" id="contact-tab">Contact</button>
           </li>
 
         </ul>
@@ -190,7 +241,7 @@
         - #ABOUT
       -->
 
-      <article class="about  active" data-page="about">
+      <article class="about  active" data-page="about" id="about-panel" role="tabpanel" aria-labelledby="about-tab">
 
         <header>
           <h2 class="h2 article-title">About me</h2>
@@ -220,8 +271,7 @@
             <li class="service-item">
 
               <div class="service-icon-box">
-                <img src="./assets/images/icon-design.svg
-                " alt="design icon" width="40">
+                <img src="./assets/images/icon-design.svg" alt="design icon" width="40" loading="lazy">
               </div>
 
               <div class="service-content-box">
@@ -237,7 +287,7 @@
             <li class="service-item">
 
               <div class="service-icon-box">
-                <img src="./assets/images/icon-dev.svg" alt="Web development icon" width="40">
+                <img src="./assets/images/icon-dev.svg" alt="Web development icon" width="40" loading="lazy">
               </div>
 
               <div class="service-content-box">
@@ -253,7 +303,7 @@
             <li class="service-item">
 
               <div class="service-icon-box">
-                <img src="./assets/images/icon-app.svg" alt="mobile app icon" width="40">
+                <img src="./assets/images/icon-app.svg" alt="mobile app icon" width="40" loading="lazy">
               </div>
 
               <div class="service-content-box">
@@ -269,7 +319,7 @@
             <li class="service-item">
 
               <div class="service-icon-box">
-                <img src="./assets/images/icon-photo.svg" alt="camera icon" width="40">
+                <img src="./assets/images/icon-photo.svg" alt="camera icon" width="40" loading="lazy">
               </div>
 
               <div class="service-content-box">
@@ -288,7 +338,7 @@
 
       </article>
 
-      <article class="resume" data-page="resume">
+      <article class="resume" data-page="resume" id="resume-panel" role="tabpanel" aria-labelledby="resume-tab" hidden>
 
         <header>
           <h2 class="h2 article-title">Resume</h2>
@@ -322,7 +372,7 @@
 
               <h4 class="h4 timeline-item-title">Ph.D. Student at JRC COMBINE</h4>
 
-              <span>2018 — 20024</span>
+              <span>2018 — 2024</span>
 
               <p class="timeline-text">
                 During my PhD I focused on developing predictors for Acute Respiratory Distress Syndrome (ARDS) in Intensive Care Unit (ICU) patients. 
@@ -533,7 +583,7 @@
         - #PORTFOLIO
     -->
 
-      <article class="portfolio" data-page="portfolio">
+      <article class="portfolio" data-page="portfolio" id="portfolio-panel" role="tabpanel" aria-labelledby="portfolio-tab" hidden>
 
         <header>
           <h2 class="h2 article-title">Portfolio</h2>
@@ -769,7 +819,7 @@
         - #BLOG
       -->
 
-      <article class="blog" data-page="blog">
+      <article class="blog" data-page="blog" id="blog-panel" role="tabpanel" aria-labelledby="blog-tab" hidden>
 
         <header>
           <h2 class="h2 article-title">Blog</h2>
@@ -957,7 +1007,7 @@
         - #TEACHING
       -->
 
-      <article class="teaching" data-page="teaching">
+      <article class="teaching" data-page="teaching" id="teaching-panel" role="tabpanel" aria-labelledby="teaching-tab" hidden>
 
         <header>
           <h2 class="h2 article-title">Teaching</h2>
@@ -981,7 +1031,7 @@
 
                     <span class="dot"></span>
 
-                    <time datetime="2022-02-23">Nov 4, 2025</time>
+                    <time datetime="2025-11-04">Nov 4, 2025</time>
                   </div>
 
                   <h3 class="h3 blog-item-title">Version Control for Researchers</h3>
@@ -1090,7 +1140,7 @@
         - #CONTACT
       -->
 
-      <article class="contact" data-page="contact">
+      <article class="contact" data-page="contact" id="contact-panel" role="tabpanel" aria-labelledby="contact-tab" hidden>
 
         <header>
           <h2 class="h2 article-title">Contact</h2>
@@ -1104,21 +1154,20 @@
           </figure>
         </section>
 
-        <section class="contact-form">
+        <section class="contact-form" role="region" aria-labelledby="contact-form-title">
 
-          <h3 class="h3 form-title">Contact Form</h3>
+          <h3 class="h3 form-title" id="contact-form-title">Contact Form</h3>
 
-          <form action="#" class="form" data-form>
+          <form action="#" class="form" data-form aria-label="Contact form">
 
             <div class="input-wrapper">
-              <input type="text" name="fullname" class="form-input" placeholder="Name" required data-form-input>
-
-              <input type="email" name="email" class="form-input" placeholder="Email address" required data-form-input>
+              <input type="text" name="fullname" id="fullname" class="form-input" placeholder="Name" required data-form-input aria-label="Full name">
+              <input type="email" name="email" id="email" class="form-input" placeholder="Email address" required data-form-input aria-label="Email address">
             </div>
 
-            <textarea name="message" class="form-input" placeholder="Your Message" required data-form-input></textarea>
+            <textarea name="message" id="message" class="form-input" placeholder="Your Message" required data-form-input aria-label="Your message"></textarea>
 
-            <button class="form-btn" type="submit" disabled data-form-btn>
+            <button class="form-btn" type="submit" disabled data-form-btn aria-label="Send message">
               <ion-icon name="paper-plane"></ion-icon>
               <span>Send Message</span>
             </button>
@@ -1126,7 +1175,7 @@
           </form>
 
           <h4 class="h4">
-          </br>
+            <br>
             Please use the contact options on the left to reach out to me directly.
           </h4>
 
@@ -1146,13 +1195,90 @@
   <!--
     - custom js link
   -->
-  <script src="./assets/js/script.js"></script>
+  <script src="./assets/js/script.js" defer></script>
+  
+  <!-- Script to handle page state persistence and direct linking -->
+  <script>
+    // Handle page state persistence and direct linking
+    document.addEventListener('DOMContentLoaded', function() {
+      // Function to show a specific page
+      function showPage(pageId) {
+        // Hide all pages
+        const allPages = document.querySelectorAll('[data-page]');
+        allPages.forEach(page => page.classList.remove('active'));
+        
+        // Show the requested page
+        const targetPage = document.querySelector(`[data-page="${pageId}"]`);
+        if (targetPage) {
+          targetPage.classList.add('active');
+        }
+        
+        // Update active state of navigation links
+        const navLinks = document.querySelectorAll('[data-nav-link]');
+        navLinks.forEach(link => {
+          if (link.textContent.toLowerCase().trim() === pageId.toLowerCase()) {
+            link.classList.add('active');
+          } else {
+            link.classList.remove('active');
+          }
+        });
+        
+        // Update URL hash without scrolling to the element
+        history.replaceState(null, null, `#${pageId}`);
+      }
+      
+      // Check URL hash on page load
+      function checkHash() {
+        let hash = window.location.hash.substring(1);
+        if (hash) {
+          // Normalize the hash to match how the nav links text appears
+          if (hash === 'portfolio') {
+            hash = 'portfolio';
+          } else if (hash === 'blog') {
+            hash = 'blog';
+          } else {
+            // Capitalize first letter for proper matching with nav text
+            hash = hash.charAt(0).toUpperCase() + hash.slice(1);
+          }
+          
+          // Look for matching page
+          const matchingPage = document.querySelector(`[data-page="${hash.toLowerCase()}"]`);
+          if (matchingPage) {
+            showPage(hash.toLowerCase());
+          } else {
+            // Default to 'about' if hash doesn't match any page
+            showPage('about');
+          }
+        } else {
+          // Default to 'about' if no hash
+          showPage('about');
+        }
+      }
+      
+      // Set up event listeners for navigation links
+      const navLinks = document.querySelectorAll('[data-nav-link]');
+      navLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          const pageId = this.textContent.toLowerCase().trim();
+          showPage(pageId);
+          window.scrollTo(0, 0);
+        });
+      });
+      
+      // Check hash when page loads
+      checkHash();
+      
+      // Listen for hash changes (e.g., browser back/forward)
+      window.addEventListener('hashchange', checkHash);
+    });
+  </script>
 
   <!--
     - ionicon link
   -->
-  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js" defer></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js" defer></script>
 
 </body>
 
