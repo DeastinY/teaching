@@ -7,6 +7,29 @@ const elementToggleFunc = function (elem) { elem.classList.toggle("active"); }
 
 
 
+// Intersection Observer for scroll-triggered animations
+const observerOptions = {
+  threshold: 0.1,
+  rootMargin: '0px 0px -50px 0px'
+};
+
+const animateOnScroll = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('animate-in');
+      // Don't unobserve to allow re-animation if needed
+    }
+  });
+}, observerOptions);
+
+// Observe elements that should animate on scroll
+document.addEventListener('DOMContentLoaded', () => {
+  const animateElements = document.querySelectorAll('.service-item, .timeline-item, .skills-item, .blog-post-item');
+  animateElements.forEach(el => animateOnScroll.observe(el));
+});
+
+
+
 // sidebar variables
 const sidebar = document.querySelector("[data-sidebar]");
 const sidebarBtn = document.querySelector("[data-sidebar-btn]");
@@ -131,6 +154,21 @@ for (let i = 0; i < formInputs.length; i++) {
       formBtn.setAttribute("disabled", "");
     }
 
+  });
+
+  // Add focus/blur visual feedback
+  formInputs[i].addEventListener("focus", function() {
+    this.parentElement.classList.add("input-focused");
+  });
+
+  formInputs[i].addEventListener("blur", function() {
+    this.parentElement.classList.remove("input-focused");
+    // Add validation state class
+    if (this.value && !this.checkValidity()) {
+      this.classList.add("input-error");
+    } else {
+      this.classList.remove("input-error");
+    }
   });
 }
 
