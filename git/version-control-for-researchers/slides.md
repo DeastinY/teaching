@@ -19,7 +19,7 @@ mdc: true
 
 # Version Control for Researchers
 
-Richard Polzin (4.11.2025)
+Richard Polzin (19.08.2026)
 
 <div class="abs-br m-6 text-xl">
   <a href="https://richardpolzin.com" target="_blank" class="slidev-icon-btn">
@@ -35,7 +35,11 @@ The last comment block of each slide will be treated as slide notes. It will be 
 layout: two-cols
 ---
 
+# Table of Contents
 
+<br>
+
+Today we'll cover the fundamentals of version control and Git — from your first commit to collaborating with others.
 
 ::right::
 
@@ -95,8 +99,22 @@ layout: two-cols
   :click-13="{ x: 40, y: 30 }"
   :leave="{ y: 30, x: 0 }"
 >
-<img src="https://git-scm.com/images/logos/downloads/Git-Logo-2Color.svg" alt="Git Logo" />
+<img src="/git-logo.svg" alt="Git Logo" />
 </div>
+
+---
+
+# But I Work Alone...
+
+<v-clicks>
+<ul>
+  <li>🕰️ <strong style="color: goldenrod;">Time travel for your own work</strong> — ever broken something and not known what changed? <code>git diff</code> and <code>git log</code> answer that instantly</li>
+  <li>🧪 <strong style="color: goldenrod;">Safe experimentation</strong> — try a completely different approach on a branch; if it fails, delete it and you're back to where you started</li>
+  <li>🏷️ <strong style="color: goldenrod;">Reproducibility</strong> — tag the exact code state used for a paper submission; re-run it a year later and get the same results</li>
+  <li>💾 <strong style="color: goldenrod;">Free offsite backup</strong> — push to GitHub/GitLab and your work survives a stolen or dead laptop</li>
+  <li>🤝 <strong style="color: goldenrod;">Future-you is a collaborator too</strong> — good commit messages are messages to yourself six months from now</li>
+</ul>
+</v-clicks>
 
 ---
 
@@ -228,8 +246,8 @@ gitGraph
   :click-6="{ x: 0, y: -1000 }"
 >
 <div class="flex justify-center space-x-8">
-    <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub Logo" style="width: 100px;"/>
-    <img src="https://about.gitlab.com/images/press/logo/png/gitlab-icon-rgb.png" alt="GitLab Logo" style="width: 100px;"/>
+    <img src="/github-logo.png" alt="GitHub Logo" style="width: 100px;"/>
+    <img src="/gitlab-logo.png" alt="GitLab Logo" style="width: 100px;"/>
 </div>
 </div>
 
@@ -255,7 +273,8 @@ git config --global user.email "your.email@example.com"
 flowchart LR
     subgraph Local
         A[Initialize Repository] --> B[Change Things]
-        B --> C[Commit Changes]
+        B --> S[Stage Changes]
+        S --> C[Commit Changes]
     end
     subgraph Remote
         C --> F
@@ -271,7 +290,8 @@ flowchart LR
 <ul>
   <li><strong style="color: goldenrod;">Initialize Repository:</strong> Start a new repository with <code>git init</code>.</li>
   <li><strong style="color: goldenrod;">Make Changes:</strong> Modify files in your working directory.</li>
-  <li><strong style="color: goldenrod;">Commit Changes:</strong> Save snapshots of your changes with <code>git commit</code>.</li>
+  <li><strong style="color: goldenrod;">Stage Changes:</strong> Select which changes to include with <code>git add</code>. Git requires an explicit staging step — only staged files go into the next commit.</li>
+  <li><strong style="color: goldenrod;">Commit Changes:</strong> Save a snapshot of staged changes with <code>git commit</code>.</li>
   <li><strong style="color: goldenrod;">Push to Remote:</strong> Upload your commits to a remote repository with <code>git push</code>.</li>
   <li><strong style="color: goldenrod;">Pull Updates:</strong> Fetch and integrate changes from the remote repository with <code>git pull</code>.</li>
 </ul>
@@ -299,10 +319,10 @@ $ git status
 > On branch main
 > nothing to commit, working tree clean
 $ # Change a file
-$ echo "\nthis is my cool description." >> README.md
+$ printf "\nthis is my cool description.\n" >> README.md
 $ # Check the status
 $ git status
-> On branch master
+> On branch main
 > Changes not staged for commit:
 >   (use "git add <file>..." to update what will be committed)
 >   (use "git restore <file>..." to discard changes in working directory)
@@ -338,7 +358,7 @@ layout: center
   <li><strong style="color: goldenrod;">Version Control:</strong> Manage changes to files over time, enable collaboration and track history.</li>
   <li><strong style="color: goldenrod;">Git:</strong> The (coolest 😉) software to do version control with.</li>
   <li><strong style="color: goldenrod;">Key Concepts:</strong> Repository, Commit, Branch, Merge, Remote.</li>
-  <li><strong style="color: goldenrod;">Basic Commands:</strong> <code>git init</code>, <code>git add</code>, <code>git commit</code>, <code>git status</code>, <code>git log</code>, <code>git diff</code>.</li>
+  <li><strong style="color: goldenrod;">Basic Commands:</strong> <code>git init</code>, <code>git add</code> (stage), <code>git commit</code> (snapshot), <code>git status</code>, <code>git log</code>, <code>git diff</code>.</li>
 </ul>
 </v-clicks>
 
@@ -384,11 +404,11 @@ gitGraph
 
 <div v-click="6">
 ```bash{1-2|1-2|1-2|4-6|4-6}
-# Create and switch to a new branch
-git checkout -b new_feature
+# Create and switch to a new branch (modern syntax)
+git switch -c new_feature  # older: git checkout -b new_feature
 
 # Merge changes back to main branch
-git checkout main
+git switch main
 git merge new_feature
 ```
 </div>
@@ -420,6 +440,44 @@ gitGraph
 ```
 </div>
 
+
+---
+layout: center
+---
+
+# Merge Conflicts
+
+When two branches change the same lines, Git can't merge automatically.
+
+<div v-click>
+
+```bash
+$ git merge new_feature
+> CONFLICT (content): Merge conflict in analysis.py
+> Automatic merge failed; fix conflicts and then commit the result.
+```
+
+</div>
+
+<div v-click>
+
+Git marks the conflicting section — edit the file to resolve it:
+
+```diff
+- threshold = 0.5   # your version (main)
++ threshold = 0.8   # incoming version (new_feature)
+```
+
+</div>
+
+<v-clicks>
+<ul>
+  <li>Edit the file to keep what you want and remove the markers</li>
+  <li><code>git add analysis.py</code> — mark it resolved</li>
+  <li><code>git commit</code> — complete the merge</li>
+  <li><code>git status</code> shows which files still have conflicts</li>
+</ul>
+</v-clicks>
 
 ---
 layout: two-cols
@@ -487,20 +545,33 @@ $ git clone git@git.rwth-aache...
 </div>
 
 ---
-layout: center
----
 
 # Best Practices (for Researchers)
 
 <v-clicks>
 <ul>
-  <li>📝 Use meaningful commit messages</li>
-  <li>📁 Keep repositories organized</li>
-  <li>🚫 Use <code>.gitignore</code> for large files and temporary files</li>
-  <li>🔄 Regularly push to a remote repository</li>
-  <li>🌿 Use branches for experimental changes</li>
+  <li>📝 <strong style="color: goldenrod;">Meaningful commit messages:</strong> "Fix threshold in model A" beats "fixed stuff"</li>
+  <li>🌿 <strong style="color: goldenrod;">Branch per experiment:</strong> keep <code>main</code> clean; use branches for new ideas so you can always go back</li>
+  <li>🏷️ <strong style="color: goldenrod;">Tag paper versions:</strong> <code>git tag v1.0-submission</code> so you can reproduce results from a specific submission</li>
+  <li>🔄 <strong style="color: goldenrod;">Push regularly:</strong> remote = free backup; don't lose a week of work to a dead laptop</li>
+  <li>📁 <strong style="color: goldenrod;">Version configs alongside code:</strong> commit your hyperparameter files and experiment configs, not just the scripts</li>
+  <li>🚫 <strong style="color: goldenrod;">Use <code>.gitignore</code>:</strong> keep large data and temp files out of the repo</li>
 </ul>
 </v-clicks>
+
+<div v-click>
+
+```bash
+# .gitignore for a typical Python research project
+data/              # large datasets — use DVC or similar instead
+*.h5               # model checkpoints
+*.pkl
+__pycache__/
+.ipynb_checkpoints/
+.env               # secrets / API keys — never commit these
+```
+
+</div>
 
 ---
 layout: center
@@ -508,20 +579,71 @@ layout: center
 
 ## GitHub, GitLab, and Alternatives
 
-- **GitHub:** Popular for open-source projects, big publicity/community
-- **GitLab:** Itself Open-Source, available from RWTH-Aachen for Education only
-- **Gitlab-CE:** Same as above, but more free license, less features
+<div class="flex justify-center space-x-8 mb-4">
+  <img src="/github-logo.png" alt="GitHub Logo" style="width: 80px;"/>
+  <img src="/gitlab-logo.png" alt="GitLab Logo" style="width: 80px;"/>
+</div>
+
+- **GitHub:** Most popular for open-source projects; large community and integrations
+- **GitLab (RWTH):** Available for RWTH members at [git.rwth-aachen.de](https://git.rwth-aachen.de) — use your TIM credentials
+- **GitLab-CE:** Self-hosted open-source version; fewer features but no vendor lock-in
+- **Codeberg / Forgejo:** Community-run, fully open-source alternatives
+
+---
+
+# Common Pitfalls
+
+<v-clicks>
+<ul>
+  <li>🐘 <strong style="color: goldenrod;">Committing large files by accident</strong> — a 2 GB dataset in git history is permanent and painful to remove; set up <code>.gitignore</code> before the first commit</li>
+  <li>😱 <strong style="color: goldenrod;">Detached HEAD</strong> — happens when you <code>git checkout</code> a commit hash directly; you're not on any branch, so commits get lost. Fix: <code>git switch main</code></li>
+  <li>🔑 <strong style="color: goldenrod;">Committing secrets</strong> — API keys, passwords, <code>.env</code> files pushed to a public repo are compromised immediately; always <code>.gitignore</code> them</li>
+  <li>💥 <strong style="color: goldenrod;">Force-pushing shared branches</strong> — <code>git push --force</code> rewrites history for everyone on the team; avoid on <code>main</code>, use <code>--force-with-lease</code> if you must</li>
+  <li>📝 <strong style="color: goldenrod;">Vague commit messages</strong> — "fixed it" or "update" tells future-you nothing; a message like "Fix off-by-one in sliding window" is searchable and self-documenting</li>
+  <li>🔀 <strong style="color: goldenrod;">Working directly on main</strong> — one bad commit blocks everyone; use branches even when working alone</li>
+</ul>
+</v-clicks>
 
 ---
 layout: center
 ---
 
-## Advanced Topics (t.b.d.)
+## Advanced Topics
 
-- Using Git with Jupyter Notebooks
-- Git Large File Storage (LFS) for datasets
-- Continuous Integration (CI) for automating workflows
-- Working with submodules for modular projects
+- **Git LFS** — store large files (datasets, model weights) without bloating the repo: `git lfs track "*.h5"`
+- **nbstripout / nbdime** — strip notebook outputs before committing so diffs stay readable
+- **CI/CD** — automatically run tests or re-run analysis on every push (GitHub Actions, GitLab CI)
+- **Submodules** — reference another repo inside yours; useful for shared libraries across projects
+- **`git bisect`** — binary-search your commit history to find exactly which commit broke something
+- **SSH keys** — stop typing your password on every push: `ssh-keygen` + add public key to GitHub/GitLab
+
+---
+layout: center
+---
+
+# Try It Yourself
+
+```bash
+# Create a repo and make your first commit
+git init my_research && cd my_research
+echo "# My Project" > README.md
+git add README.md && git commit -m "Initial commit"
+
+# Branch, change, merge
+git switch -c add-description
+echo "This project does X." >> README.md
+git add README.md && git commit -m "Add project description"
+git switch main && git merge add-description
+
+# Explore the history
+git log --oneline
+```
+
+<div class="mt-6 text-center text-green-400">
+
+Push it to [git.rwth-aachen.de](https://git.rwth-aachen.de) or GitHub to get a free remote backup!
+
+</div>
 
 ---
 layout: two-cols
@@ -539,4 +661,17 @@ layout: two-cols
 ::right::
 
 ![XKCD](/image.png)
+
+---
+layout: center
+class: text-center
+---
+
+# Questions?
+
+<br>
+
+Richard Polzin
+
+[richardpolzin.com](https://richardpolzin.com) · [rpolzin@ukaachen.de](mailto:rpolzin@ukaachen.de) · [git.rwth-aachen.de](https://git.rwth-aachen.de)
 
