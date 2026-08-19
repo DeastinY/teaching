@@ -28,12 +28,11 @@ _Richard Polzin <rpolzin@ukaachen.de\>_
 ### Table of Content
 
 1. Introduction <!-- .element: class="fragment" data-fragment-index="1" -->
-2. Linux Basics for HPC <!-- .element: class="fragment" data-fragment-index="2" -->
-   - Command Line · Filesystem · Files · Text & Search <!-- .element: class="fragment" data-fragment-index="2" -->
-   - Permissions · vim · Shell Scripts · Environment · Config <!-- .element: class="fragment" data-fragment-index="2" -->
-3. SLURM Job Manager <!-- .element: class="fragment" data-fragment-index="3" -->
-4. Compute Time Application <!-- .element: class="fragment" data-fragment-index="4" -->
-5. Tips and Tricks <!-- .element: class="fragment" data-fragment-index="5" -->
+2. Getting Access & Connecting <!-- .element: class="fragment" data-fragment-index="2" -->
+3. Linux Basics for HPC <!-- .element: class="fragment" data-fragment-index="3" -->
+4. SLURM Job Manager <!-- .element: class="fragment" data-fragment-index="4" -->
+5. Compute Time Application <!-- .element: class="fragment" data-fragment-index="5" -->
+6. Tips and Tricks <!-- .element: class="fragment" data-fragment-index="6" -->
 
 
 ---
@@ -113,6 +112,10 @@ Per Node (ML):
   - 512GB of RAM
   - 4 x NVIDIA H100 GPU (96GB HBM2e)
   - 52 such nodes available
+
+---
+
+# Getting Access & Connecting
 
 <!--v-->
 
@@ -214,6 +217,10 @@ ssh claix
 - **$WORK:** Large quota, not backed up. For working with many small files.
 - **$HPCWORK:** Largest quota, not backed up. For I/O intense jobs and large files.
 
+```sh
+quota -s   # check your current usage against each quota
+```
+
 <!--v-->
 
 ![](filesystems.png)
@@ -228,7 +235,7 @@ ssh claix
 - Mount as folder: *sshfs*
 
 <!--v-->
-### Project Management
+### Project Management: Groups
 
 - Groups are created for every project
 - Every group consists of owners (PC/PI), Managers and Members
@@ -236,7 +243,7 @@ ssh claix
 - In Aachen project storage is deleted **8 months** after a project's conclusion. Make sure you migrate the data by then!
 
 <!--v-->
-### Project Management
+### Project Management: Commands
 
 Users can be added to and removed from groups/projects using their TIM-ID.
 ```text
@@ -944,12 +951,48 @@ scancel --me                 # cancel all your jobs
 <!-- .slide: data-auto-animate -->
 ## SLURM Job Manager <!-- .element: data-id="code-animation"-->
 
+#### Array Jobs
+
+Run the same script over many inputs — one submission, many jobs:
+
+```bash [1|2|3]
+#SBATCH --array=1-100
+input_file="data/sample_${SLURM_ARRAY_TASK_ID}.txt"
+python train.py --input "$input_file" --seed "$SLURM_ARRAY_TASK_ID"
+```
+
+- `$SLURM_ARRAY_TASK_ID` — unique index per job · `--array=0-99%10` caps 10 running at once
+
+<!--v-->
+
+<!-- .slide: data-auto-animate -->
+## SLURM Job Manager <!-- .element: data-id="code-animation"-->
+
+#### Job Dependencies — Chaining Jobs
+
+Submit a pipeline without waiting for each step to finish:
+
+```bash [1|2|3]
+jid1=$(sbatch --parsable preprocess.sh)
+jid2=$(sbatch --dependency=afterok:$jid1 --parsable train.sh)
+sbatch --dependency=afterok:$jid2 evaluate.sh
+```
+
+`afterok:ID` waits for success · `afterany:ID` waits for any end · `afternotok:ID` waits for failure
+
+<!--v-->
+
+<!-- .slide: data-auto-animate -->
+## SLURM Job Manager <!-- .element: data-id="code-animation"-->
+
 #### Interactive Jobs and Accounting
 
 ```sh
 # Request an interactive session (great for testing)
 salloc --gres=gpu:1 -n 24 -t 1:00:00   # 24 cores + 1 GPU for 1 hour
 # Shell redirects to the compute node; job ends when you exit
+
+nvidia-smi   # check GPU utilization and memory on the node you're on
 
 # Show past and running job details
 sacct -S $(date -I --date="yesterday")  # all jobs since yesterday
@@ -1028,13 +1071,11 @@ HPC resources in Germany are arranged hierarchically:
 
 ### Acknowledgement (RWTH/JARA)
 
-*Computations were performed with computing resources granted by RWTH Aachen University under project <ID of your project>.*
+Cite the resources in your papers:
 
-<!--v-->
+**Short:** *Computations were performed with computing resources granted by RWTH Aachen University under project \<ID\>.*
 
-### Acknowledgement (RWTH/JARA)
-
-*The authors gratefully acknowledge the computing time provided to them at the NHR Center NHR4CES at RWTH Aachen University (project number <your-project-id: p0020XXX>). This is funded by the Federal Ministry of Education and Research, and the state governments participating on the basis of the resolutions of the GWK for national high performance computing at universities (www.nhr-verein.de/unsere-partner).*
+**NHR-funded projects:** use the full text from [nhr-verein.de/unsere-partner](https://www.nhr-verein.de/unsere-partner) — names NHR4CES, your project number, and the funding bodies.
 
 ---
 <!-- .slide: data-auto-animate -->
@@ -1060,20 +1101,20 @@ Host claix
 
 <!--v-->
 
-### SLURM Array Jobs
+### Jupyter Notebooks on the Cluster
 
-Run the same script with different inputs — one submission, many jobs:
+Run the notebook server on a compute node, tunnel the port to your laptop:
 
-```bash [1|3|4]
-#SBATCH --array=1-100          # submit 100 jobs at once
+```bash [1-2|3|5]
+salloc -n 4 -t 2:00:00
+hostname                             # note it, e.g. dsr01
+jupyter notebook --no-browser --port=8888
 
-input_file="data/sample_${SLURM_ARRAY_TASK_ID}.txt"
-python train.py --input "$input_file" --seed "$SLURM_ARRAY_TASK_ID"
+ssh -L 8888:dsr01:8888 claix         # on your laptop
 ```
 
-- `$SLURM_ARRAY_TASK_ID` gives each job a unique index (1–100 here)
-- `--array=0-99%10` — run at most 10 at a time to avoid flooding the queue
-- Great for: parameter sweeps, cross-validation folds, processing file lists
+- Open the `localhost:8888/...` URL Jupyter prints, in your local browser
+- VS Code's Jupyter extension tunnels automatically over Remote-SSH
 
 <!--v-->
 
@@ -1091,24 +1132,6 @@ tmux attach -t work     # reattach from any login node
 - Run interactive jobs or monitoring without fear of losing the session
 - Split panes: `Ctrl-b %` (vertical) · `Ctrl-b "` (horizontal)
 - List sessions: `tmux ls`
-
-<!--v-->
-
-### Job Dependencies — Chaining Jobs
-
-Submit a pipeline without waiting for each step to finish:
-
-```bash [1|2|3]
-jid1=$(sbatch --parsable preprocess.sh)
-jid2=$(sbatch --dependency=afterok:$jid1 --parsable train.sh)
-sbatch --dependency=afterok:$jid2 evaluate.sh
-```
-
-| Condition | Meaning |
-|---|---|
-| `afterok:ID` | Start only if job ID succeeded |
-| `afterany:ID` | Start after job ID ends (any status) |
-| `afternotok:ID` | Start only if job ID failed |
 
 <!--v-->
 
@@ -1133,7 +1156,15 @@ python train.py
 
 ---
 
-### Any Questions?
+## Questions?
+
+<br>
+
+**Richard Polzin**
+
+_rpolzin@ukaachen.de_
+
+[richardpolzin.com](https://richardpolzin.com) · [help.itc.rwth-aachen.de](http://help.itc.rwth-aachen.de) · [idm.rwth-aachen.de/selfservice](https://idm.rwth-aachen.de/selfservice/)
 
           </textarea>
         </section>

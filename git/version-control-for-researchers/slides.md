@@ -159,8 +159,8 @@ strong {
 >
 ```bash
 commit 0127a4e6b03cec81c38391dc643f50fdfee75f4b (HEAD -> main)
-Author: Richard Polzin <richard.polzin@posteo.de>
-Date:   Mon Feb 3 13:37:57 2025 +0100
+Author: Your Name <you@example.com>
+Date:   Mon Aug 17 13:37:57 2026 +0100
 
     Initial commit
 ```
@@ -253,7 +253,7 @@ gitGraph
 
 ---
 
-<h4>Initial Setup</h4>
+# Initial Setup
 
 <div v-click=1>
 ```bash {*|1-4|6-8}
@@ -285,6 +285,16 @@ flowchart LR
     H --> B
 ```
 </div>
+
+<div v-click>
+
+> Not a CLI person? GitHub Desktop or your editor's built-in Git panel (e.g. VS Code) cover the same workflow with buttons instead of commands — this workshop uses the command line because it's the same everywhere.
+
+</div>
+
+---
+
+# The Basic Workflow
 
 <v-clicks>
 <ul>
@@ -342,8 +352,8 @@ $ git diff
 $ # Check the commit history
 $ git log
 > commit 0127a4e6b03cec81c38391dc643f50fdfee75f4b (HEAD -> main)
-> Author: Richard Polzin <richard.polzin@posteo.de>
-> Date:   Mon Feb 3 13:37:57 2025 +0100
+> Author: Your Name <you@example.com>
+> Date:   Mon Aug 17 13:37:57 2026 +0100
 >
 >    Initial commit
 ```
@@ -366,7 +376,7 @@ layout: center
 layout: center
 ---
 
-# Branching and Merging
+# Branching and Merging: The Idea
 
 ```mermaid
 %%{init: {'theme': 'dark', 'themeVariables': { 'darkMode': true}}}%%
@@ -387,7 +397,7 @@ gitGraph
 
 ---
 
-# Branching and Merging
+# Branching and Merging: In Practice
 <br>
 
 <v-clicks>
@@ -440,6 +450,40 @@ gitGraph
 ```
 </div>
 
+
+---
+
+# Quick Context Switch: git stash
+
+Need to switch branches but you're mid-change and not ready to commit? Don't panic-commit — stash it.
+
+<v-clicks>
+<ul>
+  <li><code>git stash</code> — shelves your uncommitted changes, gives you a clean working directory</li>
+  <li><code>git switch other-branch</code> — do whatever you needed to do</li>
+  <li><code>git switch -</code> back, then <code>git stash pop</code> — restores your changes and removes them from the stash</li>
+</ul>
+</v-clicks>
+
+<div v-click>
+
+```bash
+$ git stash
+> Saved working directory and index state WIP on main: a1b2c3d Add feature
+$ git switch main
+$ git switch -
+$ git stash pop
+> On branch new_feature
+> Changes not staged for commit: ...
+```
+
+</div>
+
+<div v-click>
+
+> <code>git stash list</code> shows all shelved stashes — you can stash more than once.
+
+</div>
 
 ---
 layout: center
@@ -545,6 +589,22 @@ $ git clone git@git.rwth-aache...
 </div>
 
 ---
+layout: center
+---
+
+## GitHub, GitLab, and Alternatives
+
+<div class="flex justify-center space-x-8 mb-4">
+  <img src="/github-logo.png" alt="GitHub Logo" style="width: 80px;"/>
+  <img src="/gitlab-logo.png" alt="GitLab Logo" style="width: 80px;"/>
+</div>
+
+- **GitHub:** Most popular for open-source projects; large community and integrations
+- **GitLab (RWTH):** Available for RWTH members at [git.rwth-aachen.de](https://git.rwth-aachen.de) — use your TIM credentials
+- **GitLab-CE:** Self-hosted open-source version; fewer features but no vendor lock-in
+- **Codeberg / Forgejo:** Community-run, fully open-source alternatives
+
+---
 
 # Best Practices (for Researchers)
 
@@ -577,17 +637,18 @@ __pycache__/
 layout: center
 ---
 
-## GitHub, GitLab, and Alternatives
+# From Tag to Citation: Zenodo
 
-<div class="flex justify-center space-x-8 mb-4">
-  <img src="/github-logo.png" alt="GitHub Logo" style="width: 80px;"/>
-  <img src="/gitlab-logo.png" alt="GitLab Logo" style="width: 80px;"/>
-</div>
+A <code>git tag</code> makes a submission reproducible on your machine — <a href="https://zenodo.org" target="_blank">Zenodo</a> makes it citable by anyone.
 
-- **GitHub:** Most popular for open-source projects; large community and integrations
-- **GitLab (RWTH):** Available for RWTH members at [git.rwth-aachen.de](https://git.rwth-aachen.de) — use your TIM credentials
-- **GitLab-CE:** Self-hosted open-source version; fewer features but no vendor lock-in
-- **Codeberg / Forgejo:** Community-run, fully open-source alternatives
+<v-clicks>
+<ul>
+  <li>Connect your GitHub repo to <a href="https://zenodo.org" target="_blank">zenodo.org</a> (free, one-time setup)</li>
+  <li>Every new GitHub <strong style="color: goldenrod;">release</strong> is automatically archived and gets a permanent <strong style="color: goldenrod;">DOI</strong></li>
+  <li>Cite the exact code version behind your results — in the paper, not just "code available on request"</li>
+  <li>GitLab repos: archive manually via Zenodo's upload form</li>
+</ul>
+</v-clicks>
 
 ---
 
@@ -601,6 +662,7 @@ layout: center
   <li>💥 <strong style="color: goldenrod;">Force-pushing shared branches</strong> — <code>git push --force</code> rewrites history for everyone on the team; avoid on <code>main</code>, use <code>--force-with-lease</code> if you must</li>
   <li>📝 <strong style="color: goldenrod;">Vague commit messages</strong> — "fixed it" or "update" tells future-you nothing; a message like "Fix off-by-one in sliding window" is searchable and self-documenting</li>
   <li>🔀 <strong style="color: goldenrod;">Working directly on main</strong> — one bad commit blocks everyone; use branches even when working alone</li>
+  <li>↩️ <strong style="color: goldenrod;">Line-ending chaos (CRLF vs LF)</strong> — Windows and Mac/Linux collaborators can turn every line of a file into a "change"; add a <code>.gitattributes</code> with <code>* text=auto</code> to normalize it repo-wide</li>
 </ul>
 </v-clicks>
 
