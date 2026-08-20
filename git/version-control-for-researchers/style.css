@@ -1,0 +1,30 @@
+/* Catppuccin Mocha (dark) / Latte (light) accents */
+
+:root {
+  --slidev-theme-primary: #8839ef; /* Latte mauve */
+}
+
+html.dark {
+  --slidev-theme-primary: #cba6f7; /* Mocha mauve */
+  --slidev-code-background: #181825; /* Mocha mantle */
+  --slidev-code-foreground: #cdd6f4; /* Mocha text */
+  --slidev-code-tab-divider: #313244; /* Mocha surface0 */
+  --slidev-code-tab-text-color: #a6adc8; /* Mocha subtext0 */
+  --slidev-code-tab-active-text-color: #cdd6f4; /* Mocha text */
+  --slidev-slide-container-background: #11111b; /* Mocha crust */
+}
+
+html.dark .slidev-layout {
+  background: #1e1e2e; /* Mocha base */
+  color: #cdd6f4; /* Mocha text */
+}
+
+html.dark .slidev-layout h1,
+html.dark .slidev-layout h2,
+html.dark .slidev-layout h3 {
+  color: #cba6f7; /* Mocha mauve */
+}
+
+html.dark .slidev-layout a {
+  color: #89b4fa; /* Mocha blue */
+}
