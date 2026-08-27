@@ -70,12 +70,18 @@
     --measure: 100%;
   }
   *{ box-sizing:border-box; }
-  html{ scroll-behavior:smooth; font-size:15px; }
+  html{ scroll-behavior:smooth; font-size:15px; scroll-snap-type:y mandatory; }
   @media (min-width:1500px){ html{ font-size:16px; } }
   @media (min-width:1800px){ html{ font-size:17px; } }
   @media (min-width:2200px){ html{ font-size:18.5px; } }
   @media (max-width:820px){ html{ font-size:14.5px; } }
   @media (max-width:400px){ html{ font-size:13.5px; } }
+  /* the page has to fit the screen, so the whole scale follows the height too */
+  /* the root must stay on a half-pixel so --u (2rem) lands on a whole pixel;
+     a fractional unit re-introduces sub-pixel drift in the ruled grid */
+  @media (max-height:820px){ html{ font-size:14px; } }
+  @media (max-height:700px){ html{ font-size:13px; } }
+  @media (max-height:600px){ html{ font-size:12px; } }
   body{
     margin:0; background:var(--desk); color:var(--graphite);
     font-family:'Kalam','Segoe Print',cursive; font-size:1.06rem; line-height:var(--u);
@@ -89,7 +95,12 @@
   .grain{ position:fixed; inset:0; pointer-events:none; z-index:0; opacity:.5; }
   a{ color:var(--accent); text-decoration:none; }
 
-  .stage{ position:relative; z-index:1; max-width:54rem; margin:0 auto; padding:4rem 1.9rem 8rem; }
+    .stage{ position:relative; z-index:1; }
+  .page{
+    min-height:100svh; display:flex; align-items:center; justify-content:center;
+    padding:3.5vh 1.9rem; scroll-snap-align:center; scroll-snap-stop:always;
+  }
+  .page > .sheet{ width:100%; max-width:54rem; }
 
   /* ---------- the sheet ---------- */
   .sheet{
@@ -98,7 +109,7 @@
     border-radius:16px 7px 14px 9px / 9px 14px 7px 16px;
     box-shadow:8px 14px 30px oklch(40% .01 68 / .14);
     transform:rotate(-.45deg);
-    padding:var(--u) 4.25rem calc(var(--u) * 3) 8.8rem;
+    padding:var(--u) 4.25rem var(--u) 8.8rem;
   }
   /* the ruling is its own layer so it can be drawn down the page on load.
      z-index:-1 keeps it above the sheet's paper but under the writing. */
@@ -179,7 +190,8 @@
   .stain.small{ --stain-o:.72; width:7.5rem; height:7.5rem; right:9rem; top:10rem; transform:rotate(148deg); }
 
   /* ---------- sections ---------- */
-  section{ padding-top:calc(var(--u) * 2); position:relative; }
+  .sheet > .sect-head:first-of-type{ margin-top:0; }
+  header{ position:relative; padding-top:0; }
   .sect-head{ margin:0 0 var(--u); }
   .sect-head h2{
     font-family:'Caveat',cursive; font-weight:600; font-size:2.53rem; line-height:var(--u);
@@ -224,9 +236,9 @@
   .flag svg{ display:block; margin-left:auto; width:2.95rem; height:1.47rem; }
 
   /* workshop cards */
-  .cards{ display:grid; grid-template-columns:minmax(0,1fr); gap:var(--u); max-width:var(--measure); }
+  .cards{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:var(--u); }
   .wk{
-    position:relative; display:block; height:calc(var(--u) * 6); color:inherit;
+    position:relative; display:block; height:calc(var(--u) * 7); color:inherit;
     padding:1.15rem 1.4rem; transition:transform .18s ease;
   }
   /* the box is drawn, not printed: a border-only layer gets the wobble so the
@@ -261,7 +273,7 @@
   .hello a:hover .v{ color:var(--accent); }
 
   /* index tabs down the right edge, like notebook dividers */
-  .tabs{ position:fixed; gap:.47rem; right:max(1.2rem, calc(50vw - 37.7rem)); top:50%; transform:translateY(-50%); z-index:5; display:flex; flex-direction:column; }
+  .tabs{ position:fixed; gap:.4rem; right:max(1.2rem, calc(50vw - 37.7rem)); top:50%; transform:translateY(-50%); z-index:5; display:flex; flex-direction:column; }
   .tabs a{
     position:relative; display:block; font-family:'Caveat',cursive; font-size:1.27rem; line-height:1;
     padding:.47rem 1rem .47rem .87rem; color:var(--graphite-2);
@@ -374,7 +386,7 @@
   @media (min-width:2200px){ .stage{ max-width:58rem; } }
   @media (max-width:1180px){ .tabs{ display:none; } }
   @media (max-width:820px){
-    .stage{ padding:1.6rem .85rem 4.5rem; }
+    .page{ padding:2vh .85rem; }
     .sheet{ transform:none; padding:var(--u) 1.35rem calc(var(--u) * 2) 3.6rem; }
     .margin-rule{ left:2.2rem; }
     /* let it wrap on narrow phones, but only in whole grid steps */
@@ -444,21 +456,23 @@
 </svg>
 
 <nav class="tabs" aria-label="Sections">
+  <a href="#intro">intro</a>
   <a href="#work">work</a>
   <a href="#papers">papers</a>
-  <a href="#track">background</a>
+  <a href="#background">background</a>
+  <a href="#projects">projects</a>
   <a href="#teaching">teaching</a>
   <a href="#outside">outside</a>
-  <a href="#hello">contact</a>
+  <a href="#contact">contact</a>
 </nav>
 
 <div class="stage">
-<div class="sheet">
-  <svg class="margin-rule" viewBox="0 0 8 600" preserveAspectRatio="none" aria-hidden="true">
-    <path d="M4 0 Q2.4 150 4 300 Q5.6 450 4 600" stroke="var(--margin-red)" stroke-width="1.8" fill="none"/>
-  </svg>
-
-  <header>
+  <section class="page" id="intro">
+    <div class="sheet">
+    <svg class="margin-rule" viewBox="0 0 8 600" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M4 0 Q2.4 150 4 300 Q5.6 450 4 600" stroke="var(--margin-red)" stroke-width="1.8" fill="none"/>
+    </svg>
+    <header>
     <h1 class="reveal">Richard Polzin</h1>
     <p class="role reveal">AI Researcher · <b>JRC COMBINE</b> · Aachen, Germany</p>
     <div class="head-row">
@@ -472,9 +486,13 @@
       <b>Right now</b>Preparing an ICU oxygenation model for external validation, teaching version control to research groups, and building out a home lab for local inference work.
     </div>
   </header>
-
-  <!-- ---------------- work ---------------- -->
-  <section id="work">
+    </div>
+  </section>
+  <section class="page" id="work">
+    <div class="sheet">
+    <svg class="margin-rule" viewBox="0 0 8 600" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M4 0 Q2.4 150 4 300 Q5.6 450 4 600" stroke="var(--margin-red)" stroke-width="1.8" fill="none"/>
+    </svg>
     <div class="sect-head">
       <h2>What I work on</h2>
       <svg viewBox="0 0 210 30" fill="none" aria-hidden="true"><path class="drawn" style="--l:230" d="M4 14 Q56 8 108 12 Q160 16 205 9" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round"/></svg>
@@ -496,10 +514,13 @@
         <p>Publishing the tools and teaching materials alongside the research, not only the papers.</p>
       </li>
     </ul>
+    </div>
   </section>
-
-  <!-- ---------------- papers ---------------- -->
-  <section id="papers">
+  <section class="page" id="papers">
+    <div class="sheet">
+    <svg class="margin-rule" viewBox="0 0 8 600" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M4 0 Q2.4 150 4 300 Q5.6 450 4 600" stroke="var(--margin-red)" stroke-width="1.8" fill="none"/>
+    </svg>
     <div class="sect-head">
       <h2>Papers</h2>
       <svg viewBox="0 0 210 30" fill="none" aria-hidden="true"><path class="drawn" style="--l:230" d="M4 14 Q56 8 108 12 Q160 16 205 9" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round"/></svg>
@@ -515,10 +536,13 @@
       <h3><a href="https://bmjopen.bmj.com/content/11/4/e045589">Algorithmic surveillance of ICU patients with ARDS (ASIC): protocol for a multicentre stepped-wedge cluster randomised quality improvement strategy</a></h3>
       <p class="meta"><b>BMJ Open</b> · 2021 · Marx G, Bickenbach J, Fritsch SJ, et al. — one of ~45 co-authors</p>
     </div>
+    </div>
   </section>
-
-  <!-- ---------------- track ---------------- -->
-  <section id="track">
+  <section class="page" id="background">
+    <div class="sheet">
+    <svg class="margin-rule" viewBox="0 0 8 600" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M4 0 Q2.4 150 4 300 Q5.6 450 4 600" stroke="var(--margin-red)" stroke-width="1.8" fill="none"/>
+    </svg>
     <div class="sect-head">
       <h2>Where I've been</h2>
       <svg viewBox="0 0 210 30" fill="none" aria-hidden="true"><path class="drawn" style="--l:230" d="M4 14 Q56 8 108 12 Q160 16 205 9" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round"/></svg>
@@ -527,8 +551,14 @@
     <div class="entry"><span class="yr">2018 – 24</span><h3>Ph.D., JRC COMBINE</h3><p>Six years on ARDS prediction for intensive-care patients, working with routine clinical data.</p></div>
     <div class="entry"><span class="yr">2016 – 18</span><h3>M.Sc., Maastricht University</h3><p>Natural language processing and machine learning — sentiment analysis, topic modelling, deep learning.</p></div>
     <div class="entry"><span class="yr">2013 – 16</span><h3>B.Sc., Aachen</h3><p>Computer science and mathematics, alongside a first developer role at a CNC simulation company.</p></div>
-
-    <div class="sect-head" style="margin-top:var(--u)">
+    </div>
+  </section>
+  <section class="page" id="projects">
+    <div class="sheet">
+    <svg class="margin-rule" viewBox="0 0 8 600" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M4 0 Q2.4 150 4 300 Q5.6 450 4 600" stroke="var(--margin-red)" stroke-width="1.8" fill="none"/>
+    </svg>
+    <div class="sect-head">
       <h2>Projects I'm part of</h2>
       <svg viewBox="0 0 210 30" fill="none" aria-hidden="true"><path class="drawn" style="--l:230" d="M4 14 Q56 8 108 12 Q160 16 205 9" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round"/></svg>
     </div>
@@ -536,10 +566,13 @@
     <div class="entry"><span class="yr">2023 →</span><h3><a href="https://www.nhr4ces.de/simulation-and-data-labs/sdl-digital-patient/">SDL Digital Patient</a></h3><p>Bringing high-performance computing capability to healthcare research groups.</p></div>
     <div class="entry"><span class="yr">2023 →</span><h3><a href="https://www.ccls.rwth-aachen.de/">CCLS</a></h3><p>RWTH's push to bring computational methods to the life sciences.</p></div>
     <div class="entry"><span class="yr">2018 – 23</span><h3><a href="https://www.smith.care/">SMITH</a></h3><p>The clinical data platform behind my PhD work on early warning for ARDS.</p></div>
+    </div>
   </section>
-
-  <!-- ---------------- teaching ---------------- -->
-  <section id="teaching">
+  <section class="page" id="teaching">
+    <div class="sheet">
+    <svg class="margin-rule" viewBox="0 0 8 600" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M4 0 Q2.4 150 4 300 Q5.6 450 4 600" stroke="var(--margin-red)" stroke-width="1.8" fill="none"/>
+    </svg>
     <div class="sect-head">
       <h2>Workshops I've run</h2>
       <svg viewBox="0 0 210 30" fill="none" aria-hidden="true"><path class="drawn" style="--l:230" d="M4 14 Q56 8 108 12 Q160 16 205 9" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round"/></svg>
@@ -575,10 +608,13 @@
         <p>Using large language models for research on CCLS infrastructure — worked examples and practical guidance.</p>
       </a>
     </div>
+    </div>
   </section>
-
-  <!-- ---------------- outside ---------------- -->
-  <section id="outside">
+  <section class="page" id="outside">
+    <div class="sheet">
+    <svg class="margin-rule" viewBox="0 0 8 600" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M4 0 Q2.4 150 4 300 Q5.6 450 4 600" stroke="var(--margin-red)" stroke-width="1.8" fill="none"/>
+    </svg>
     <img class="stain" src="./assets/images/coffee-stain.png" alt="" aria-hidden="true">
     <img class="stain small" src="./assets/images/coffee-stain.png" alt="" aria-hidden="true">
     <div class="sect-head">
@@ -602,10 +638,13 @@
         <p>Photography around Aachen, and co-op gaming when there is time.</p>
       </li>
     </ul>
+    </div>
   </section>
-
-  <!-- ---------------- hello ---------------- -->
-  <section id="hello">
+  <section class="page" id="contact">
+    <div class="sheet">
+    <svg class="margin-rule" viewBox="0 0 8 600" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M4 0 Q2.4 150 4 300 Q5.6 450 4 600" stroke="var(--margin-red)" stroke-width="1.8" fill="none"/>
+    </svg>
     <div class="sect-head">
       <h2>Get in touch</h2>
       <svg viewBox="0 0 210 30" fill="none" aria-hidden="true"><path class="drawn" style="--l:230" d="M4 14 Q56 8 108 12 Q160 16 205 9" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round"/></svg>
@@ -629,9 +668,10 @@
         <span class="k">Where</span><span class="v">Aachen, Germany</span>
       </div>
     </div>
+    </div>
   </section>
 </div>
-</div>
+
 
 <script>
 (function(){
@@ -639,7 +679,11 @@
   var io = new IntersectionObserver(function(es){
     es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('reveal'); io.unobserve(e.target); } });
   }, { rootMargin:'0px 0px -12% 0px' });
-  document.querySelectorAll('section > *:not(.stain)').forEach(function(el){ io.observe(el); });
+  // the blocks inside each sheet — not the sheet itself, or a whole page
+  // would wipe in as one piece and the per-block draws would never fire.
+  // header children carry .reveal in the markup; the stain runs its own soak.
+  document.querySelectorAll('.sheet > *:not(.margin-rule):not(header):not(.stain)')
+    .forEach(function(el){ io.observe(el); });
 
   // draw the section underlines when they come into view
   var io2 = new IntersectionObserver(function(es){
