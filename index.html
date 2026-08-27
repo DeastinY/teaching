@@ -100,14 +100,18 @@
     min-height:100svh; display:flex; align-items:center; justify-content:center;
     padding:3.5vh 1.9rem; scroll-snap-align:center; scroll-snap-stop:always;
   }
-  .page > .sheet{ width:100%; max-width:54rem; }
+  .page > .sheet{ width:100%; max-width:47rem; }
 
   /* ---------- the sheet ---------- */
   .sheet{
     position:relative; background:var(--sheet);
     border:1.6px solid var(--graphite);
     border-radius:16px 7px 14px 9px / 9px 14px 7px 16px;
-    box-shadow:8px 14px 30px oklch(40% .01 68 / .14);
+    /* two sheets peeking out behind turn the card into a short deck */
+    box-shadow:
+      5px 6px 0 -1px var(--sheet), 5px 6px 0 0 oklch(83% .012 76),
+      10px 12px 0 -1px var(--sheet), 10px 12px 0 0 oklch(86% .012 76),
+      14px 20px 34px oklch(40% .01 68 / .15);
     transform:rotate(-.45deg);
     padding:var(--u) 4.25rem var(--u) 8.8rem;
   }
@@ -272,22 +276,41 @@
   .hello .v{ font-size:1.16rem; font-weight:700; }
   .hello a:hover .v{ color:var(--accent); }
 
-  /* index tabs down the right edge, like notebook dividers */
-  .tabs{ position:fixed; gap:.4rem; right:max(1.2rem, calc(50vw - 37.7rem)); top:50%; transform:translateY(-50%); z-index:5; display:flex; flex-direction:column; }
+  /* coloured markers slipped between the sheets: each one is tucked under the
+     card's right edge and only its tail shows, so they read as index tabs */
+  .tabs{
+    position:fixed; top:50%; transform:translateY(-50%);
+    left:calc(50% + 23.5rem - 1.9rem);
+    z-index:0; display:flex; flex-direction:column; gap:.42rem;
+  }
   .tabs a{
-    position:relative; display:block; font-family:'Caveat',cursive; font-size:1.27rem; line-height:1;
-    padding:.47rem 1rem .47rem .87rem; color:var(--graphite-2);
-    transition:transform .16s ease, color .16s ease;
+    position:relative; display:block;
+    padding:.44rem 1.05rem .44rem 3.5rem;
+    font-family:'Caveat',cursive; font-size:1.2rem; line-height:1;
+    color:oklch(34% .06 var(--h));
+    transition:transform .18s cubic-bezier(.3,.9,.4,1), color .18s ease;
   }
   .tabs a::before{
     content:''; position:absolute; inset:0; z-index:-1;
-    background:oklch(96% .012 86); border:1.4px solid var(--graphite);
-    border-radius:.2rem .8rem .8rem .2rem; box-shadow:2px 3px 8px oklch(40% .01 68 / .13);
+    background:oklch(87% .085 var(--h) / .95);
+    border:1.3px solid oklch(60% .1 var(--h) / .75);
+    border-radius:.12rem .65rem .65rem .12rem;
+    box-shadow:2px 2px 6px oklch(40% .01 68 / .17);
     filter:url(#roughEdge2);
   }
-  .tabs a:nth-child(odd){ transform:rotate(-1.2deg); }
-  .tabs a:nth-child(even){ transform:rotate(.9deg); }
-  .tabs a:hover, .tabs a.on{ color:var(--accent); transform:translateX(-7px) rotate(0deg); }
+  .tabs a:nth-child(1){ --h:38;  }
+  .tabs a:nth-child(2){ --h:145; }
+  .tabs a:nth-child(3){ --h:250; }
+  .tabs a:nth-child(4){ --h:305; }
+  .tabs a:nth-child(5){ --h:75;  }
+  .tabs a:nth-child(6){ --h:195; }
+  .tabs a:nth-child(7){ --h:15;  }
+  .tabs a:nth-child(8){ --h:110; }
+  .tabs a:nth-child(odd){ transform:translateX(0) rotate(-.8deg); }
+  .tabs a:nth-child(even){ transform:translateX(-.15rem) rotate(.6deg); }
+  .tabs a:hover{ transform:translateX(.7rem) rotate(0deg); color:oklch(28% .09 var(--h)); }
+  .tabs a.on{ transform:translateX(1.15rem) rotate(0deg); color:oklch(26% .1 var(--h)); }
+  .tabs a.on::before{ background:oklch(83% .12 var(--h) / .97); border-color:oklch(54% .13 var(--h) / .85); }
 
   /* ---------- motion ----------
      one orchestrated load: the page rules itself, the name is written on,
@@ -367,6 +390,7 @@
   .tabs a:nth-child(1){ animation-delay:1.9s; } .tabs a:nth-child(2){ animation-delay:1.97s; }
   .tabs a:nth-child(3){ animation-delay:2.04s; } .tabs a:nth-child(4){ animation-delay:2.11s; }
   .tabs a:nth-child(5){ animation-delay:2.18s; } .tabs a:nth-child(6){ animation-delay:2.25s; }
+  .tabs a:nth-child(7){ animation-delay:2.32s; } .tabs a:nth-child(8){ animation-delay:2.39s; }
 
   @media (prefers-reduced-motion:reduce){
     html{ scroll-behavior:auto; }
