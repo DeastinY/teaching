@@ -1,1284 +1,666 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Richard Polzin — AI Researcher & Computational Biomedicine</title>
-  <meta name="description" content="AI researcher turning healthcare data into better patient outcomes. Working at the intersection of machine learning, HPC, and computational biomedicine in Aachen, Germany.">
-  <meta name="keywords" content="Richard Polzin, AI Researcher, Machine Learning, Computational Biomedicine, Predictive Modeling, HPC, Research Software Development, Synthetic Data">
-  <meta name="author" content="Richard Polzin">
-  <link rel="canonical" href="https://richardpolzin.com/">
-  
-  <!-- Open Graph / Facebook -->
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://richardpolzin.com/">
-  <meta property="og:title" content="Richard Polzin — AI Researcher & Computational Biomedicine">
-  <meta property="og:description" content="AI researcher turning healthcare data into better patient outcomes. Machine learning, HPC, and computational biomedicine.">
-  <meta property="og:image" content="./assets/images/my-avatar.png">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Richard Polzin — AI Researcher &amp; Computational Biomedicine</title>
+<meta name="description" content="AI researcher turning healthcare data into better patient outcomes. Working at the intersection of machine learning, HPC, and computational biomedicine in Aachen, Germany.">
+<meta name="keywords" content="Richard Polzin, AI Researcher, Machine Learning, Computational Biomedicine, Predictive Modeling, HPC, Research Software Development, Synthetic Data">
+<meta name="author" content="Richard Polzin">
+<link rel="canonical" href="https://richardpolzin.com/">
 
-  <!-- Twitter -->
-  <meta property="twitter:card" content="summary_large_image">
-  <meta property="twitter:url" content="https://richardpolzin.com/">
-  <meta property="twitter:title" content="Richard Polzin — AI Researcher & Computational Biomedicine">
-  <meta property="twitter:description" content="AI researcher turning healthcare data into better patient outcomes. Machine learning, HPC, and computational biomedicine.">
-  <meta property="twitter:image" content="./assets/images/my-avatar.png">
-  
-  <!-- JSON-LD structured data -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Richard Polzin",
-    "jobTitle": "Postdoctoral Researcher",
-    "worksFor": {
-      "@type": "Organization",
-      "name": "Joint Research Center of Computational Biomedicine (JRC COMBINE)"
-    },
-    "url": "https://richardpolzin.com",
-    "sameAs": [
-      "https://www.instagram.com/weird.coffee.person/"
-    ],
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Aachen",
-      "addressCountry": "Germany"
-    },
-    "email": "mailto:mail@richardpolzin.com",
-    "description": "AI researcher turning healthcare data into better patient outcomes through machine learning and computational biomedicine."
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://richardpolzin.com/">
+<meta property="og:title" content="Richard Polzin — AI Researcher &amp; Computational Biomedicine">
+<meta property="og:description" content="AI researcher turning healthcare data into better patient outcomes. Machine learning, HPC, and computational biomedicine.">
+<meta property="og:image" content="https://richardpolzin.com/assets/images/my-avatar.png">
+
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="https://richardpolzin.com/">
+<meta property="twitter:title" content="Richard Polzin — AI Researcher &amp; Computational Biomedicine">
+<meta property="twitter:description" content="AI researcher turning healthcare data into better patient outcomes. Machine learning, HPC, and computational biomedicine.">
+<meta property="twitter:image" content="https://richardpolzin.com/assets/images/my-avatar.png">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Richard Polzin",
+  "jobTitle": "Postdoctoral Researcher",
+  "worksFor": {
+    "@type": "Organization",
+    "name": "Joint Research Center of Computational Biomedicine (JRC COMBINE)"
+  },
+  "url": "https://richardpolzin.com",
+  "sameAs": [
+    "https://github.com/DeastinY",
+    "https://www.instagram.com/weird.coffee.person/"
+  ],
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Aachen",
+    "addressCountry": "Germany"
+  },
+  "email": "mailto:mail@richardpolzin.com",
+  "description": "AI researcher turning healthcare data into better patient outcomes through machine learning and computational biomedicine."
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Kalam:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --desk:       oklch(92.4% 0.014 84);
+    --sheet:      oklch(97.6% 0.005 88);
+    --graphite:   oklch(40% 0.009 68);
+    --graphite-2: oklch(50% 0.011 68);
+    --graphite-3: oklch(61% 0.011 68);
+    --rule:       oklch(88% 0.011 72);
+    --margin-red: oklch(62% 0.085 34);
+    --accent:     oklch(50% 0.13 38);
+    --accent-soft:oklch(89% 0.048 44);
+    --coffee:     oklch(46% 0.021 54);
+
+    /* the whole page is built on this one unit — every vertical value is a
+       multiple of it, which is what keeps text sitting on the ruled lines */
+    --u: 2rem;            /* 30px at the 15px root — the whole grid scales with it */
+    /* every block of writing stops at the same place; what's left of the sheet
+       is a deliberate margin column, holding the photo and the coffee ring */
+    --measure: 32rem;
   }
-  </script>
-  
-  <!-- Preload critical CSS -->
-  <link rel="preload" href="./assets/css/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="./assets/css/style.css"></noscript>
-  
-  <!-- Preload critical font -->
-  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap"></noscript>
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; font-size:15px; }
+  @media (min-width:1500px){ html{ font-size:16px; } }
+  @media (min-width:1800px){ html{ font-size:17px; } }
+  @media (min-width:2200px){ html{ font-size:18.5px; } }
+  @media (max-width:820px){ html{ font-size:14.5px; } }
+  @media (max-width:400px){ html{ font-size:13.5px; } }
+  body{
+    margin:0; background:var(--desk); color:var(--graphite);
+    font-family:'Kalam','Segoe Print',cursive; font-size:1.06rem; line-height:var(--u);
+    -webkit-font-smoothing:antialiased;
+  }
+  body::after{ /* paper tooth */
+    content:''; position:fixed; inset:0; pointer-events:none; z-index:60;
+    mix-blend-mode:multiply; opacity:.36;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
+  }
+  .grain{ position:fixed; inset:0; pointer-events:none; z-index:0; opacity:.5; }
+  a{ color:var(--accent); text-decoration:none; }
 
-  <!--
-    - favicon
-    <link rel="shortcut icon" href="./assets/images/logo.ico" type="image/x-icon">
-  -->
-  
+  .stage{ position:relative; z-index:1; max-width:62rem; margin:0 auto; padding:4rem 1.9rem 8rem; }
 
-  <!--
-    - custom css link
-  -->
-  <link rel="stylesheet" href="./assets/css/style.css">
+  /* ---------- the sheet ---------- */
+  .sheet{
+    position:relative; background:var(--sheet);
+    border:1.6px solid var(--graphite);
+    border-radius:16px 7px 14px 9px / 9px 14px 7px 16px;
+    box-shadow:8px 14px 30px oklch(40% .01 68 / .14);
+    transform:rotate(-.45deg);
+    padding:var(--u) 4.25rem calc(var(--u) * 3) 8.8rem;
+  }
+  /* the ruling is its own layer so it can be drawn down the page on load.
+     z-index:-1 keeps it above the sheet's paper but under the writing. */
+  .sheet::after{
+    content:''; position:absolute; inset:0; z-index:-1; pointer-events:none;
+    background-image:repeating-linear-gradient(to bottom,
+      transparent 0 calc(var(--u) - 1px), var(--rule) calc(var(--u) - 1px) var(--u));
+    background-position:0 1.4rem;   /* sits the rule just under the body baseline, at any scale */
+    -webkit-mask-image:linear-gradient(#000 0 0); mask-image:linear-gradient(#000 0 0);
+    -webkit-mask-repeat:no-repeat;  mask-repeat:no-repeat;
+    -webkit-mask-size:100% 0%;      mask-size:100% 0%;
+    animation:rule-page 1.15s ease-out .12s forwards;
+  }
+  .sheet::before{ /* the line gone over twice */
+    content:''; position:absolute; inset:3px 2px 2px 3px; pointer-events:none;
+    border:1.1px solid var(--graphite); opacity:.26;
+    border-radius:14px 9px 16px 7px / 7px 16px 9px 14px;
+  }
+  .margin-rule{ position:absolute; left:6.4rem; top:1.2rem; bottom:1.2rem; width:.55rem; opacity:.5; }
 
-  <!--
-    - google font link
-  -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  /* ---------- header ---------- */
+  header{ position:relative; padding-top:var(--u); }
+  .photo{
+    position:absolute; right:-.4rem; top:0; width:11.3rem; transform:rotate(3.2deg);
+    padding:.6rem .6rem 0; background:oklch(99% .004 90);
+    box-shadow:3px 5px 14px oklch(40% .01 68 / .18);
+  }
+  .photo img{ display:block; width:100%; aspect-ratio:1/1; object-fit:cover; filter:grayscale(.6) contrast(1.05); }
+  .photo figcaption{
+    font-family:'Caveat',cursive; font-size:1.27rem; line-height:2.5rem; text-align:center; color:var(--graphite-2);
+  }
+  .tape{
+    position:absolute; top:-.87rem; left:50%; width:5.2rem; height:1.73rem; transform:translateX(-50%) rotate(-4deg);
+    background:oklch(88% .045 92 / .72); border-left:1px dashed oklch(78% .05 92); border-right:1px dashed oklch(78% .05 92);
+  }
+  h1{
+    font-family:'Caveat',cursive; font-weight:700; font-size:4.9rem; line-height:calc(var(--u) * 3);
+    /* explicit height keeps the display face from knocking the grid off */
+    height:calc(var(--u) * 3); margin:0; color:oklch(31% .012 66); white-space:nowrap;
+  }
+  .role{ font-size:1rem; line-height:var(--u); margin:0; color:var(--graphite-2); letter-spacing:.01em; }
+  .role b{ color:var(--accent); font-weight:700; }
+  .lead{
+    font-family:'Caveat',cursive; font-weight:500; font-size:2.05rem; line-height:var(--u);
+    margin:var(--u) 0 0; max-width:22rem; color:oklch(34% .011 66);
+  }
+  .lead em{ font-weight:600; color:var(--accent); }
+
+  .note{
+    position:relative; margin:var(--u) 0 0; padding:calc(var(--u) / 2) 1.35rem; max-width:25rem;
+    transform:rotate(-1.1deg); font-size:.94rem; line-height:var(--u);
+  }
+  .note::before{   /* the paper itself, so its edge can be torn without moving the text */
+    content:''; position:absolute; inset:0; z-index:-1;
+    background:oklch(95.5% .035 96);
+    box-shadow:2px 4px 11px oklch(40% .01 68 / .13);
+    filter:url(#roughEdge2);
+  }
+  /* the handwritten face gets its own line — mixed inline faces align on
+     different baselines and expand the line box off the 30px grid */
+  .note b{ display:block; font-family:'Caveat',cursive; font-size:1.47rem; line-height:var(--u); color:var(--accent); font-weight:600; }
+
+  /* ---------- coffee ring ----------
+     baked to a PNG by make_stain.py — the deposit is modelled on the coffee-ring
+     effect (evaporation drags the solute to the pinned contact line, so nearly
+     all of it lands in a narrow band at the rim and the middle stays clean).
+     multiply lets it tint the paper and the ruled lines rather than sit on top.
+     an image also drops the two live feTurbulence passes this used to cost. */
+  .stain{
+    position:absolute; pointer-events:none; mix-blend-mode:multiply;
+    width:17rem; height:17rem; right:.5rem; top:1rem;
+    transform:rotate(-9deg);
+  }
+  /* a second, fainter mark where the cup was set down again */
+  .stain.small{ --stain-o:.72; width:8.5rem; height:8.5rem; right:11.5rem; top:10.5rem; transform:rotate(148deg); }
+
+  /* ---------- sections ---------- */
+  section{ padding-top:calc(var(--u) * 2); position:relative; }
+  .sect-head{ margin:0 0 var(--u); }
+  .sect-head h2{
+    font-family:'Caveat',cursive; font-weight:600; font-size:2.53rem; line-height:var(--u);
+    margin:0; color:oklch(32% .012 66);
+  }
+  .sect-head svg{ display:block; width:14rem; height:var(--u); }
+  p{ margin:0 0 var(--u); max-width:var(--measure); color:var(--graphite-2); }
+
+  /* handwritten list */
+  ul.hand{ list-style:none; margin:0 0 var(--u); padding:0; }
+  ul.hand li{ position:relative; padding-left:2.15rem; margin:0 0 var(--u); max-width:var(--measure); }
+  ul.hand li:last-child{ margin-bottom:0; }
+  ul.hand h3{ font-size:1.12rem; font-weight:700; line-height:var(--u); margin:0; color:var(--graphite); }
+  ul.hand p{ margin:0; }
+  ul.hand .tick{ position:absolute; left:0; top:.6rem; width:1.27rem; height:.87rem; color:var(--accent); }
+
+  /* margin-dated entries */
+  .entry{ position:relative; margin:0 0 var(--u); max-width:var(--measure); }
+  .entry:last-child{ margin-bottom:0; }
+  .entry h3{ font-size:1.12rem; font-weight:700; line-height:var(--u); margin:0; }
+  .entry h3 a{ color:inherit; border-bottom:1.5px solid var(--accent-soft); }
+  .entry h3 a:hover{ color:var(--accent); border-color:var(--accent); }
+  .entry p{ margin:0; font-size:1.02rem; }
+  .entry .yr{
+    position:absolute; left:-8.3rem; top:0; width:6.95rem; text-align:right;
+    font-family:'Caveat',cursive; font-size:1.4rem; line-height:var(--u); color:var(--accent);
+    transform:rotate(-1.6deg);
+  }
+
+  /* publications */
+  .pub{ position:relative; margin:0 0 var(--u); max-width:var(--measure); }
+  .pub h3{ font-size:1.12rem; font-weight:700; line-height:var(--u); margin:0; }
+  .pub h3 a{ color:inherit; border-bottom:1.5px solid var(--accent-soft); }
+  .pub h3 a:hover{ color:var(--accent); border-color:var(--accent); }
+  .pub .meta{ margin:0; font-size:.98rem; line-height:var(--u); color:var(--graphite-3); }
+  .pub .meta b{ color:var(--accent); font-weight:700; }
+  .flag{
+    position:absolute; left:-10rem; top:var(--u); width:8.7rem; text-align:right;
+    font-family:'Caveat',cursive; font-size:1.33rem; line-height:1.75rem; color:var(--accent);
+    transform:rotate(-7deg);
+  }
+  .flag svg{ display:block; margin-left:auto; width:2.95rem; height:1.47rem; }
+
+  /* workshop cards */
+  .cards{ display:grid; grid-template-columns:minmax(0,1fr); gap:var(--u); max-width:var(--measure); }
+  .wk{
+    position:relative; display:block; height:calc(var(--u) * 6); color:inherit;
+    padding:1.15rem 1.4rem; transition:transform .18s ease;
+  }
+  /* the box is drawn, not printed: a border-only layer gets the wobble so the
+     text inside stays crisp — filtering the card itself would smear the words */
+  .wk::before{
+    content:''; position:absolute; inset:0; pointer-events:none;
+    border:1.7px solid var(--graphite);
+    border-radius:14px 6px 12px 8px / 8px 12px 6px 14px;
+    filter:url(#roughEdge);
+  }
+  .wk::after{           /* gone round a second time, as you do */
+    content:''; position:absolute; inset:3px 2px 2px 3px; pointer-events:none;
+    border:1.1px solid var(--graphite); opacity:.32;
+    border-radius:12px 8px 14px 6px / 6px 14px 8px 12px;
+    filter:url(#roughEdge2);
+  }
+  .wk:nth-child(odd){ transform:rotate(-.7deg); }
+  .wk:nth-child(even){ transform:rotate(.55deg); }
+  .wk:hover{ transform:rotate(0deg) translateY(-3px); }
+  .wk .mark{ display:block; width:1.85rem; height:1.85rem; color:var(--wk,var(--accent)); filter:url(#roughInk); }
+  .wk .kicker{ font-size:.78rem; letter-spacing:.09em; text-transform:uppercase; color:var(--wk,var(--accent)); font-weight:600; margin:.35rem 0 0; line-height:1.35rem; }
+  .wk h3{ font-family:'Caveat',cursive; font-size:1.9rem; line-height:1.95rem; margin:.1rem 0 0; color:oklch(30% .012 66); }
+  .wk .swash{ display:block; width:7.5rem; height:.55rem; margin:.15rem 0 .45rem; color:var(--wk,var(--accent)); }
+  .wk p{ font-size:.95rem; line-height:1.35rem; margin:0; color:var(--graphite-2); }
+
+  /* contact */
+  .hello{ display:flex; flex-direction:column; max-width:var(--measure); }
+  .hello a, .hello div{ display:flex; align-items:center; gap:1.05rem; padding:0; height:calc(var(--u) * 2); color:inherit; }
+  .hello .ic{ width:1.35rem; height:1.35rem; color:var(--accent); flex:none; filter:url(#roughInk); }
+  .hello .k{ font-size:.78rem; letter-spacing:.1em; text-transform:uppercase; color:var(--graphite-3); width:5.2rem; flex:none; }
+  .hello .v{ font-size:1.16rem; font-weight:700; }
+  .hello a:hover .v{ color:var(--accent); }
+
+  /* index tabs down the right edge, like notebook dividers */
+  .tabs{ position:fixed; gap:.47rem; right:max(1.2rem, calc(50vw - 37.7rem)); top:50%; transform:translateY(-50%); z-index:5; display:flex; flex-direction:column; }
+  .tabs a{
+    position:relative; display:block; font-family:'Caveat',cursive; font-size:1.27rem; line-height:1;
+    padding:.47rem 1rem .47rem .87rem; color:var(--graphite-2);
+    transition:transform .16s ease, color .16s ease;
+  }
+  .tabs a::before{
+    content:''; position:absolute; inset:0; z-index:-1;
+    background:oklch(96% .012 86); border:1.4px solid var(--graphite);
+    border-radius:.2rem .8rem .8rem .2rem; box-shadow:2px 3px 8px oklch(40% .01 68 / .13);
+    filter:url(#roughEdge2);
+  }
+  .tabs a:nth-child(odd){ transform:rotate(-1.2deg); }
+  .tabs a:nth-child(even){ transform:rotate(.9deg); }
+  .tabs a:hover, .tabs a.on{ color:var(--accent); transform:translateX(-7px) rotate(0deg); }
+
+  /* ---------- motion ----------
+     one orchestrated load: the page rules itself, the name is written on,
+     then the pinned photo drops in and the ink soaks through. */
+  @keyframes rise{ from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:translateY(0);} }
+  @keyframes scribe{ from{ -webkit-mask-position:100% 0; mask-position:100% 0; }
+                     to  { -webkit-mask-position:0% 0;   mask-position:0% 0;   } }
+  @keyframes rule-page{ to{ -webkit-mask-size:100% 100%; mask-size:100% 100%; } }
+  @keyframes draw-box{ to{ -webkit-mask-size:100% 100%; mask-size:100% 100%; } }
+  @keyframes draw{ to{ stroke-dashoffset:0; } }
+  @keyframes fade{ from{opacity:0;} to{opacity:1;} }
+  @keyframes write{
+    from{ clip-path:inset(-25% 102% -25% -3%); }
+    to  { clip-path:inset(-25% -3% -25% -3%); }
+  }
+  @keyframes tape-in{
+    from{ opacity:0; transform:rotate(7deg) translateY(-22px); }
+    to  { opacity:1; transform:rotate(3.2deg) translateY(0); }
+  }
+  @keyframes soak{ from{ opacity:0; } to{ opacity:var(--stain-o, 1); } }
+  @keyframes tick-draw{ from{ stroke-dashoffset:34; } to{ stroke-dashoffset:0; } }
+
+  /* a soft-edged mask swept left to right: the block appears the way a line
+     of handwriting does, rather than fading up as a whole */
+  .reveal{
+    -webkit-mask-image:linear-gradient(101deg, #000 38%, rgba(0,0,0,.45) 54%, transparent 68%);
+    mask-image:linear-gradient(101deg, #000 38%, rgba(0,0,0,.45) 54%, transparent 68%);
+    -webkit-mask-size:280% 100%; mask-size:280% 100%;
+    -webkit-mask-repeat:no-repeat; mask-repeat:no-repeat;
+    animation:scribe .75s cubic-bezier(.4,.1,.3,1) both;
+  }
+  .drawn{ stroke-dasharray:var(--l,240); stroke-dashoffset:var(--l,240); animation:draw .7s ease-out .1s forwards; }
+
+  /* the red margin rule is ruled down the page first */
+  .margin-rule path{ stroke-dasharray:1400; stroke-dashoffset:1400; animation:draw 1.3s ease-out .05s forwards; }
+  /* then the name is written across */
+  h1.reveal{
+    -webkit-mask-image:none; mask-image:none;
+    animation:write 1.05s cubic-bezier(.62,.05,.3,1) .5s both;
+  }
+  /* the photo is taped on afterwards */
+  .photo.reveal{
+    -webkit-mask-image:none; mask-image:none;
+    animation:tape-in .65s cubic-bezier(.2,.85,.3,1.08) 1.5s both;
+  }
+  /* ticks get checked off one at a time as each list scrolls in.
+     the hidden state lives on .reveal, so they stay visible if this never runs */
+  ul.hand.reveal .tick path{ stroke-dasharray:34; animation:tick-draw .4s ease-out both; }
+  ul.hand.reveal li:nth-child(1) .tick path{ animation-delay:.18s; }
+  ul.hand.reveal li:nth-child(2) .tick path{ animation-delay:.34s; }
+  ul.hand.reveal li:nth-child(3) .tick path{ animation-delay:.5s; }
+  header .role.reveal{ animation-delay:1.02s; }
+  header .lead.reveal{ animation-delay:1.2s; }
+  header .note.reveal{ animation-delay:1.55s; }
+
+  /* the boxes get drawn round rather than appearing */
+  .cards.reveal{ -webkit-mask-image:none; mask-image:none; animation:none; }
+  .cards.reveal .wk::before, .cards.reveal .wk::after{
+    -webkit-mask-image:linear-gradient(#000 0 0); mask-image:linear-gradient(#000 0 0);
+    -webkit-mask-repeat:no-repeat; mask-repeat:no-repeat;
+    -webkit-mask-size:0% 100%; mask-size:0% 100%;
+    animation:draw-box .65s ease-out both;
+  }
+  .cards.reveal .wk{ animation:scribe .7s cubic-bezier(.4,.1,.3,1) both;
+    -webkit-mask-image:linear-gradient(101deg,#000 38%,rgba(0,0,0,.45) 54%,transparent 68%);
+    mask-image:linear-gradient(101deg,#000 38%,rgba(0,0,0,.45) 54%,transparent 68%);
+    -webkit-mask-size:280% 100%; mask-size:280% 100%; -webkit-mask-repeat:no-repeat; mask-repeat:no-repeat; }
+  .cards.reveal .wk:nth-child(1), .cards.reveal .wk:nth-child(1)::before, .cards.reveal .wk:nth-child(1)::after{ animation-delay:.05s; }
+  .cards.reveal .wk:nth-child(2), .cards.reveal .wk:nth-child(2)::before, .cards.reveal .wk:nth-child(2)::after{ animation-delay:.19s; }
+  .cards.reveal .wk:nth-child(3), .cards.reveal .wk:nth-child(3)::before, .cards.reveal .wk:nth-child(3)::after{ animation-delay:.33s; }
+  .cards.reveal .wk:nth-child(4), .cards.reveal .wk:nth-child(4)::before, .cards.reveal .wk:nth-child(4)::after{ animation-delay:.47s; }
+
+  /* the coffee soaks in rather than popping */
+  .stain{ animation:soak 1.9s ease-out 1.9s both; }
+  /* divider tabs settle in last */
+  .tabs a{ animation:fade .5s ease-out both; }
+  .tabs a:nth-child(1){ animation-delay:1.9s; } .tabs a:nth-child(2){ animation-delay:1.97s; }
+  .tabs a:nth-child(3){ animation-delay:2.04s; } .tabs a:nth-child(4){ animation-delay:2.11s; }
+  .tabs a:nth-child(5){ animation-delay:2.18s; } .tabs a:nth-child(6){ animation-delay:2.25s; }
+
+  @media (prefers-reduced-motion:reduce){
+    html{ scroll-behavior:auto; }
+    .reveal,.drawn,.stain,.tabs a,.margin-rule path,ul.hand .tick path,h1.reveal,.photo.reveal,
+    .sheet::after,.cards.reveal .wk,.cards.reveal .wk::before,.cards.reveal .wk::after{
+      animation:none !important; opacity:1 !important; stroke-dashoffset:0 !important;
+      clip-path:none !important; transform:none !important;
+      -webkit-mask-image:none !important; mask-image:none !important;
+      -webkit-mask-size:auto !important; mask-size:auto !important;
+    }
+    .photo{ transform:rotate(3.2deg) !important; }
+    .stain{ transform:rotate(-9deg) !important; }
+    .stain.small{ transform:rotate(14deg) !important; }
+  }
+
+  /* responsive */
+  @media (min-width:2200px){ .stage{ max-width:68rem; } }
+  @media (max-width:1180px){ .tabs{ display:none; } }
+  @media (max-width:820px){
+    .stage{ padding:1.6rem .85rem 4.5rem; }
+    .sheet{ transform:none; padding:var(--u) 1.35rem calc(var(--u) * 2) 3.6rem; }
+    .margin-rule{ left:2.2rem; }
+    /* let it wrap on narrow phones, but only in whole grid steps */
+    h1{ font-size:3.1rem; line-height:calc(var(--u) * 2); height:auto; white-space:normal; }
+    /* in flow on mobile, so its height has to land on the grid like everything else */
+    .photo{
+      position:static; width:9rem; height:calc(var(--u) * 5); padding:.5rem .5rem 0;
+      margin:0 0 var(--u); transform:rotate(-2deg);
+    }
+    .photo img{ aspect-ratio:auto; height:calc(var(--u) * 4 - .5rem); }
+    .photo figcaption{ line-height:var(--u); }
+    .lead{ font-size:1.3rem; }
+    .entry{ padding-left:0; }
+    .entry .yr{ position:static; width:auto; text-align:left; transform:none; display:block; font-size:1.3rem; }
+    /* inline here, so it has to occupy whole grid steps like everything else */
+    .flag{ display:block; position:static; width:auto; text-align:left; transform:none; margin:0; line-height:var(--u); }
+    .flag svg{ display:none; }
+    .cards{ max-width:none; }
+    /* a grid multiple, not auto — an auto height here drifts every section below it */
+    .wk{ height:calc(var(--u) * 7); }
+    .wk:nth-child(odd), .wk:nth-child(even){ transform:none; }
+    .hello .k{ width:4.3rem; }
+  }
+  @media (max-width:430px){
+    /* the contact value gets its own line rather than pushing the row sideways —
+       two 1u lines still add up to the row's 2u height */
+    /* row-gap would be added between the wrapped lines and spill the row
+       into the next one, so the gap stays horizontal only */
+    .hello a, .hello div{ flex-wrap:wrap; align-content:center; row-gap:0; column-gap:1.05rem; }
+    .hello .k{ width:auto; line-height:var(--u); }
+    .hello .v{ flex:0 0 100%; font-size:1rem; line-height:var(--u); }
+    /* longest card copy needs one more unit at this width */
+    .wk{ height:calc(var(--u) * 8); }
+  }
+  @media (max-width:820px){
+    /* the column is narrow here, so the ring pulls back to the corner and
+       lightens rather than sitting across the writing */
+    .stain{ --stain-o:.6; width:10.5rem; height:10.5rem; right:0; top:auto; bottom:0; }
+    .stain.small{ display:none; }
+  }
+</style>
 </head>
-
 <body>
 
-  <!--
-    - #MAIN
-  -->
-
-  <main>
-
-    <!--
-      - #SIDEBAR
-    -->
-
-    <aside class="sidebar" data-sidebar>
-
-      <div class="sidebar-info">
-
-        <figure class="avatar-box">
-          <img src="./assets/images/my-avatar.png" alt="Richard Polzin" width="80" loading="lazy">
-        </figure>
-
-        <div class="info-content">
-          <h1 class="name" title="Richard Polzin">Richard Polzin</h1>
-
-          <p class="title">AI Researcher</p>
-        </div>
-
-        <button class="info_more-btn" data-sidebar-btn>
-          <span>Show Contacts</span>
-
-          <ion-icon name="chevron-down"></ion-icon>
-        </button>
-
-      </div>
-
-      <div class="sidebar-info_more">
-
-        <div class="separator"></div>
-
-        <ul class="contacts-list">
-
-          <li class="contact-item">
-
-            <div class="icon-box">
-              <ion-icon name="mail-outline"></ion-icon>
-            </div>
-
-            <div class="contact-info">
-              <p class="contact-title">Email</p>
-
-              <a href="mailto:mail@richardpolzin.com" class="contact-link">mail@richardpolzin.com</a>
-            </div>
-
-          </li>
-
-          <li class="contact-item">
-
-            <div class="icon-box">
-              <ion-icon name="phone-portrait-outline"></ion-icon>
-            </div>
-
-            <div class="contact-info">
-              <p class="contact-title">Signal</p>
-
-              <a href="https://signal.me/#eu/Lap7ZFK-xjpQbNY1eeTPpWOEQ_UPCA6zLsA0XzUoX0f7VOnZqrpB2bR3tXfJVOqD" class="contact-link">Click here</a>
-            </div>
-
-          </li>
-
-          <li class="contact-item">
-
-            <div class="icon-box">
-              <ion-icon name="calendar-outline"></ion-icon>
-            </div>
-
-            <div class="contact-info">
-              <p class="contact-title">Birthday</p>
-
-              <time datetime="1994-03">March, 1994</time>
-            </div>
-
-          </li>
-
-          <li class="contact-item">
-
-            <div class="icon-box">
-              <ion-icon name="location-outline"></ion-icon>
-            </div>
-
-            <div class="contact-info">
-              <p class="contact-title">Location</p>
-
-              <address>Aachen, Germany</address>
-            </div>
-
-          </li>
-
-        </ul>
-
-        <div class="separator"></div>
-
-        <ul class="social-list">
-
-          <li class="social-item">
-            <a href="https://www.instagram.com/weird.coffee.person/" class="social-link">
-              <ion-icon name="logo-instagram"></ion-icon>
-            </a>
-          </li>
-
-        </ul>
-
-      </div>
-
-    </aside>
-
-
-
-
-
-    <!--
-      - #main-content
-    -->
-
-    <div class="main-content">
-
-      <!--
-        - #NAVBAR
-      -->
-
-      <nav class="navbar" role="navigation" aria-label="Main navigation">
-
-        <ul class="navbar-list" role="tablist">
-
-          <li class="navbar-item">
-            <button class="navbar-link  active" data-nav-link role="tab" aria-selected="true" aria-controls="about-panel" id="about-tab">About</button>
-          </li>
-
-          <li class="navbar-item">
-            <button class="navbar-link" data-nav-link role="tab" aria-selected="false" aria-controls="resume-panel" id="resume-tab">Resume</button>
-          </li>
-
-          <!--<li class="navbar-item">
-            <button class="navbar-link" data-nav-link role="tab" aria-selected="false">Blog</button>
-          </li>-->
-
-          <li class="navbar-item">
-            <button class="navbar-link" data-nav-link role="tab" aria-selected="false" aria-controls="teaching-panel" id="teaching-tab">Teaching</button>
-          </li>
-
-          <li class="navbar-item">
-            <button class="navbar-link" data-nav-link role="tab" aria-selected="false" aria-controls="contact-panel" id="contact-tab">Contact</button>
-          </li>
-
-        </ul>
-
-      </nav>
-
-
-
-
-
-      <!--
-        - #ABOUT
-      -->
-
-      <article class="about  active" data-page="about" id="about-panel" role="tabpanel" aria-labelledby="about-tab">
-
-        <header>
-          <h2 class="h2 article-title">About me</h2>
-        </header>
-
-        <section class="about-text">
-          <p>
-            Hey there! I'm a medical AI researcher based in Aachen, Germany, working with Prof. Schuppert's team at the Joint Research Center of Computational Biomedicine.
-          </p>
-
-          <p>
-            My work sits at the intersection of healthcare and technology — I build predictive models using AI and Machine Learning to help improve patient outcomes, particularly with time-series data. I'm also passionate about making High Performance Computing more accessible to researchers at German University Hospitals through the NHR4CES Simulation and Data Lab.
-          </p>
-
-          <p>
-            When I'm not diving into data, you'll probably find me hunting for the perfect cup of coffee or getting creative with photography, video, or music.
-          </p>
-        </section>
-
-
-        <section class="service">
-
-          <h3 class="h3 service-title">What i'm doing</h3>
-
-          <ul class="service-list">
-
-            <li class="service-item">
-
-              <div class="service-icon-box">
-                <img src="./assets/images/icon-design.svg" alt="design icon" width="40" loading="lazy">
-              </div>
-
-              <div class="service-content-box">
-                <h4 class="h4 service-item-title">Project Conceptualization</h4>
-
-                <p class="service-item-text">
-                  Bridging the gap between disciplines — because the best ideas come from collaboration.
-                </p>
-              </div>
-
-            </li>
-
-            <li class="service-item">
-
-              <div class="service-icon-box">
-                <img src="./assets/images/icon-dev.svg" alt="Web development icon" width="40" loading="lazy">
-              </div>
-
-              <div class="service-content-box">
-                <h4 class="h4 service-item-title">Open Source</h4>
-
-                <p class="service-item-text">
-                  Championing reproducible research through good software practices and shared tools.
-                </p>
-              </div>
-
-            </li>
-
-            <li class="service-item">
-
-              <div class="service-icon-box">
-                <img src="./assets/images/icon-app.svg" alt="mobile app icon" width="40" loading="lazy">
-              </div>
-
-              <div class="service-content-box">
-                <h4 class="h4 service-item-title">Modern Presentation</h4>
-
-                <p class="service-item-text">
-                  Making science accessible and engaging — no more death by PowerPoint!
-                </p>
-              </div>
-
-            </li>
-
-            <li class="service-item">
-
-              <div class="service-icon-box">
-                <img src="./assets/images/icon-photo.svg" alt="camera icon" width="40" loading="lazy">
-              </div>
-
-              <div class="service-content-box">
-                <h4 class="h4 service-item-title">Media</h4>
-
-                <p class="service-item-text">
-                  Capturing moments and telling stories through photo, video, and creative projects.
-                </p>
-              </div>
-
-            </li>
-
-          </ul>
-
-        </section>
-
-      </article>
-
-      <article class="resume" data-page="resume" id="resume-panel" role="tabpanel" aria-labelledby="resume-tab" hidden>
-
-        <header>
-          <h2 class="h2 article-title">Resume</h2>
-        </header>
-
-        <section class="timeline">
-
-          <div class="title-wrapper">
-            <div class="icon-box">
-              <ion-icon name="book-outline"></ion-icon>
-            </div>
-
-            <h3 class="h3">Education</h3>
-          </div>
-
-          <ol class="timeline-list">
-
-            <li class="timeline-item">
-
-              <h4 class="h4 timeline-item-title">Postdoc at JRC COMBINE</h4>
-
-              <span>2024 — Present</span>
-
-              <p class="timeline-text">
-                Fresh off my PhD, I'm continuing to push the boundaries of computational biomedicine with Prof. Schuppert's team — now with more autonomy and exciting new challenges.
-              </p>
-
-            </li>
-
-            <li class="timeline-item">
-
-              <h4 class="h4 timeline-item-title">Ph.D. at JRC COMBINE</h4>
-
-              <span>2018 — 2024</span>
-
-              <p class="timeline-text">
-                Six years of deep diving into ARDS prediction for ICU patients. Built predictive models, learned a ton about clinical data, and discovered that healthcare AI is exactly where I want to be.
-              </p>
-
-            </li>
-
-            <li class="timeline-item">
-
-              <h4 class="h4 timeline-item-title">M.Sc. at Maastricht University</h4>
-
-              <span>2016 — 2018</span>
-
-              <p class="timeline-text">
-                Fell in love with NLP and machine learning here. Spent my days exploring sentiment analysis, topic modeling, and getting my hands dirty with deep learning.
-              </p>
-
-            </li>
-
-            <li class="timeline-item">
-
-              <h4 class="h4 timeline-item-title">B.Sc. in Aachen, Germany</h4>
-
-              <span>2013 — 2016</span>
-
-              <p class="timeline-text">
-                Where it all started — computer science and math fundamentals. Also landed my first real programming gig at a CNC simulation company, which taught me that coding is way more fun when it solves real problems.
-              </p>
-
-            </li>
-
-          </ol>
-
-        </section>
-
-        <section class="timeline">
-
-          <div class="title-wrapper">
-            <div class="icon-box">
-              <ion-icon name="book-outline"></ion-icon>
-            </div>
-
-            <h3 class="h3">Projects</h3>
-          </div>
-
-          <ol class="timeline-list">
-
-            <li class="timeline-item">
-
-              <h4 class="h4 timeline-item-title"><a style="color:white;" href="https://www.edith-csa.eu/">EDITH CSA</a></h4>
-
-              <span>2023 — Present</span>
-
-              <p class="timeline-text">
-                Working on the future of digital twins in healthcare — helping chart the roadmap from single-organ models to fully integrated whole-body simulations. It's ambitious, and that's what makes it exciting.
-              </p>
-
-            </li>
-
-            <li class="timeline-item">
-
-              <h4 class="h4 timeline-item-title"><a style="color:white;" href="https://www.nhr4ces.de/simulation-and-data-labs/sdl-digital-patient/">SDL Digital Patient</a></h4>
-
-              <span>2023 — Present</span>
-
-              <p class="timeline-text">
-                Making supercomputers accessible to healthcare researchers who have great data but maybe not the HPC expertise. We're bridging that gap so clinicians can run serious simulations without needing a CS degree.
-              </p>
-
-            </li>
-
-            <li class="timeline-item">
-
-              <h4 class="h4 timeline-item-title"><a style="color:white;" href="https://www.ccls.rwth-aachen.de/cms/ccls/~ystnr/das-ccls/">CCLS</a></h4>
-
-              <span>2023 — Present</span>
-
-              <p class="timeline-text">
-                Part of RWTH's push to bring computational methods to life sciences. I focus on getting the word out, running training programs, and helping researchers see what's possible when biology meets computing.
-              </p>
-
-            </li>
-
-            <li class="timeline-item">
-
-              <h4 class="h4 timeline-item-title"><a style="color:white;" href="https://www.smith.care/en/research/use-case-asic/">SMITH</a></h4>
-
-              <span>2018 — 2023</span>
-
-              <p class="timeline-text">
-                My PhD home base. Built an ARDS prediction system for ICU patients as part of the ASIC use case — turning messy clinical data into actionable early warnings.
-              </p>
-
-            </li>
-
-          </ol>
-
-        </section>
-
-        <section class="skill">
-
-          <h3 class="h3 skills-title">Skillset</h3>
-
-          <ul class="skills-list content-card">
-
-            <li class="skills-item">
-
-              <div class="title-wrapper">
-                <h5 class="h5">Data-Driven Modeling</h5>
-                <data value="95">95%</data>
-              </div>
-
-              <div class="skill-progress-bg">
-                <div class="skill-progress-fill" style="width: 95%;"></div>
-              </div>
-
-            </li>
-
-            <li class="skills-item">
-
-              <div class="title-wrapper">
-                <h5 class="h5">Python Programming</h5>
-                <data value="90">90%</data>
-              </div>
-
-              <div class="skill-progress-bg">
-                <div class="skill-progress-fill" style="width: 90%;"></div>
-              </div>
-
-            </li>
-
-            <li class="skills-item">
-
-              <div class="title-wrapper">
-                <h5 class="h5">Research Software Development</h5>
-                <data value="85">85%</data>
-              </div>
-
-              <div class="skill-progress-bg">
-                <div class="skill-progress-fill" style="width: 85%;"></div>
-              </div>
-
-            </li>
-
-            <li class="skills-item">
-
-              <div class="title-wrapper">
-                <h5 class="h5">High Performance Computing</h5>
-                <data value="80">80%</data>
-              </div>
-
-              <div class="skill-progress-bg">
-                <div class="skill-progress-fill" style="width: 80%;"></div>
-              </div>
-
-            </li>
-
-            <li class="skills-item">
-
-              <div class="title-wrapper">
-                <h5 class="h5">Workshops / Teaching</h5>
-                <data value="60">60%</data>
-              </div>
-
-              <div class="skill-progress-bg">
-                <div class="skill-progress-fill" style="width: 60%;"></div>
-              </div>
-
-            </li>
-
-            <li class="skills-item">
-
-              <div class="title-wrapper">
-                <h5 class="h5">Outreach and Media</h5>
-                <data value="75">75%</data>
-              </div>
-
-              <div class="skill-progress-bg">
-                <div class="skill-progress-fill" style="width: 75%;"></div>
-              </div>
-
-            </li>
-
-            <li class="skills-item">
-
-              <div class="title-wrapper">
-                <h5 class="h5">Coordination and Organization</h5>
-                <data value="80">80%</data>
-              </div>
-
-              <div class="skill-progress-bg">
-                <div class="skill-progress-fill" style="width: 80%;"></div>
-              </div>
-
-            </li>
-
-          </ul>
-
-        </section>
-
-      </article>
-
-
-
-
-
-      <!--
-        - #PORTFOLIO
-    -->
-
-      <article class="portfolio" data-page="portfolio" id="portfolio-panel" role="tabpanel" aria-labelledby="portfolio-tab" hidden>
-
-        <header>
-          <h2 class="h2 article-title">Portfolio</h2>
-        </header>
-
-        <section class="projects">
-
-          <ul class="filter-list">
-
-            <li class="filter-item">
-              <button class="active" data-filter-btn>All</button>
-            </li>
-
-            <li class="filter-item">
-              <button data-filter-btn>Web design</button>
-            </li>
-
-            <li class="filter-item">
-              <button data-filter-btn>Applications</button>
-            </li>
-
-            <li class="filter-item">
-              <button data-filter-btn>Web development</button>
-            </li>
-
-          </ul>
-
-          <div class="filter-select-box">
-
-            <button class="filter-select" data-select>
-
-              <div class="select-value" data-selecct-value>Select category</div>
-
-              <div class="select-icon">
-                <ion-icon name="chevron-down"></ion-icon>
-              </div>
-
-            </button>
-
-            <ul class="select-list">
-
-              <li class="select-item">
-                <button data-select-item>All</button>
-              </li>
-
-              <li class="select-item">
-                <button data-select-item>Web design</button>
-              </li>
-
-              <li class="select-item">
-                <button data-select-item>Applications</button>
-              </li>
-
-              <li class="select-item">
-                <button data-select-item>Web development</button>
-              </li>
-
-            </ul>
-
-          </div>
-
-          <ul class="project-list">
-
-            <li class="project-item  active" data-filter-item data-category="web development">
-              <a href="#">
-
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-
-                  <img src="./assets/images/project-1.jpg" alt="finance" loading="lazy">
-                </figure>
-
-                <h3 class="project-title">Finance</h3>
-
-                <p class="project-category">Web development</p>
-
-              </a>
-            </li>
-
-            <li class="project-item  active" data-filter-item data-category="web development">
-              <a href="#">
-
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-
-                  <img src="./assets/images/project-2.png" alt="orizon" loading="lazy">
-                </figure>
-
-                <h3 class="project-title">Orizon</h3>
-
-                <p class="project-category">Web development</p>
-
-              </a>
-            </li>
-
-            <li class="project-item  active" data-filter-item data-category="web design">
-              <a href="#">
-
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-
-                  <img src="./assets/images/project-3.jpg" alt="fundo" loading="lazy">
-                </figure>
-
-                <h3 class="project-title">Fundo</h3>
-
-                <p class="project-category">Web design</p>
-
-              </a>
-            </li>
-
-            <li class="project-item  active" data-filter-item data-category="applications">
-              <a href="#">
-
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-
-                  <img src="./assets/images/project-4.png" alt="brawlhalla" loading="lazy">
-                </figure>
-
-                <h3 class="project-title">Brawlhalla</h3>
-
-                <p class="project-category">Applications</p>
-
-              </a>
-            </li>
-
-            <li class="project-item  active" data-filter-item data-category="web design">
-              <a href="#">
-
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-
-                  <img src="./assets/images/project-5.png" alt="dsm." loading="lazy">
-                </figure>
-
-                <h3 class="project-title">DSM.</h3>
-
-                <p class="project-category">Web design</p>
-
-              </a>
-            </li>
-
-            <li class="project-item  active" data-filter-item data-category="web design">
-              <a href="#">
-
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-
-                  <img src="./assets/images/project-6.png" alt="metaspark" loading="lazy">
-                </figure>
-
-                <h3 class="project-title">MetaSpark</h3>
-
-                <p class="project-category">Web design</p>
-
-              </a>
-            </li>
-
-            <li class="project-item  active" data-filter-item data-category="web development">
-              <a href="#">
-
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-
-                  <img src="./assets/images/project-7.png" alt="summary" loading="lazy">
-                </figure>
-
-                <h3 class="project-title">Summary</h3>
-
-                <p class="project-category">Web development</p>
-
-              </a>
-            </li>
-
-            <li class="project-item  active" data-filter-item data-category="applications">
-              <a href="#">
-
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-
-                  <img src="./assets/images/project-8.jpg" alt="task manager" loading="lazy">
-                </figure>
-
-                <h3 class="project-title">Task Manager</h3>
-
-                <p class="project-category">Applications</p>
-
-              </a>
-            </li>
-
-            <li class="project-item  active" data-filter-item data-category="web development">
-              <a href="#">
-
-                <figure class="project-img">
-                  <div class="project-item-icon-box">
-                    <ion-icon name="eye-outline"></ion-icon>
-                  </div>
-
-                  <img src="./assets/images/project-9.png" alt="arrival" loading="lazy">
-                </figure>
-
-                <h3 class="project-title">Arrival</h3>
-
-                <p class="project-category">Web development</p>
-
-              </a>
-            </li>
-
-          </ul>
-
-        </section>
-
-      </article>
-
-      <!--
-        - #BLOG
-      -->
-
-      <article class="blog" data-page="blog" id="blog-panel" role="tabpanel" aria-labelledby="blog-tab" hidden>
-
-        <header>
-          <h2 class="h2 article-title">Blog</h2>
-        </header>
-
-        <section class="blog-posts">
-
-          <ul class="blog-posts-list">
-
-            <li class="blog-post-item">
-              <a href="#">
-
-                <figure class="blog-banner-box">
-                  <img src="./assets/images/blog-1.jpg" alt="Design conferences in 2022" loading="lazy">
-                </figure>
-
-                <div class="blog-content">
-
-                  <div class="blog-meta">
-                    <p class="blog-category">Design</p>
-
-                    <span class="dot"></span>
-
-                    <time datetime="2022-02-23">Fab 23, 2022</time>
-                  </div>
-
-                  <h3 class="h3 blog-item-title">Design conferences in 2022</h3>
-
-                  <p class="blog-text">
-                    Veritatis et quasi architecto beatae vitae dicta sunt, explicabo.
-                  </p>
-
-                </div>
-
-              </a>
-            </li>
-
-            <li class="blog-post-item">
-              <a href="#">
-
-                <figure class="blog-banner-box">
-                  <img src="./assets/images/blog-2.jpg" alt="Best fonts every designer" loading="lazy">
-                </figure>
-
-                <div class="blog-content">
-
-                  <div class="blog-meta">
-                    <p class="blog-category">Design</p>
-
-                    <span class="dot"></span>
-
-                    <time datetime="2022-02-23">Fab 23, 2022</time>
-                  </div>
-
-                  <h3 class="h3 blog-item-title">Best fonts every designer</h3>
-
-                  <p class="blog-text">
-                    Sed ut perspiciatis, nam libero tempore, cum soluta nobis est eligendi.
-                  </p>
-
-                </div>
-
-              </a>
-            </li>
-
-            <li class="blog-post-item">
-              <a href="#">
-
-                <figure class="blog-banner-box">
-                  <img src="./assets/images/blog-3.jpg" alt="Design digest #80" loading="lazy">
-                </figure>
-
-                <div class="blog-content">
-
-                  <div class="blog-meta">
-                    <p class="blog-category">Design</p>
-
-                    <span class="dot"></span>
-
-                    <time datetime="2022-02-23">Fab 23, 2022</time>
-                  </div>
-
-                  <h3 class="h3 blog-item-title">Design digest #80</h3>
-
-                  <p class="blog-text">
-                    Excepteur sint occaecat cupidatat no proident, quis nostrum exercitationem ullam corporis suscipit.
-                  </p>
-
-                </div>
-
-              </a>
-            </li>
-
-            <li class="blog-post-item">
-              <a href="#">
-
-                <figure class="blog-banner-box">
-                  <img src="./assets/images/blog-4.jpg" alt="UI interactions of the week" loading="lazy">
-                </figure>
-
-                <div class="blog-content">
-
-                  <div class="blog-meta">
-                    <p class="blog-category">Design</p>
-
-                    <span class="dot"></span>
-
-                    <time datetime="2022-02-23">Fab 23, 2022</time>
-                  </div>
-
-                  <h3 class="h3 blog-item-title">UI interactions of the week</h3>
-
-                  <p class="blog-text">
-                    Enim ad minim veniam, consectetur adipiscing elit, quis nostrud exercitation ullamco laboris nisi.
-                  </p>
-
-                </div>
-
-              </a>
-            </li>
-
-            <li class="blog-post-item">
-              <a href="#">
-
-                <figure class="blog-banner-box">
-                  <img src="./assets/images/blog-5.jpg" alt="The forgotten art of spacing" loading="lazy">
-                </figure>
-
-                <div class="blog-content">
-
-                  <div class="blog-meta">
-                    <p class="blog-category">Design</p>
-
-                    <span class="dot"></span>
-
-                    <time datetime="2022-02-23">Fab 23, 2022</time>
-                  </div>
-
-                  <h3 class="h3 blog-item-title">The forgotten art of spacing</h3>
-
-                  <p class="blog-text">
-                    Maxime placeat, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  </p>
-
-                </div>
-
-              </a>
-            </li>
-
-            <li class="blog-post-item">
-              <a href="#">
-
-                <figure class="blog-banner-box">
-                  <img src="./assets/images/blog-6.jpg" alt="Design digest #79" loading="lazy">
-                </figure>
-
-                <div class="blog-content">
-
-                  <div class="blog-meta">
-                    <p class="blog-category">Design</p>
-
-                    <span class="dot"></span>
-
-                    <time datetime="2022-02-23">Fab 23, 2022</time>
-                  </div>
-
-                  <h3 class="h3 blog-item-title">Design digest #79</h3>
-
-                  <p class="blog-text">
-                    Optio cumque nihil impedit uo minus quod maxime placeat, velit esse cillum.
-                  </p>
-
-                </div>
-
-              </a>
-            </li>
-
-          </ul>
-
-        </section>
-
-      </article>
-
-      <!--
-        - #TEACHING
-      -->
-
-      <article class="teaching" data-page="teaching" id="teaching-panel" role="tabpanel" aria-labelledby="teaching-tab" hidden>
-
-        <header>
-          <h2 class="h2 article-title">Teaching</h2>
-        </header>
-
-        <section class="blog-posts">
-
-          <ul class="blog-posts-list">
-
-            <li class="blog-post-item">
-              <a href="version-control-for-researchers/index.html">
-
-                <figure class="blog-banner-box">
-                  <img src="./assets/images/versioncontrol.png" loading="lazy" alt="Version Control workshop">
-                </figure>
-
-                <div class="blog-content">
-
-                  <div class="blog-meta">
-                    <p class="blog-category">Workshop</p>
-
-                    <span class="dot"></span>
-
-                    <time datetime="2025-11-04">Nov 2025</time>
-                  </div>
-
-                  <h3 class="h3 blog-item-title">Version Control for Researchers</h3>
-
-                  <p class="blog-text">
-                    Git doesn't have to be scary! A friendly intro to version control that'll save your future self from "final_v2_FINAL_really_final.py" chaos.
-                  </p>
-
-                </div>
-
-              </a>
-            </li>
-
-            <li class="blog-post-item">
-              <a href="syndata/index.html">
-
-                <figure class="blog-banner-box">
-                  <img src="./assets/images/blog-3.png" loading="lazy" alt="Synthetic Data workshop">
-                </figure>
-
-                <div class="blog-content">
-
-                  <div class="blog-meta">
-                    <p class="blog-category">Workshop</p>
-
-                    <span class="dot"></span>
-
-                    <time datetime="2024-11-22">Nov 2024</time>
-                  </div>
-
-                  <h3 class="h3 blog-item-title">Synthetic Data in Medicine</h3>
-
-                  <p class="blog-text">
-                    When real patient data is hard to share, synthetic data comes to the rescue. Exploring open-source tools for generating realistic medical datasets.
-                  </p>
-
-                </div>
-
-              </a>
-            </li>
-
-            <li class="blog-post-item">
-              <a href="clusterintro/index.html">
-
-                <figure class="blog-banner-box">
-                  <img src="./assets/images/blog-1.png" loading="lazy" alt="HPC workshop">
-                </figure>
-
-                <div class="blog-content">
-
-                  <div class="blog-meta">
-                    <p class="blog-category">Workshop</p>
-
-                    <span class="dot"></span>
-
-                    <time datetime="2024-11-27">Nov 2024</time>
-                  </div>
-
-                  <h3 class="h3 blog-item-title">HPC for Researchers</h3>
-
-                  <p class="blog-text">
-                    Your laptop shouldn't catch fire running experiments. Learn how to harness supercomputing power — from SLURM basics to landing compute time through NHR4CES.
-                  </p>
-
-                </div>
-
-              </a>
-            </li>
-
-            <li class="blog-post-item">
-              <a href="azurellm/index.html">
-
-                <figure class="blog-banner-box">
-                  <img src="./assets/images/blog-2.png" loading="lazy" alt="LLM workshop">
-                </figure>
-
-                <div class="blog-content">
-
-                  <div class="blog-meta">
-                    <p class="blog-category">Workshop</p>
-
-                    <span class="dot"></span>
-
-                    <time datetime="2024-10-10">Oct 2024</time>
-                  </div>
-
-                  <h3 class="h3 blog-item-title">LLMs at CCLS</h3>
-
-                  <p class="blog-text">
-                    Hands-on guide to using large language models for research on CCLS infrastructure. Python examples, best practices, and how to not blow your API budget.
-                  </p>
-
-                </div>
-
-              </a>
-            </li>
-          </ul>
-
-        </section>
-
-      </article>
-
-
-
-      <!--
-        - #CONTACT
-      -->
-
-      <article class="contact" data-page="contact" id="contact-panel" role="tabpanel" aria-labelledby="contact-tab" hidden>
-
-        <header>
-          <h2 class="h2 article-title">Contact</h2>
-        </header>
-
-        <section class="mapbox" data-mapbox>
-          <figure>
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d80763.53572856188!2d6.013953092128369!3d50.75962044176248!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c0997cb08a191d%3A0x63a30eae0b0e444f!2sAachen!5e0!3m2!1sde!2sde!4v1731570126158!5m2!1sde!2sde"
-              width="400" height="300" loading="lazy"></iframe>
-          </figure>
-        </section>
-
-        <section class="contact-form" role="region" aria-labelledby="contact-form-title">
-
-          <h3 class="h3 form-title" id="contact-form-title">Contact Form</h3>
-
-          <form action="#" class="form" data-form aria-label="Contact form">
-
-            <div class="input-wrapper">
-              <input type="text" name="fullname" id="fullname" class="form-input" placeholder="Name" required data-form-input aria-label="Full name">
-              <input type="email" name="email" id="email" class="form-input" placeholder="Email address" required data-form-input aria-label="Email address">
-            </div>
-
-            <textarea name="message" id="message" class="form-input" placeholder="Your Message" required data-form-input aria-label="Your message"></textarea>
-
-            <button class="form-btn" type="submit" disabled data-form-btn aria-label="Send message">
-              <ion-icon name="paper-plane"></ion-icon>
-              <span>Send Message</span>
-            </button>
-
-          </form>
-
-          <p class="about-text" style="margin-top: 20px; text-align: center;">
-            Prefer a direct approach? Check out the contact options in the sidebar — I'm always happy to chat!
-          </p>
-
-        </section>
-
-      </article>
-
+<svg class="filters" width="0" height="0" aria-hidden="true" style="position:absolute">
+  <defs>
+    <!-- nudges every pixel by a little noise, so a straight border stops being straight -->
+    <filter id="roughEdge" x="-6%" y="-6%" width="112%" height="112%">
+      <feTurbulence type="fractalNoise" baseFrequency=".021" numOctaves="3" seed="7" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="3.4" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <filter id="roughEdge2" x="-6%" y="-6%" width="112%" height="112%">
+      <feTurbulence type="fractalNoise" baseFrequency=".029" numOctaves="3" seed="29" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="2.6" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <filter id="roughInk" x="-12%" y="-12%" width="124%" height="124%">
+      <feTurbulence type="fractalNoise" baseFrequency=".07" numOctaves="2" seed="13" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="1.1" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </defs>
+</svg>
+
+<svg class="grain" width="100%" height="100%" preserveAspectRatio="none" viewBox="0 0 1440 900" aria-hidden="true">
+  <g fill="none" stroke="oklch(85% .015 72)" stroke-width="1.5" stroke-linecap="round">
+    <path d="M-20 78 Q360 70 720 82 Q1080 92 1460 76"/>
+    <path d="M-20 232 Q340 242 700 228 Q1060 216 1460 236"/>
+    <path d="M-20 386 Q380 374 740 390 Q1100 402 1460 382"/>
+    <path d="M-20 540 Q340 552 720 536 Q1080 524 1460 544"/>
+    <path d="M-20 694 Q380 682 760 698 Q1100 710 1460 690"/>
+    <path d="M-20 848 Q360 860 700 844 Q1080 832 1460 852"/>
+  </g>
+</svg>
+
+<nav class="tabs" aria-label="Sections">
+  <a href="#work">work</a>
+  <a href="#papers">papers</a>
+  <a href="#track">track</a>
+  <a href="#teaching">teaching</a>
+  <a href="#outside">outside</a>
+  <a href="#hello">hello</a>
+</nav>
+
+<div class="stage">
+<div class="sheet">
+  <svg class="margin-rule" viewBox="0 0 8 600" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M4 0 Q2.4 150 4 300 Q5.6 450 4 600" stroke="var(--margin-red)" stroke-width="1.8" fill="none"/>
+  </svg>
+
+  <header>
+    <figure class="photo reveal">
+      <span class="tape"></span>
+      <img src="./assets/images/my-avatar.png" alt="Richard Polzin">
+      <figcaption>me, mid-thought</figcaption>
+    </figure>
+
+    <h1 class="reveal">Richard Polzin</h1>
+    <p class="role reveal">AI Researcher · <b>JRC COMBINE</b> · Aachen, Germany</p>
+    <p class="lead reveal">I build models that notice an intensive-care patient going downhill <em>before the numbers make it obvious.</em></p>
+    <div class="note reveal">
+      <b>Right now</b>Prepping an ICU oxygenation model for external validation, teaching Git to reluctant researchers, and expanding a home lab that has comfortably outgrown its rack.
     </div>
+  </header>
 
-  </main>
+  <!-- ---------------- work ---------------- -->
+  <section id="work">
+    <div class="sect-head">
+      <h2>What I work on</h2>
+      <svg viewBox="0 0 210 30" fill="none" aria-hidden="true"><path class="drawn" style="--l:230" d="M4 14 Q56 8 108 12 Q160 16 205 9" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round"/></svg>
+    </div>
+    <ul class="hand">
+      <li>
+        <svg class="tick" viewBox="0 0 19 13" fill="none" aria-hidden="true"><path d="M2 7 L7 11 L17 2" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <h3>Predictive modelling for intensive care</h3>
+        <p>Time-series models that forecast oxygenation crashes up to 72 hours ahead — the subject of my PhD and my current paper.</p>
+      </li>
+      <li>
+        <svg class="tick" viewBox="0 0 19 13" fill="none" aria-hidden="true"><path d="M2 7 L7 11 L17 2" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <h3>HPC that hospital researchers can actually use</h3>
+        <p>Through the NHR4CES Simulation and Data Lab — for people who have the data but not the cluster experience.</p>
+      </li>
+      <li>
+        <svg class="tick" viewBox="0 0 19 13" fill="none" aria-hidden="true"><path d="M2 7 L7 11 L17 2" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <h3>Open tools, not just papers</h3>
+        <p>If I build something worth keeping, it goes on GitHub — along with the workshops that teach it.</p>
+      </li>
+    </ul>
+  </section>
 
+  <!-- ---------------- papers ---------------- -->
+  <section id="papers">
+    <div class="sect-head">
+      <h2>Papers</h2>
+      <svg viewBox="0 0 210 30" fill="none" aria-hidden="true"><path class="drawn" style="--l:230" d="M4 14 Q56 8 108 12 Q160 16 205 9" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round"/></svg>
+    </div>
+    <div class="pub">
+      <span class="flag">first author
+        <svg viewBox="0 0 44 22" fill="none" aria-hidden="true"><path d="M2 4 Q22 2 38 14 M38 14 L29 13 M38 14 L36 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+      <h3><a href="https://iopscience.iop.org/article/10.1088/3049-477X/ae7cfe/meta">Predicting a sudden decrease in oxygenation in mechanically ventilated adult intensive care patients</a></h3>
+      <p class="meta"><b>Machine Learning: Health</b> · 2026 · Polzin R, Fritsch S, Sharafutdinov K, Bickenbach J, Marx G, Schuppert A</p>
+    </div>
+    <div class="pub">
+      <h3><a href="https://bmjopen.bmj.com/content/11/4/e045589">Algorithmic surveillance of ICU patients with ARDS (ASIC): protocol for a multicentre stepped-wedge cluster randomised quality improvement strategy</a></h3>
+      <p class="meta"><b>BMJ Open</b> · 2021 · Marx G, Bickenbach J, Fritsch SJ, et al. — one of ~45 co-authors</p>
+    </div>
+  </section>
 
+  <!-- ---------------- track ---------------- -->
+  <section id="track">
+    <div class="sect-head">
+      <h2>Where I've been</h2>
+      <svg viewBox="0 0 210 30" fill="none" aria-hidden="true"><path class="drawn" style="--l:230" d="M4 14 Q56 8 108 12 Q160 16 205 9" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round"/></svg>
+    </div>
+    <div class="entry"><span class="yr">2024 →</span><h3>Postdoc, JRC COMBINE</h3><p>Same team, more rope. Pushing the ICU prediction work toward something clinically usable.</p></div>
+    <div class="entry"><span class="yr">2018 – 24</span><h3>Ph.D., JRC COMBINE</h3><p>Six years on ARDS prediction for ICU patients — models, messy clinical data, and finding my corner of healthcare AI.</p></div>
+    <div class="entry"><span class="yr">2016 – 18</span><h3>M.Sc., Maastricht University</h3><p>Where NLP and machine learning got their hooks in — sentiment analysis, topic modelling, deep learning.</p></div>
+    <div class="entry"><span class="yr">2013 – 16</span><h3>B.Sc., Aachen</h3><p>CS and maths fundamentals, plus a first programming job at a CNC simulation company.</p></div>
 
+    <div class="sect-head" style="margin-top:var(--u)">
+      <h2>Projects I'm part of</h2>
+      <svg viewBox="0 0 210 30" fill="none" aria-hidden="true"><path class="drawn" style="--l:230" d="M4 14 Q56 8 108 12 Q160 16 205 9" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round"/></svg>
+    </div>
+    <div class="entry"><span class="yr">2023 →</span><h3><a href="https://www.edith-csa.eu/">EDITH CSA</a></h3><p>Charting the road from single-organ models to whole-body digital twins.</p></div>
+    <div class="entry"><span class="yr">2023 →</span><h3><a href="https://www.nhr4ces.de/simulation-and-data-labs/sdl-digital-patient/">SDL Digital Patient</a></h3><p>Getting supercomputers into the hands of healthcare researchers.</p></div>
+    <div class="entry"><span class="yr">2023 →</span><h3><a href="https://www.ccls.rwth-aachen.de/">CCLS</a></h3><p>RWTH's push to bring computational methods to the life sciences.</p></div>
+    <div class="entry"><span class="yr">2018 – 23</span><h3><a href="https://www.smith.care/">SMITH</a></h3><p>My PhD home base — turning messy clinical data into early warnings.</p></div>
+  </section>
 
+  <!-- ---------------- teaching ---------------- -->
+  <section id="teaching">
+    <div class="sect-head">
+      <h2>Workshops I've run</h2>
+      <svg viewBox="0 0 210 30" fill="none" aria-hidden="true"><path class="drawn" style="--l:230" d="M4 14 Q56 8 108 12 Q160 16 205 9" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round"/></svg>
+    </div>
+    <p>All of them free to reuse — each card opens the full slide deck.</p>
+    <div class="cards">
+      <a class="wk" href="version-control-for-researchers/" style="--wk:oklch(50% .13 38)">
+        <svg class="mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="6" r="2.5"/><circle cx="6" cy="18" r="2.5"/><circle cx="18" cy="9" r="2.5"/><path d="M6 8.5V15.5M6.9 16.9C9 15 12 14 15.6 10.4"/></svg>
+        <p class="kicker">Nov 2025</p>
+        <h3>Version Control for Researchers</h3>
+        <svg class="swash" viewBox="0 0 120 9" fill="none" aria-hidden="true"><path d="M3 6 Q32 2 62 5 Q92 8 117 4" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+        <p>Git doesn't have to be scary. A friendly intro that'll save your future self from "final_v2_FINAL_really_final.py".</p>
+      </a>
+      <a class="wk" href="syndata/" style="--wk:oklch(46% .1 145)">
+        <svg class="mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v6c0 1.7 3.6 3 8 3s8-1.3 8-3V6M4 12v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></svg>
+        <p class="kicker">Nov 2024</p>
+        <h3>Synthetic Data in Medicine</h3>
+        <svg class="swash" viewBox="0 0 120 9" fill="none" aria-hidden="true"><path d="M3 6 Q32 2 62 5 Q92 8 117 4" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+        <p>When real patient data can't be shared — open-source tools for generating realistic medical datasets.</p>
+      </a>
+      <a class="wk" href="clusterintro/" style="--wk:oklch(45% .11 250)">
+        <svg class="mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="6" rx="1.5"/><rect x="4" y="14" width="16" height="6" rx="1.5"/><path d="M8 7h.01M8 17h.01"/></svg>
+        <p class="kicker">Nov 2024</p>
+        <h3>HPC for Researchers</h3>
+        <svg class="swash" viewBox="0 0 120 9" fill="none" aria-hidden="true"><path d="M3 6 Q32 2 62 5 Q92 8 117 4" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+        <p>Your laptop shouldn't catch fire running experiments. SLURM basics through to landing compute time.</p>
+      </a>
+      <a class="wk" href="azurellm/" style="--wk:oklch(46% .13 305)">
+        <svg class="mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a4 4 0 0 0-4 4c0 1.3.6 2.4 1.5 3.1C8.6 11 8 12.1 8 13.5A4 4 0 0 0 12 17.5a4 4 0 0 0 4-4c0-1.4-.6-2.5-1.5-3.4A3.9 3.9 0 0 0 16 7a4 4 0 0 0-4-4Z"/><path d="M9 20.5h6M12 17.5v3"/></svg>
+        <p class="kicker">Oct 2024</p>
+        <h3>LLMs at CCLS</h3>
+        <svg class="swash" viewBox="0 0 120 9" fill="none" aria-hidden="true"><path d="M3 6 Q32 2 62 5 Q92 8 117 4" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+        <p>Using large language models for research on CCLS infrastructure — examples, practices, budget sanity.</p>
+      </a>
+    </div>
+  </section>
 
+  <!-- ---------------- outside ---------------- -->
+  <section id="outside">
+    <img class="stain" src="./assets/images/coffee-stain.png" alt="" aria-hidden="true">
+    <img class="stain small" src="./assets/images/coffee-stain.png" alt="" aria-hidden="true">
+    <div class="sect-head">
+      <h2>Outside the lab</h2>
+      <svg viewBox="0 0 210 30" fill="none" aria-hidden="true"><path class="drawn" style="--l:230" d="M4 14 Q56 8 108 12 Q160 16 205 9" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round"/></svg>
+    </div>
+    <ul class="hand">
+      <li>
+        <svg class="tick" viewBox="0 0 19 13" fill="none" aria-hidden="true"><path d="M2 7 L7 11 L17 2" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <h3>A home lab that keeps growing</h3>
+        <p>Self-hosted services, local LLM inference, own infrastructure, and more network gear than strictly necessary.</p>
+      </li>
+      <li>
+        <svg class="tick" viewBox="0 0 19 13" fill="none" aria-hidden="true"><path d="M2 7 L7 11 L17 2" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <h3>Roasting my own coffee</h3>
+        <p>At home, on purpose. Yes, I have opinions about your pour-over.</p>
+      </li>
+      <li>
+        <svg class="tick" viewBox="0 0 19 13" fill="none" aria-hidden="true"><path d="M2 7 L7 11 L17 2" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <h3>Photography &amp; gaming</h3>
+        <p>Chasing good light around Aachen; co-op whenever the group can agree on something.</p>
+      </li>
+    </ul>
+  </section>
 
-  <!--
-    - custom js link
-  -->
-  <script src="./assets/js/script.js" defer></script>
-  
-  <!-- Script to handle page state persistence and direct linking -->
-  <script>
-    // Handle page state persistence and direct linking
-    document.addEventListener('DOMContentLoaded', function() {
-      // Function to show a specific page
-      function showPage(pageId) {
-        // Hide all pages
-        const allPages = document.querySelectorAll('[data-page]');
-        allPages.forEach(page => page.classList.remove('active'));
-        
-        // Show the requested page
-        const targetPage = document.querySelector(`[data-page="${pageId}"]`);
-        if (targetPage) {
-          targetPage.classList.add('active');
-        }
-        
-        // Update active state of navigation links
-        const navLinks = document.querySelectorAll('[data-nav-link]');
-        navLinks.forEach(link => {
-          if (link.textContent.toLowerCase().trim() === pageId.toLowerCase()) {
-            link.classList.add('active');
-          } else {
-            link.classList.remove('active');
-          }
-        });
-        
-        // Update URL hash without scrolling to the element
-        history.replaceState(null, null, `#${pageId}`);
-      }
-      
-      // Check URL hash on page load
-      function checkHash() {
-        let hash = window.location.hash.substring(1);
-        if (hash) {
-          // Normalize the hash to match how the nav links text appears
-          if (hash === 'portfolio') {
-            hash = 'portfolio';
-          } else if (hash === 'blog') {
-            hash = 'blog';
-          } else {
-            // Capitalize first letter for proper matching with nav text
-            hash = hash.charAt(0).toUpperCase() + hash.slice(1);
-          }
-          
-          // Look for matching page
-          const matchingPage = document.querySelector(`[data-page="${hash.toLowerCase()}"]`);
-          if (matchingPage) {
-            showPage(hash.toLowerCase());
-          } else {
-            // Default to 'about' if hash doesn't match any page
-            showPage('about');
-          }
-        } else {
-          // Default to 'about' if no hash
-          showPage('about');
-        }
-      }
-      
-      // Set up event listeners for navigation links
-      const navLinks = document.querySelectorAll('[data-nav-link]');
-      navLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-          e.preventDefault();
-          const pageId = this.textContent.toLowerCase().trim();
-          showPage(pageId);
-          window.scrollTo(0, 0);
-        });
-      });
-      
-      // Check hash when page loads
-      checkHash();
-      
-      // Listen for hash changes (e.g., browser back/forward)
-      window.addEventListener('hashchange', checkHash);
+  <!-- ---------------- hello ---------------- -->
+  <section id="hello">
+    <div class="sect-head">
+      <h2>Say hello</h2>
+      <svg viewBox="0 0 210 30" fill="none" aria-hidden="true"><path class="drawn" style="--l:230" d="M4 14 Q56 8 108 12 Q160 16 205 9" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round"/></svg>
+    </div>
+    <p>No contact form — just pick whichever's easiest.</p>
+    <div class="hello">
+      <a href="mailto:mail@richardpolzin.com">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 6.5 8.5 6 8.5-6"/></svg>
+        <span class="k">Email</span><span class="v">mail@richardpolzin.com</span>
+      </a>
+      <a href="#">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-8.9 8.4 8.7 8.7 0 0 1-3.4-.8L3 20l1-5a8.4 8.4 0 0 1-.9-3.8A8.4 8.4 0 0 1 12 3a8.4 8.4 0 0 1 9 8.5Z"/></svg>
+        <span class="k">Signal</span><span class="v">Start a chat</span>
+      </a>
+      <a href="https://github.com/DeastinY/">
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-4 1.4-4-2.2-6-2.7m12 5.2v-3.4c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.3 4.3 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12 12 0 0 0-6.2 0C6.5 3.4 5.4 3.7 5.4 3.7a4.3 4.3 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 10.1c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2v3.4"/></svg>
+        <span class="k">GitHub</span><span class="v">github.com/DeastinY</span>
+      </a>
+      <div>
+        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.1 7-11.5A7 7 0 0 0 5 9.5C5 14.9 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
+        <span class="k">Where</span><span class="v">Aachen, Germany</span>
+      </div>
+    </div>
+  </section>
+</div>
+</div>
+
+<script>
+(function(){
+  // reveal on scroll
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('reveal'); io.unobserve(e.target); } });
+  }, { rootMargin:'0px 0px -12% 0px' });
+  document.querySelectorAll('section > *:not(.stain)').forEach(function(el){ io.observe(el); });
+
+  // draw the section underlines when they come into view
+  var io2 = new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ e.target.style.animationPlayState='running'; io2.unobserve(e.target); } });
+  }, { rootMargin:'0px 0px -10% 0px' });
+  document.querySelectorAll('.drawn').forEach(function(el){ el.style.animationPlayState='paused'; io2.observe(el); });
+
+  // highlight the current section in the index tabs
+  var links = Array.prototype.slice.call(document.querySelectorAll('.tabs a'));
+  var secs  = links.map(function(a){ return document.querySelector(a.getAttribute('href')); });
+  var io3 = new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(!e.isIntersecting) return;
+      var i = secs.indexOf(e.target);
+      links.forEach(function(l,j){ l.classList.toggle('on', j===i); });
     });
-  </script>
-
-  <!--
-    - ionicon link
-  -->
-  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js" defer></script>
-  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js" defer></script>
-
+  }, { rootMargin:'-45% 0px -50% 0px' });
+  secs.forEach(function(s){ if(s) io3.observe(s); });
+})();
+</script>
 </body>
-
 </html>
