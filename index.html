@@ -126,17 +126,13 @@
   .head-row{ display:flex; gap:1.7rem; align-items:flex-start; margin-top:var(--u); }
   .head-row .lead{ margin:0; flex:1 1 auto; }
   .photo{
-    position:static; flex:0 0 auto; width:9.7rem; height:calc(var(--u) * 5);
+    position:static; flex:0 0 auto; width:9.7rem; height:calc(var(--u) * 4);
     margin:0; transform:rotate(3.2deg);
-    padding:.5rem .5rem 0; background:oklch(99% .004 90);
+    padding:.5rem; background:oklch(99% .004 90);
     box-shadow:3px 5px 14px oklch(40% .01 68 / .18);
   }
-  .photo img{ height:calc(var(--u) * 4 - .5rem); }
-  .photo figcaption{ line-height:var(--u); }
+  .photo img{ height:calc(var(--u) * 4 - 1rem); }
   .photo img{ display:block; width:100%; object-fit:cover; filter:grayscale(.6) contrast(1.05); }
-  .photo figcaption{
-    font-family:'Caveat',cursive; font-size:1.27rem; text-align:center; color:var(--graphite-2);
-  }
   .tape{
     position:absolute; top:-.87rem; left:50%; width:5.2rem; height:1.73rem; transform:translateX(-50%) rotate(-4deg);
     background:oklch(88% .045 92 / .72); border-left:1px dashed oklch(78% .05 92); border-right:1px dashed oklch(78% .05 92);
@@ -450,10 +446,10 @@
 <nav class="tabs" aria-label="Sections">
   <a href="#work">work</a>
   <a href="#papers">papers</a>
-  <a href="#track">track</a>
+  <a href="#track">background</a>
   <a href="#teaching">teaching</a>
   <a href="#outside">outside</a>
-  <a href="#hello">hello</a>
+  <a href="#hello">contact</a>
 </nav>
 
 <div class="stage">
@@ -470,11 +466,10 @@
       <figure class="photo reveal">
         <span class="tape"></span>
         <img src="./assets/images/my-avatar.png" alt="Richard Polzin">
-        <figcaption>me, mid-thought</figcaption>
       </figure>
     </div>
     <div class="note reveal">
-      <b>Right now</b>Prepping an ICU oxygenation model for external validation, teaching Git to reluctant researchers, and expanding a home lab that has comfortably outgrown its rack.
+      <b>Right now</b>Preparing an ICU oxygenation model for external validation, teaching version control to research groups, and building out a home lab for local inference work.
     </div>
   </header>
 
@@ -488,17 +483,17 @@
       <li>
         <svg class="tick" viewBox="0 0 19 13" fill="none" aria-hidden="true"><path d="M2 7 L7 11 L17 2" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         <h3>Predictive modelling for intensive care</h3>
-        <p>Time-series models that forecast oxygenation crashes up to 72 hours ahead — the subject of my PhD and my current paper.</p>
+        <p>Time-series models that forecast oxygenation deterioration up to 72 hours ahead — the subject of my PhD and my current paper.</p>
       </li>
       <li>
         <svg class="tick" viewBox="0 0 19 13" fill="none" aria-hidden="true"><path d="M2 7 L7 11 L17 2" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        <h3>HPC that hospital researchers can actually use</h3>
-        <p>Through the NHR4CES Simulation and Data Lab — for people who have the data but not the cluster experience.</p>
+        <h3>Accessible high-performance computing</h3>
+        <p>Supporting clinical research groups who have the data but not the cluster experience, through the NHR4CES Simulation and Data Lab.</p>
       </li>
       <li>
         <svg class="tick" viewBox="0 0 19 13" fill="none" aria-hidden="true"><path d="M2 7 L7 11 L17 2" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        <h3>Open tools, not just papers</h3>
-        <p>If I build something worth keeping, it goes on GitHub — along with the workshops that teach it.</p>
+        <h3>Open tools and materials</h3>
+        <p>Publishing the tools and teaching materials alongside the research, not only the papers.</p>
       </li>
     </ul>
   </section>
@@ -528,19 +523,19 @@
       <h2>Where I've been</h2>
       <svg viewBox="0 0 210 30" fill="none" aria-hidden="true"><path class="drawn" style="--l:230" d="M4 14 Q56 8 108 12 Q160 16 205 9" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round"/></svg>
     </div>
-    <div class="entry"><span class="yr">2024 →</span><h3>Postdoc, JRC COMBINE</h3><p>Same team, more rope. Pushing the ICU prediction work toward something clinically usable.</p></div>
-    <div class="entry"><span class="yr">2018 – 24</span><h3>Ph.D., JRC COMBINE</h3><p>Six years on ARDS prediction for ICU patients — models, messy clinical data, and finding my corner of healthcare AI.</p></div>
-    <div class="entry"><span class="yr">2016 – 18</span><h3>M.Sc., Maastricht University</h3><p>Where NLP and machine learning got their hooks in — sentiment analysis, topic modelling, deep learning.</p></div>
-    <div class="entry"><span class="yr">2013 – 16</span><h3>B.Sc., Aachen</h3><p>CS and maths fundamentals, plus a first programming job at a CNC simulation company.</p></div>
+    <div class="entry"><span class="yr">2024 →</span><h3>Postdoc, JRC COMBINE</h3><p>Continuing the ICU prediction work with Prof. Schuppert's group, focused on clinical applicability.</p></div>
+    <div class="entry"><span class="yr">2018 – 24</span><h3>Ph.D., JRC COMBINE</h3><p>Six years on ARDS prediction for intensive-care patients, working with routine clinical data.</p></div>
+    <div class="entry"><span class="yr">2016 – 18</span><h3>M.Sc., Maastricht University</h3><p>Natural language processing and machine learning — sentiment analysis, topic modelling, deep learning.</p></div>
+    <div class="entry"><span class="yr">2013 – 16</span><h3>B.Sc., Aachen</h3><p>Computer science and mathematics, alongside a first developer role at a CNC simulation company.</p></div>
 
     <div class="sect-head" style="margin-top:var(--u)">
       <h2>Projects I'm part of</h2>
       <svg viewBox="0 0 210 30" fill="none" aria-hidden="true"><path class="drawn" style="--l:230" d="M4 14 Q56 8 108 12 Q160 16 205 9" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round"/></svg>
     </div>
     <div class="entry"><span class="yr">2023 →</span><h3><a href="https://www.edith-csa.eu/">EDITH CSA</a></h3><p>Charting the road from single-organ models to whole-body digital twins.</p></div>
-    <div class="entry"><span class="yr">2023 →</span><h3><a href="https://www.nhr4ces.de/simulation-and-data-labs/sdl-digital-patient/">SDL Digital Patient</a></h3><p>Getting supercomputers into the hands of healthcare researchers.</p></div>
+    <div class="entry"><span class="yr">2023 →</span><h3><a href="https://www.nhr4ces.de/simulation-and-data-labs/sdl-digital-patient/">SDL Digital Patient</a></h3><p>Bringing high-performance computing capability to healthcare research groups.</p></div>
     <div class="entry"><span class="yr">2023 →</span><h3><a href="https://www.ccls.rwth-aachen.de/">CCLS</a></h3><p>RWTH's push to bring computational methods to the life sciences.</p></div>
-    <div class="entry"><span class="yr">2018 – 23</span><h3><a href="https://www.smith.care/">SMITH</a></h3><p>My PhD home base — turning messy clinical data into early warnings.</p></div>
+    <div class="entry"><span class="yr">2018 – 23</span><h3><a href="https://www.smith.care/">SMITH</a></h3><p>The clinical data platform behind my PhD work on early warning for ARDS.</p></div>
   </section>
 
   <!-- ---------------- teaching ---------------- -->
@@ -549,14 +544,14 @@
       <h2>Workshops I've run</h2>
       <svg viewBox="0 0 210 30" fill="none" aria-hidden="true"><path class="drawn" style="--l:230" d="M4 14 Q56 8 108 12 Q160 16 205 9" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round"/></svg>
     </div>
-    <p>All of them free to reuse — each card opens the full slide deck.</p>
+    <p>All materials are free to reuse — each entry opens the full slide deck.</p>
     <div class="cards">
       <a class="wk" href="version-control-for-researchers/" style="--wk:oklch(50% .13 38)">
         <svg class="mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="6" r="2.5"/><circle cx="6" cy="18" r="2.5"/><circle cx="18" cy="9" r="2.5"/><path d="M6 8.5V15.5M6.9 16.9C9 15 12 14 15.6 10.4"/></svg>
         <p class="kicker">Nov 2025</p>
         <h3>Version Control for Researchers</h3>
         <svg class="swash" viewBox="0 0 120 9" fill="none" aria-hidden="true"><path d="M3 6 Q32 2 62 5 Q92 8 117 4" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
-        <p>Git doesn't have to be scary. A friendly intro that'll save your future self from "final_v2_FINAL_really_final.py".</p>
+        <p>A practical introduction to version control for research code: branching, collaboration, and a history you can actually retrace.</p>
       </a>
       <a class="wk" href="syndata/" style="--wk:oklch(46% .1 145)">
         <svg class="mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v6c0 1.7 3.6 3 8 3s8-1.3 8-3V6M4 12v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></svg>
@@ -570,14 +565,14 @@
         <p class="kicker">Nov 2024</p>
         <h3>HPC for Researchers</h3>
         <svg class="swash" viewBox="0 0 120 9" fill="none" aria-hidden="true"><path d="M3 6 Q32 2 62 5 Q92 8 117 4" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
-        <p>Your laptop shouldn't catch fire running experiments. SLURM basics through to landing compute time.</p>
+        <p>From SLURM fundamentals through to applying for time on national compute resources.</p>
       </a>
       <a class="wk" href="azurellm/" style="--wk:oklch(46% .13 305)">
         <svg class="mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a4 4 0 0 0-4 4c0 1.3.6 2.4 1.5 3.1C8.6 11 8 12.1 8 13.5A4 4 0 0 0 12 17.5a4 4 0 0 0 4-4c0-1.4-.6-2.5-1.5-3.4A3.9 3.9 0 0 0 16 7a4 4 0 0 0-4-4Z"/><path d="M9 20.5h6M12 17.5v3"/></svg>
         <p class="kicker">Oct 2024</p>
         <h3>LLMs at CCLS</h3>
         <svg class="swash" viewBox="0 0 120 9" fill="none" aria-hidden="true"><path d="M3 6 Q32 2 62 5 Q92 8 117 4" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
-        <p>Using large language models for research on CCLS infrastructure — examples, practices, budget sanity.</p>
+        <p>Using large language models for research on CCLS infrastructure — worked examples and practical guidance.</p>
       </a>
     </div>
   </section>
@@ -593,18 +588,18 @@
     <ul class="hand">
       <li>
         <svg class="tick" viewBox="0 0 19 13" fill="none" aria-hidden="true"><path d="M2 7 L7 11 L17 2" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        <h3>A home lab that keeps growing</h3>
-        <p>Self-hosted services, local LLM inference, own infrastructure, and more network gear than strictly necessary.</p>
+        <h3>Home lab</h3>
+        <p>Self-hosted services, local LLM inference, and my own network infrastructure.</p>
       </li>
       <li>
         <svg class="tick" viewBox="0 0 19 13" fill="none" aria-hidden="true"><path d="M2 7 L7 11 L17 2" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        <h3>Roasting my own coffee</h3>
-        <p>At home, on purpose. Yes, I have opinions about your pour-over.</p>
+        <h3>Coffee roasting</h3>
+        <p>Roasting my own beans at home.</p>
       </li>
       <li>
         <svg class="tick" viewBox="0 0 19 13" fill="none" aria-hidden="true"><path d="M2 7 L7 11 L17 2" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
         <h3>Photography &amp; gaming</h3>
-        <p>Chasing good light around Aachen; co-op whenever the group can agree on something.</p>
+        <p>Photography around Aachen, and co-op gaming when there is time.</p>
       </li>
     </ul>
   </section>
@@ -612,10 +607,10 @@
   <!-- ---------------- hello ---------------- -->
   <section id="hello">
     <div class="sect-head">
-      <h2>Say hello</h2>
+      <h2>Get in touch</h2>
       <svg viewBox="0 0 210 30" fill="none" aria-hidden="true"><path class="drawn" style="--l:230" d="M4 14 Q56 8 108 12 Q160 16 205 9" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round"/></svg>
     </div>
-    <p>No contact form — just pick whichever's easiest.</p>
+    <p>The quickest ways to reach me.</p>
     <div class="hello">
       <a href="mailto:mail@richardpolzin.com">
         <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 6.5 8.5 6 8.5-6"/></svg>
