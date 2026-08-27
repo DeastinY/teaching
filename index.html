@@ -65,9 +65,9 @@
     /* the whole page is built on this one unit — every vertical value is a
        multiple of it, which is what keeps text sitting on the ruled lines */
     --u: 2rem;            /* 30px at the 15px root — the whole grid scales with it */
-    /* every block of writing stops at the same place; what's left of the sheet
-       is a deliberate margin column, holding the photo and the coffee ring */
-    --measure: 32rem;
+    /* the column IS the measure — the sheet is sized so a comfortable line
+       length fills it, rather than leaving a reserved strip down the side */
+    --measure: 100%;
   }
   *{ box-sizing:border-box; }
   html{ scroll-behavior:smooth; font-size:15px; }
@@ -89,7 +89,7 @@
   .grain{ position:fixed; inset:0; pointer-events:none; z-index:0; opacity:.5; }
   a{ color:var(--accent); text-decoration:none; }
 
-  .stage{ position:relative; z-index:1; max-width:62rem; margin:0 auto; padding:4rem 1.9rem 8rem; }
+  .stage{ position:relative; z-index:1; max-width:54rem; margin:0 auto; padding:4rem 1.9rem 8rem; }
 
   /* ---------- the sheet ---------- */
   .sheet{
@@ -121,14 +121,21 @@
 
   /* ---------- header ---------- */
   header{ position:relative; padding-top:var(--u); }
+  /* sits beside the opening line, so the header reads as one block.
+     an explicit height keeps it on the grid now that it is in the flow. */
+  .head-row{ display:flex; gap:1.7rem; align-items:flex-start; margin-top:var(--u); }
+  .head-row .lead{ margin:0; flex:1 1 auto; }
   .photo{
-    position:absolute; right:-.4rem; top:0; width:11.3rem; transform:rotate(3.2deg);
-    padding:.6rem .6rem 0; background:oklch(99% .004 90);
+    position:static; flex:0 0 auto; width:9.7rem; height:calc(var(--u) * 5);
+    margin:0; transform:rotate(3.2deg);
+    padding:.5rem .5rem 0; background:oklch(99% .004 90);
     box-shadow:3px 5px 14px oklch(40% .01 68 / .18);
   }
-  .photo img{ display:block; width:100%; aspect-ratio:1/1; object-fit:cover; filter:grayscale(.6) contrast(1.05); }
+  .photo img{ height:calc(var(--u) * 4 - .5rem); }
+  .photo figcaption{ line-height:var(--u); }
+  .photo img{ display:block; width:100%; object-fit:cover; filter:grayscale(.6) contrast(1.05); }
   .photo figcaption{
-    font-family:'Caveat',cursive; font-size:1.27rem; line-height:2.5rem; text-align:center; color:var(--graphite-2);
+    font-family:'Caveat',cursive; font-size:1.27rem; text-align:center; color:var(--graphite-2);
   }
   .tape{
     position:absolute; top:-.87rem; left:50%; width:5.2rem; height:1.73rem; transform:translateX(-50%) rotate(-4deg);
@@ -143,7 +150,7 @@
   .role b{ color:var(--accent); font-weight:700; }
   .lead{
     font-family:'Caveat',cursive; font-weight:500; font-size:2.05rem; line-height:var(--u);
-    margin:var(--u) 0 0; max-width:22rem; color:oklch(34% .011 66);
+    margin:var(--u) 0 0; color:oklch(34% .011 66);
   }
   .lead em{ font-weight:600; color:var(--accent); }
 
@@ -169,11 +176,11 @@
      an image also drops the two live feTurbulence passes this used to cost. */
   .stain{
     position:absolute; pointer-events:none; mix-blend-mode:multiply;
-    width:17rem; height:17rem; right:.5rem; top:1rem;
+    width:15rem; height:15rem; right:-1.5rem; top:1.5rem;
     transform:rotate(-9deg);
   }
   /* a second, fainter mark where the cup was set down again */
-  .stain.small{ --stain-o:.72; width:8.5rem; height:8.5rem; right:11.5rem; top:10.5rem; transform:rotate(148deg); }
+  .stain.small{ --stain-o:.72; width:7.5rem; height:7.5rem; right:9rem; top:10rem; transform:rotate(148deg); }
 
   /* ---------- sections ---------- */
   section{ padding-top:calc(var(--u) * 2); position:relative; }
@@ -368,7 +375,7 @@
   }
 
   /* responsive */
-  @media (min-width:2200px){ .stage{ max-width:68rem; } }
+  @media (min-width:2200px){ .stage{ max-width:58rem; } }
   @media (max-width:1180px){ .tabs{ display:none; } }
   @media (max-width:820px){
     .stage{ padding:1.6rem .85rem 4.5rem; }
@@ -376,13 +383,8 @@
     .margin-rule{ left:2.2rem; }
     /* let it wrap on narrow phones, but only in whole grid steps */
     h1{ font-size:3.1rem; line-height:calc(var(--u) * 2); height:auto; white-space:normal; }
-    /* in flow on mobile, so its height has to land on the grid like everything else */
-    .photo{
-      position:static; width:9rem; height:calc(var(--u) * 5); padding:.5rem .5rem 0;
-      margin:0 0 var(--u); transform:rotate(-2deg);
-    }
-    .photo img{ aspect-ratio:auto; height:calc(var(--u) * 4 - .5rem); }
-    .photo figcaption{ line-height:var(--u); }
+    .head-row{ flex-direction:column; gap:0; }
+    .photo{ width:9rem; margin:var(--u) 0 0; transform:rotate(-2deg); }
     .lead{ font-size:1.3rem; }
     .entry{ padding-left:0; }
     .entry .yr{ position:static; width:auto; text-align:left; transform:none; display:block; font-size:1.3rem; }
@@ -461,15 +463,16 @@
   </svg>
 
   <header>
-    <figure class="photo reveal">
-      <span class="tape"></span>
-      <img src="./assets/images/my-avatar.png" alt="Richard Polzin">
-      <figcaption>me, mid-thought</figcaption>
-    </figure>
-
     <h1 class="reveal">Richard Polzin</h1>
     <p class="role reveal">AI Researcher · <b>JRC COMBINE</b> · Aachen, Germany</p>
-    <p class="lead reveal">I build models that notice an intensive-care patient going downhill <em>before the numbers make it obvious.</em></p>
+    <div class="head-row">
+      <p class="lead reveal">I build models that notice an intensive-care patient going downhill <em>before the numbers make it obvious.</em></p>
+      <figure class="photo reveal">
+        <span class="tape"></span>
+        <img src="./assets/images/my-avatar.png" alt="Richard Polzin">
+        <figcaption>me, mid-thought</figcaption>
+      </figure>
+    </div>
     <div class="note reveal">
       <b>Right now</b>Prepping an ICU oxygenation model for external validation, teaching Git to reluctant researchers, and expanding a home lab that has comfortably outgrown its rack.
     </div>
