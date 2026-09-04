@@ -4,7 +4,7 @@ theme: seriph
 colorSchema: dark
 # random image from a curated Unsplash collection by Anthony
 # like them? see https://unsplash.com/collections/94734566/slidev
-background: "./title.png"
+background: "./title.jpg"
 # some information about your slides (markdown enabled)
 title: Version Control for Researchers
 # apply unocss classes to the current slide

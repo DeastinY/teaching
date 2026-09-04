@@ -7,19 +7,19 @@
 <meta name="description" content="AI researcher turning healthcare data into better patient outcomes. Working at the intersection of machine learning, HPC, and computational biomedicine in Aachen, Germany.">
 <meta name="keywords" content="Richard Polzin, AI Researcher, Machine Learning, Computational Biomedicine, Predictive Modeling, HPC, Research Software Development, Synthetic Data">
 <meta name="author" content="Richard Polzin">
-<link rel="canonical" href="https://richardpolzin.com/">
+<link rel="canonical" href="https://www.richardpolzin.com/">
 
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://richardpolzin.com/">
+<meta property="og:url" content="https://www.richardpolzin.com/">
 <meta property="og:title" content="Richard Polzin — AI Researcher &amp; Computational Biomedicine">
 <meta property="og:description" content="AI researcher turning healthcare data into better patient outcomes. Machine learning, HPC, and computational biomedicine.">
-<meta property="og:image" content="https://richardpolzin.com/assets/images/my-avatar.png">
+<meta property="og:image" content="https://www.richardpolzin.com/assets/images/my-avatar.png">
 
 <meta property="twitter:card" content="summary_large_image">
-<meta property="twitter:url" content="https://richardpolzin.com/">
+<meta property="twitter:url" content="https://www.richardpolzin.com/">
 <meta property="twitter:title" content="Richard Polzin — AI Researcher &amp; Computational Biomedicine">
 <meta property="twitter:description" content="AI researcher turning healthcare data into better patient outcomes. Machine learning, HPC, and computational biomedicine.">
-<meta property="twitter:image" content="https://richardpolzin.com/assets/images/my-avatar.png">
+<meta property="twitter:image" content="https://www.richardpolzin.com/assets/images/my-avatar.png">
 
 <script type="application/ld+json">
 {
@@ -31,7 +31,7 @@
     "@type": "Organization",
     "name": "Joint Research Center of Computational Biomedicine (JRC COMBINE)"
   },
-  "url": "https://richardpolzin.com",
+  "url": "https://www.richardpolzin.com",
   "sameAs": [
     "https://github.com/DeastinY",
     "https://www.instagram.com/weird.coffee.person/"
@@ -442,7 +442,10 @@
   }
 
   /* responsive */
-  @media (min-width:2200px){ .stage{ max-width:58rem; } }
+  /* the cap has to stay centred: .tabs is fixed at 50% of the viewport, so a
+     left-aligned stage puts the card on the left and the tabs by themselves
+     out in the middle of a wide screen — 1340px apart at 3840. */
+  @media (min-width:2200px){ .stage{ max-width:58rem; margin-inline:auto; } }
   @media (max-width:1180px){ .tabs{ display:none; } }
   @media (max-width:820px){
     .page{ padding:2vh .85rem; }
