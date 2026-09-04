@@ -368,13 +368,25 @@
     to  { opacity:1; transform:rotate(3.2deg) translateY(0); }
   }
   @keyframes soak{ from{ opacity:0; } to{ opacity:var(--stain-o, 1); } }
-  /* the incoming sheet is laid down rather than cut to: it comes in a touch low,
-     over-rotated and lifted, and settles onto its resting angle. driven by the
-     scroll position itself, so it follows the reader's hand instead of firing on
-     a timer and finishing out of step with the scroll. */
-  @keyframes lay-down{
-    from{ transform:translateY(3.2vh) rotate(-1.9deg) scale(.978); }
-    to  { transform:translateY(0)     rotate(-.45deg) scale(1);    }
+  /* a sheet's trip through the pile: it comes forward from behind the stack,
+     sits square at the front to be read, then slides off to the side and
+     recedes behind again as the next one takes its place. the pile itself
+     never moves, so the index tabs stay tucked against its edge instead of
+     being left behind by a card that has scrolled away. */
+  /* The whole visible span has to fit inside one page's worth of scrolling, or
+     the next sheet starts fading up over the one still being read. Pages sit H
+     apart while this range is measured over cover, which is H + one viewport,
+     so the visible window must stay under H/(H+viewport) - 58% at these sizes.
+     20%-80% overlaps the neighbouring sheet by a hair, which is what stops the
+     desk blinking empty between cards, while the square, still stretch in the
+     middle stays well clear of its neighbour's - only ever one card to read. */
+  @keyframes through-pile{
+    0%,20%  { transform:translateX(9%)  rotate(2.4deg)  scale(.88); opacity:0;
+              pointer-events:none; }
+    36%,66% { transform:translateX(0)   rotate(-.45deg) scale(1);   opacity:1;
+              pointer-events:auto; }
+    80%,100%{ transform:translateX(10%) rotate(2.8deg)  scale(.86); opacity:0;
+              pointer-events:none; }
   }
   @keyframes tick-draw{ from{ stroke-dashoffset:34; } to{ stroke-dashoffset:0; } }
 
@@ -454,13 +466,30 @@
     .stain.small{ transform:rotate(14deg) !important; }
   }
 
+  /* ---------- the pile ----------
+     only where the index tabs are actually on screen, and only where the
+     browser can drive an animation from scroll position. everywhere else the
+     deck keeps its plain vertical scroll, which is a perfectly good fallback. */
   @supports (animation-timeline: view()){
-    @media (min-width:821px) and (prefers-reduced-motion:no-preference){
+    @media (min-width:1181px) and (prefers-reduced-motion:no-preference){
+      /* the section stops being a frame around the card and becomes pure scroll
+         length: it is what the card's trip through the pile is timed against. */
+      .page{
+        display:block; height:140svh; min-height:0; padding:0;
+        view-timeline-name:--page;
+        /* start-aligned: it puts the settled scroll position in the middle of
+           the card's square, still stretch rather than at the end of it */
+        scroll-snap-align:start;
+      }
+      /* fixed, so the pile is genuinely stationary - no sticky travel to leak
+         vertical movement back in at the ends of the range. */
       .page > .sheet{
-        animation:lay-down linear both;
-        animation-timeline:view();
-        /* settled well before the card is centred, so it is at rest while read */
-        animation-range:entry 5% entry 55%;
+        position:fixed; left:50%; top:50%;
+        width:min(47rem, calc(100vw - 3.8rem));
+        translate:-50% -50%;
+        animation:through-pile linear both;
+        animation-timeline:--page;
+        animation-range:cover 0% cover 100%;
       }
     }
   }
@@ -760,24 +789,26 @@
 
 <script>
 (function(){
-  // reveal on scroll
-  var io = new IntersectionObserver(function(es){
-    es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('reveal'); io.unobserve(e.target); } });
-  // fires while the card is still coming up rather than once it has arrived:
-  // with the deck snapping a whole page at a time, a -12% margin meant you
-  // landed on blank paper and waited out the sweep.
-  }, { rootMargin:'0px 0px 22% 0px' });
-  // the blocks inside each sheet — not the sheet itself, or a whole page
-  // would wipe in as one piece and the per-block draws would never fire.
-  // header children carry .reveal in the markup; the stain runs its own soak.
-  document.querySelectorAll('.sheet > *:not(.margin-rule):not(header):not(.stain)')
-    .forEach(function(el){ io.observe(el); });
+  // What gets watched is the section, never the card. In pile mode the cards are
+  // position:fixed, so they are all permanently in the viewport — observing them
+  // would fire every reveal at once on load. The sections stay in flow either
+  // way, so they are the honest signal for "this page is coming up".
+  var BLOCKS = '.sheet > *:not(.margin-rule):not(header):not(.stain)';
 
-  // draw the section underlines when they come into view
-  var io2 = new IntersectionObserver(function(es){
-    es.forEach(function(e){ if(e.isIntersecting){ e.target.style.animationPlayState='running'; io2.unobserve(e.target); } });
-  }, { rootMargin:'0px 0px 20% 0px' });
-  document.querySelectorAll('.drawn').forEach(function(el){ el.style.animationPlayState='paused'; io2.observe(el); });
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(!e.isIntersecting) return;
+      e.target.querySelectorAll(BLOCKS).forEach(function(el){ el.classList.add('reveal'); });
+      e.target.querySelectorAll('.drawn').forEach(function(el){ el.style.animationPlayState='running'; });
+      io.unobserve(e.target);
+    });
+  // fires while the page is still coming up rather than once it has arrived, so
+  // the writing lands with the card instead of trailing it.
+  }, { rootMargin:'0px 0px 22% 0px' });
+
+  // the underlines hold at their un-drawn state until their section is reached
+  document.querySelectorAll('.drawn').forEach(function(el){ el.style.animationPlayState='paused'; });
+  document.querySelectorAll('.page').forEach(function(el){ io.observe(el); });
 
   // highlight the current section in the index tabs
   var links = Array.prototype.slice.call(document.querySelectorAll('.tabs a'));
