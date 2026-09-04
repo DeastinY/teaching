@@ -8,6 +8,8 @@
 <meta name="keywords" content="Richard Polzin, AI Researcher, Machine Learning, Computational Biomedicine, Predictive Modeling, HPC, Research Software Development, Synthetic Data">
 <meta name="author" content="Richard Polzin">
 <link rel="canonical" href="https://www.richardpolzin.com/">
+<link rel="icon" href="./assets/favicon.svg" type="image/svg+xml">
+<meta name="theme-color" content="#e9e4db">
 
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://www.richardpolzin.com/">
@@ -453,7 +455,7 @@
      inline transforms - so the plain vertical deck is the fallback and there
      is no dependence on scroll-driven CSS, which Firefox still lacks. */
   .stage.pile .page{
-    display:block; height:140svh; min-height:0; padding:0;
+    display:block; height:200svh; min-height:0; padding:0;
     scroll-snap-align:start;
   }
   .stage.pile .page > .sheet{
@@ -822,26 +824,32 @@
         var sheet = page.querySelector('.sheet');
         gsap.set(sheet, { xPercent:-50, yPercent:-50, transformOrigin:'50% 55%' });
         return gsap.timeline({
-          scrollTrigger:{ trigger:page, start:'top bottom', end:'bottom top', scrub:.35 }
+          scrollTrigger:{ trigger:page, start:'top bottom', end:'bottom top', scrub:.6 }
         })
         // Surfacing out of the pile. fromTo with immediateRender, not a set()
         // at position 0: a scrubbed timeline is not rendered until its trigger
         // comes into range, so cards further down the page kept the
         // stylesheet's opacity and sat stacked on top of the one being read.
+        // the move and the fade are separate tweens on purpose: an out ease
+        // drives opacity almost to full in its first fifth, so the card used to
+        // arrive fast and then drift, which read as quick however far it moved.
+        // the fade runs flat while the move decelerates.
         .fromTo(sheet,
           { opacity:0, x:0, y:16, rotate:-2.6, scale:.93 },
-          { opacity:1, x:0, y:0, rotate:-.45, scale:1,
-            ease:'power3.out', duration:.17, immediateRender:true }, .20)
+          { x:0, y:0, rotate:-.45, scale:1,
+            ease:'power2.out', duration:.20, immediateRender:true }, .16)
+        .to(sheet, { opacity:1, ease:'none', duration:.15 }, .16)
         // square and still, to be read — and the only one taking clicks
-        .set(sheet, { pointerEvents:'auto' }, .37)
-        .to(sheet, { duration:.26 }, .37)
-        .set(sheet, { pointerEvents:'none' }, .63)
+        .set(sheet, { pointerEvents:'auto' }, .36)
+        .to(sheet, { duration:.28 }, .36)
+        .set(sheet, { pointerEvents:'none' }, .64)
         // slid off the top and tucked in behind
-        .to(sheet, { opacity:0, x:'23%', y:-10, rotate:6.5, scale:.9,
-                     ease:'power2.in', duration:.17 }, .63)
+        .to(sheet, { x:'-23%', y:-10, rotate:-6.5, scale:.9,
+                     ease:'power2.in', duration:.20 }, .64)
+        .to(sheet, { opacity:0, ease:'none', duration:.15 }, .69)
         // scrub maps the scroll range onto the timeline's real duration, so it
         // has to be padded to a full 1 or every position above is stretched
-        .to(sheet, { duration:.20 }, .80);
+        .to(sheet, { duration:.16 }, .84);
       });
       ScrollTrigger.refresh();
       return function(){
