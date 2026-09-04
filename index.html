@@ -29,10 +29,10 @@
   "jobTitle": "Postdoctoral Researcher",
   "worksFor": { "@type": "Organization", "name": "Joint Research Center of Computational Biomedicine (JRC COMBINE)" },
   "url": "https://www.richardpolzin.com",
-  "sameAs": ["https://github.com/DeastinY", "https://orcid.org/0000-0001-6831-3001"],
+  "sameAs": ["https://github.com/DeastinY", "https://orcid.org/0000-0001-6831-3001", "https://www.linkedin.com/in/richard-polzin/"],
   "identifier": "https://orcid.org/0000-0001-6831-3001",
   "address": { "@type": "PostalAddress", "addressLocality": "Aachen", "addressCountry": "Germany" },
-  "email": "mailto:mail@richardpolzin.com",
+  "email": "mailto:richard.polzin@posteo.de",
   "description": "AI researcher turning healthcare data into better patient outcomes through machine learning and computational biomedicine."
 }
 </script>
@@ -48,7 +48,7 @@
     --ink-2:     #4f4a42;
     --ink-3:     #6b6259;   /* 5.7:1 on the page ground — #857d72 measured 3.83 */
     --line:      #e5ded4;
-    --accent:    #a8503a;
+    --accent:    #9d4a35;   /* 5.7:1 on the ground, 5.0:1 inside the accent chip */
     --accent-lo: #f2e6e0;
     --data:      #4a6b76;
 
@@ -231,6 +231,31 @@
   .deck .go span{ display:inline-block; transition:transform .3s cubic-bezier(.2,.8,.3,1); }
   .deck:hover .go span{ transform:translateX(5px); }
 
+  /* ---------- open to ----------
+     the one part of the page with a ground of its own, because it is the thing
+     a visitor is most likely to have come to find out */
+  .open{ background:var(--bg-warm); border-top:1px solid var(--line); }
+  .open-grid{ display:grid; gap:clamp(1.5rem,3vw,3.5rem);
+              grid-template-columns:minmax(0,1fr); align-items:start; }
+  @media (min-width:900px){ .open-grid{ grid-template-columns:minmax(0,1.1fr) minmax(0,1fr); } }
+  .open h2{ font-size:clamp(1.8rem,1.3rem + 1.6vw,3rem); margin:0 0 1rem; }
+  .open p{ margin:0 0 1rem; color:var(--ink-2); font-size:clamp(1.02rem,.98rem + .3vw,1.28rem); max-width:44ch; }
+  .open p:last-of-type{ margin-bottom:0; }
+  .open .say{ color:var(--ink); font-weight:500; }
+  .tags{ display:flex; flex-wrap:wrap; gap:.5rem; margin:0; padding:0; list-style:none; }
+  .tags li{
+    padding:.42rem .85rem; border:1px solid var(--line); border-radius:99px;
+    background:var(--bg); font-size:.88rem; color:var(--ink-2);
+  }
+  .tags li.key{ border-color:var(--accent); color:var(--accent); font-weight:500; }
+
+  /* ---------- outside the lab ---------- */
+  .life{ display:grid; gap:var(--gap) clamp(2rem,4vw,4rem);
+         grid-template-columns:repeat(auto-fit,minmax(min(16rem,100%),1fr)); }
+  .life article h3{ font-size:clamp(1.08rem,1rem + .3vw,1.3rem); font-weight:500; margin:0 0 .45rem; }
+  .life article p{ margin:0; color:var(--ink-2); font-size:.96rem; }
+  .life .em{ font-size:1.9rem; line-height:1; display:block; margin-bottom:.75rem; }
+
   /* ---------- contact ---------- */
   .contact-grid{ display:grid; gap:var(--gap) clamp(2rem,5vw,5rem);
                  grid-template-columns:repeat(auto-fit,minmax(min(15rem,100%),1fr)); }
@@ -277,9 +302,9 @@
   <div class="shell">
     <div class="head rise"><h2>Right now</h2><span class="rule"></span></div>
     <dl class="now rise">
-      <div><dt>Research</dt><dd>Preparing an ICU oxygenation model for external validation.</dd></div>
-      <div><dt>Teaching</dt><dd>Version control and reproducible workflows for research groups.</dd></div>
-      <div><dt>Building</dt><dd>A home lab for local inference and self-hosted infrastructure.</dd></div>
+      <div><dt>Research</dt><dd>Getting an ICU oxygenation model ready for external validation — the real test of whether it travels.</dd></div>
+      <div><dt>Teaching</dt><dd>Version control and reproducible workflows, for research groups who never got taught them.</dd></div>
+      <div><dt>Building</dt><dd>A home lab for local inference, and a food-sharing site for Aachen on the side.</dd></div>
     </dl>
   </div>
 </section>
@@ -291,18 +316,41 @@
       <article class="rise">
         <span class="n">01</span>
         <h3>Predictive modelling for intensive care</h3>
-        <p>Time-series models that forecast oxygenation deterioration up to 72 hours ahead — the subject of my PhD and my current paper.</p>
+        <p>Time-series models that forecast oxygenation deterioration up to 72 hours ahead. Six years of my life, and the thing I still find most worth doing: buying a clinician time they did not have.</p>
       </article>
       <article class="rise">
         <span class="n">02</span>
         <h3>Accessible high-performance computing</h3>
-        <p>Supporting clinical research groups who have the data but not the cluster experience, through the NHR4CES Simulation and Data Lab.</p>
+        <p>Plenty of groups have the data and the question but not the cluster experience. Through the NHR4CES Simulation and Data Lab I help close that gap.</p>
       </article>
       <article class="rise">
         <span class="n">03</span>
         <h3>Open tools and materials</h3>
-        <p>Publishing the tools and teaching materials alongside the research, not only the papers.</p>
+        <p>The papers are the smallest part of what a project produces. I publish the tools and the teaching materials too — every workshop below is free to take and reuse.</p>
       </article>
+    </div>
+  </div>
+</section>
+
+<section class="open">
+  <div class="shell">
+    <div class="open-grid">
+      <div>
+        <h2 class="rise">Open to what's next</h2>
+        <p class="rise">I'm looking for the next thing — a role, a collaboration, or a project worth building. What I like most is the messy middle: real data, a real decision at the end of it, and a model that has to earn its place.</p>
+        <p class="rise say">If that sounds like something you're working on, <a href="mailto:richard.polzin@posteo.de">say hello</a>.</p>
+      </div>
+      <ul class="tags rise">
+        <li class="key">Machine learning</li>
+        <li class="key">LLMs &amp; applied AI</li>
+        <li class="key">Time-series forecasting</li>
+        <li>Clinical &amp; healthcare data</li>
+        <li>High-performance computing</li>
+        <li>Synthetic data</li>
+        <li>Research software</li>
+        <li>Python</li>
+        <li>Teaching &amp; mentoring</li>
+      </ul>
     </div>
   </div>
 </section>
@@ -342,6 +390,7 @@
       <div>
         <div class="head rise"><h2>Projects I'm part of</h2><span class="rule"></span></div>
         <ul class="entries rise">
+          <li><span class="yr">2025 →</span><strong><a href="https://fairteiler-aachen.de/">Fairteiler Aachen</a></strong><p>A site for Aachen's Fairteiler — the public shelves and fridges where anyone can leave food they won't get through and anyone can take what they need. Built and run in my own time.</p></li>
           <li><span class="yr">2023 →</span><strong><a href="https://www.edith-csa.eu/">EDITH CSA</a></strong><p>Charting the road from single-organ models to whole-body digital twins.</p></li>
           <li><span class="yr">2023 →</span><strong><a href="https://www.nhr4ces.de/simulation-and-data-labs/sdl-digital-patient/">SDL Digital Patient</a></strong><p>Bringing high-performance computing capability to healthcare research groups.</p></li>
           <li><span class="yr">2023 →</span><strong><a href="https://www.ccls.rwth-aachen.de/">CCLS</a></strong><p>RWTH's push to bring computational methods to the life sciences.</p></li>
@@ -354,9 +403,9 @@
 
 <section>
   <div class="shell">
-    <div class="head rise"><h2>Workshops I've run</h2><span class="count">Free to reuse</span><span class="rule"></span></div>
+    <div class="head rise"><h2>Workshops I've run</h2><span class="count">Free to take and reuse</span><span class="rule"></span></div>
     <div class="decks">
-      <a class="deck rise" href="version-control-for-researchers/" style="--tint:#f3e3dd;--tint-2:#a8503a">
+      <a class="deck rise" href="version-control-for-researchers/" style="--tint:#f3e3dd;--tint-2:#9d4a35">
         <span class="when">Nov 2025</span>
         <h3>Version Control for Researchers</h3>
         <p>A practical introduction to version control for research code: branching, collaboration, and a history you can actually retrace.</p>
@@ -386,11 +435,40 @@
 
 <section>
   <div class="shell">
+    <div class="head rise"><h2>Outside the lab</h2><span class="rule"></span></div>
+    <div class="life">
+      <article class="rise">
+        <span class="em">☕</span>
+        <h3>Roasting my own coffee</h3>
+        <p>Green beans, a roaster, and an ongoing argument with myself about how dark is too dark. It is the one process in my life I am happy to run without logging the parameters.</p>
+      </article>
+      <article class="rise">
+        <span class="em">🖥</span>
+        <h3>A home lab that keeps growing</h3>
+        <p>Self-hosted services, my own network, and local model inference — partly to keep my own data close, mostly because it is a good excuse to keep learning how things actually work.</p>
+      </article>
+      <article class="rise">
+        <span class="em">📷</span>
+        <h3>Photography around Aachen</h3>
+        <p>Walking the city with a camera, which is the best way I know to notice a place you think you already know well.</p>
+      </article>
+      <article class="rise">
+        <span class="em">🎮</span>
+        <h3>Co-op games, when there's time</h3>
+        <p>Preferably the kind you play with other people in the same room, or at least the same voice channel.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="shell">
     <div class="head rise"><h2>Get in touch</h2><span class="rule"></span></div>
     <dl class="contact-grid rise">
-      <a href="mailto:mail@richardpolzin.com"><dt>Email</dt><dd>mail@richardpolzin.com</dd></a>
+      <a href="mailto:richard.polzin@posteo.de"><dt>Email</dt><dd>richard.polzin@posteo.de</dd></a>
       <a href="https://signal.me/#eu/Lap7ZFK-xjpQbNY1eeTPpWOEQ_UPCA6zLsA0XzUoX0f7VOnZqrpB2bR3tXfJVOqD"><dt>Signal</dt><dd>Start a chat</dd></a>
       <a href="https://orcid.org/0000-0001-6831-3001"><dt>ORCID</dt><dd>0000-0001-6831-3001</dd></a>
+      <a href="https://www.linkedin.com/in/richard-polzin/"><dt>LinkedIn</dt><dd>richard-polzin</dd></a>
       <a href="https://github.com/DeastinY/"><dt>GitHub</dt><dd>github.com/DeastinY</dd></a>
       <div><dt>Where</dt><dd>Aachen, Germany</dd></div>
     </dl>
@@ -401,7 +479,7 @@
 
 <footer class="shell">
   <span>Richard Polzin — Aachen, Germany</span>
-  <span>Outside the lab: coffee roasting, photography, a home lab.</span>
+  <span>Built by hand · <a href="https://github.com/DeastinY/teaching">source on GitHub</a></span>
 </footer>
 
 <script src="./assets/js/vendor/gsap.min.js"></script>
@@ -447,7 +525,7 @@
           x === 0 ? cx.moveTo(x, y) : cx.lineTo(x, y);
         }
         var warm = i % 4 === 0;
-        cx.strokeStyle = warm ? 'rgba(168, 80, 58, .24)' : 'rgba(74, 107, 118, .19)';
+        cx.strokeStyle = warm ? 'rgba(157, 74, 53, .24)' : 'rgba(74, 107, 118, .19)';
         cx.lineWidth = warm ? 1.3 : .95;
         cx.stroke();
       }
