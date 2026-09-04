@@ -60,3 +60,12 @@ artifact. `git/`, `tools/` and `deploy.sh` are never published.
 ## License
 
 Workshop materials are shared for educational purposes. The HPC workshop includes content adapted from [HPC.NRW](https://hpc-wiki.info/hpc/HPC_Wiki) under CC-BY-SA license.
+
+## Why `.nojekyll`
+
+GitHub Pages runs Jekyll on a branch unless this file exists. That was
+applying the default Slate theme (generating a stray
+`/assets/css/style.css`) and, more importantly, silently dropping every
+path beginning with an underscore - Vite emits assets like
+`_plugin-vue_export-helper-*.js`, which would have broken the deck with no
+obvious cause. `.nojekyll` publishes the files exactly as built.
