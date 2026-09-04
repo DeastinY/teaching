@@ -3,10 +3,6 @@ CLAUDE.md
 # Dependencies
 node_modules/
 
-# Build outputs
-assets/css/style.min.css
-assets/js/script.min.js
-
 # Package files
 package.json
 package-lock.json
