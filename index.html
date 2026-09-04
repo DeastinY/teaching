@@ -368,26 +368,6 @@
     to  { opacity:1; transform:rotate(3.2deg) translateY(0); }
   }
   @keyframes soak{ from{ opacity:0; } to{ opacity:var(--stain-o, 1); } }
-  /* a sheet's trip through the pile: it comes forward from behind the stack,
-     sits square at the front to be read, then slides off to the side and
-     recedes behind again as the next one takes its place. the pile itself
-     never moves, so the index tabs stay tucked against its edge instead of
-     being left behind by a card that has scrolled away. */
-  /* The whole visible span has to fit inside one page's worth of scrolling, or
-     the next sheet starts fading up over the one still being read. Pages sit H
-     apart while this range is measured over cover, which is H + one viewport,
-     so the visible window must stay under H/(H+viewport) - 58% at these sizes.
-     20%-80% overlaps the neighbouring sheet by a hair, which is what stops the
-     desk blinking empty between cards, while the square, still stretch in the
-     middle stays well clear of its neighbour's - only ever one card to read. */
-  @keyframes through-pile{
-    0%,20%  { transform:translateX(9%)  rotate(2.4deg)  scale(.88); opacity:0;
-              pointer-events:none; }
-    36%,66% { transform:translateX(0)   rotate(-.45deg) scale(1);   opacity:1;
-              pointer-events:auto; }
-    80%,100%{ transform:translateX(10%) rotate(2.8deg)  scale(.86); opacity:0;
-              pointer-events:none; }
-  }
   @keyframes tick-draw{ from{ stroke-dashoffset:34; } to{ stroke-dashoffset:0; } }
 
   /* a soft-edged mask swept left to right: the block appears the way a line
@@ -467,31 +447,24 @@
   }
 
   /* ---------- the pile ----------
-     only where the index tabs are actually on screen, and only where the
-     browser can drive an animation from scroll position. everywhere else the
-     deck keeps its plain vertical scroll, which is a perfectly good fallback. */
-  @supports (animation-timeline: view()){
-    @media (min-width:1181px) and (prefers-reduced-motion:no-preference){
-      /* the section stops being a frame around the card and becomes pure scroll
-         length: it is what the card's trip through the pile is timed against. */
-      .page{
-        display:block; height:140svh; min-height:0; padding:0;
-        view-timeline-name:--page;
-        /* start-aligned: it puts the settled scroll position in the middle of
-           the card's square, still stretch rather than at the end of it */
-        scroll-snap-align:start;
-      }
-      /* fixed, so the pile is genuinely stationary - no sticky travel to leak
-         vertical movement back in at the ends of the range. */
-      .page > .sheet{
-        position:fixed; left:50%; top:50%;
-        width:min(47rem, calc(100vw - 3.8rem));
-        translate:-50% -50%;
-        animation:through-pile linear both;
-        animation-timeline:--page;
-        animation-range:cover 0% cover 100%;
-      }
-    }
+     GSAP drives the motion, so this only has to stack the cards on one spot.
+     The class is added by gsap.matchMedia() and taken off again on narrow
+     screens or when reduced motion is asked for, which also reverts the
+     inline transforms - so the plain vertical deck is the fallback and there
+     is no dependence on scroll-driven CSS, which Firefox still lacks. */
+  .stage.pile .page{
+    display:block; height:140svh; min-height:0; padding:0;
+    scroll-snap-align:start;
+  }
+  .stage.pile .page > .sheet{
+    position:fixed; left:50%; top:50%;
+    width:min(47rem, calc(100vw - 3.8rem));
+    will-change:transform, opacity;
+    /* every card sits on the same spot, so the seven that are not being read
+       would still swallow clicks - including the ones aimed at the index tabs
+       tucked under the card's right edge. The timeline hands this back to
+       whichever card is currently at the front. */
+    pointer-events:none;
   }
 
   /* responsive */
@@ -787,6 +760,8 @@
 </div>
 
 
+<script src="./assets/js/vendor/gsap.min.js"></script>
+<script src="./assets/js/vendor/ScrollTrigger.min.js"></script>
 <script>
 (function(){
   // What gets watched is the section, never the card. In pile mode the cards are
@@ -821,6 +796,61 @@
     });
   }, { rootMargin:'-45% 0px -50% 0px' });
   secs.forEach(function(s){ if(s) io3.observe(s); });
+
+  /* ---------- the pile ----------
+     Each sheet is dealt off the top of the stack: it rises out of the pile,
+     sits square and still to be read, then is slid off to the side and tucked
+     in behind while the next one surfaces. Scrubbed, so it is the reader's own
+     scrolling that moves the card, with a little lag so it settles rather than
+     tracking the wheel notch for notch.
+
+     The window in which a sheet is visible at all has to stay inside one
+     page's worth of scrolling. Pages sit H apart and this range spans H plus a
+     viewport, so the budget is H/(H+viewport) — 58% at these sizes. 20%-80%
+     spends 60% of it, overlapping the neighbouring sheet just enough that the
+     desk never blinks empty, while the still stretch in the middle stays well
+     clear of its neighbour's. */
+  if (!window.gsap || !window.ScrollTrigger) return;
+  gsap.registerPlugin(ScrollTrigger);
+
+  var stage = document.querySelector('.stage');
+  gsap.matchMedia().add(
+    '(min-width:1181px) and (prefers-reduced-motion:no-preference)',
+    function(){
+      stage.classList.add('pile');
+      var built = gsap.utils.toArray('.page').map(function(page){
+        var sheet = page.querySelector('.sheet');
+        gsap.set(sheet, { xPercent:-50, yPercent:-50, transformOrigin:'50% 55%' });
+        return gsap.timeline({
+          scrollTrigger:{ trigger:page, start:'top bottom', end:'bottom top', scrub:.35 }
+        })
+        // Surfacing out of the pile. fromTo with immediateRender, not a set()
+        // at position 0: a scrubbed timeline is not rendered until its trigger
+        // comes into range, so cards further down the page kept the
+        // stylesheet's opacity and sat stacked on top of the one being read.
+        .fromTo(sheet,
+          { opacity:0, x:0, y:16, rotate:-2.6, scale:.93 },
+          { opacity:1, x:0, y:0, rotate:-.45, scale:1,
+            ease:'power3.out', duration:.17, immediateRender:true }, .20)
+        // square and still, to be read — and the only one taking clicks
+        .set(sheet, { pointerEvents:'auto' }, .37)
+        .to(sheet, { duration:.26 }, .37)
+        .set(sheet, { pointerEvents:'none' }, .63)
+        // slid off the top and tucked in behind
+        .to(sheet, { opacity:0, x:'23%', y:-10, rotate:6.5, scale:.9,
+                     ease:'power2.in', duration:.17 }, .63)
+        // scrub maps the scroll range onto the timeline's real duration, so it
+        // has to be padded to a full 1 or every position above is stretched
+        .to(sheet, { duration:.20 }, .80);
+      });
+      ScrollTrigger.refresh();
+      return function(){
+        stage.classList.remove('pile');
+        built.forEach(function(tl){ if(tl.scrollTrigger) tl.scrollTrigger.kill(); tl.kill(); });
+        gsap.set('.page > .sheet', { clearProps:'all' });
+      };
+    }
+  );
 })();
 </script>
 </body>
