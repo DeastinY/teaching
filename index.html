@@ -3,24 +3,22 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Richard Polzin — AI Researcher &amp; Computational Biomedicine</title>
-<meta name="description" content="AI researcher turning healthcare data into better patient outcomes. Working at the intersection of machine learning, HPC, and computational biomedicine in Aachen, Germany.">
-<meta name="keywords" content="Richard Polzin, AI Researcher, Machine Learning, Computational Biomedicine, Predictive Modeling, HPC, Research Software Development, Synthetic Data">
+<title>Richard Polzin — AI Researcher, Computational Biomedicine</title>
+<meta name="description" content="AI researcher turning healthcare data into better patient outcomes. Machine learning, HPC and computational biomedicine in Aachen, Germany.">
 <meta name="author" content="Richard Polzin">
 <link rel="canonical" href="https://www.richardpolzin.com/">
 <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml">
-<meta name="theme-color" content="#e9e4db">
+<meta name="theme-color" content="#faf8f5">
 
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://www.richardpolzin.com/">
-<meta property="og:title" content="Richard Polzin — AI Researcher &amp; Computational Biomedicine">
-<meta property="og:description" content="AI researcher turning healthcare data into better patient outcomes. Machine learning, HPC, and computational biomedicine.">
+<meta property="og:title" content="Richard Polzin — AI Researcher, Computational Biomedicine">
+<meta property="og:description" content="AI researcher turning healthcare data into better patient outcomes. Machine learning, HPC and computational biomedicine.">
 <meta property="og:image" content="https://www.richardpolzin.com/assets/images/my-avatar.png">
-
 <meta property="twitter:card" content="summary_large_image">
 <meta property="twitter:url" content="https://www.richardpolzin.com/">
-<meta property="twitter:title" content="Richard Polzin — AI Researcher &amp; Computational Biomedicine">
-<meta property="twitter:description" content="AI researcher turning healthcare data into better patient outcomes. Machine learning, HPC, and computational biomedicine.">
+<meta property="twitter:title" content="Richard Polzin — AI Researcher, Computational Biomedicine">
+<meta property="twitter:description" content="AI researcher turning healthcare data into better patient outcomes.">
 <meta property="twitter:image" content="https://www.richardpolzin.com/assets/images/my-avatar.png">
 
 <script type="application/ld+json">
@@ -29,20 +27,11 @@
   "@type": "Person",
   "name": "Richard Polzin",
   "jobTitle": "Postdoctoral Researcher",
-  "worksFor": {
-    "@type": "Organization",
-    "name": "Joint Research Center of Computational Biomedicine (JRC COMBINE)"
-  },
+  "worksFor": { "@type": "Organization", "name": "Joint Research Center of Computational Biomedicine (JRC COMBINE)" },
   "url": "https://www.richardpolzin.com",
-  "sameAs": [
-    "https://github.com/DeastinY",
-    "https://www.instagram.com/weird.coffee.person/"
-  ],
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "Aachen",
-    "addressCountry": "Germany"
-  },
+  "sameAs": ["https://github.com/DeastinY", "https://orcid.org/0000-0001-6831-3001"],
+  "identifier": "https://orcid.org/0000-0001-6831-3001",
+  "address": { "@type": "PostalAddress", "addressLocality": "Aachen", "addressCountry": "Germany" },
   "email": "mailto:mail@richardpolzin.com",
   "description": "AI researcher turning healthcare data into better patient outcomes through machine learning and computational biomedicine."
 }
@@ -50,877 +39,451 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Kalam:wght@300;400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --desk:       oklch(92.4% 0.014 84);
-    --sheet:      oklch(97.6% 0.005 88);
-    --graphite:   oklch(40% 0.009 68);
-    --graphite-2: oklch(50% 0.011 68);
-    --graphite-3: oklch(61% 0.011 68);
-    --rule:       oklch(88% 0.011 72);
-    --margin-red: oklch(62% 0.085 34);
-    --accent:     oklch(50% 0.13 38);
-    --accent-soft:oklch(89% 0.048 44);
-    --coffee:     oklch(46% 0.021 54);
+    --bg:        #faf8f5;
+    --bg-warm:   #f4f0ea;
+    --ink:       #17150f;
+    --ink-2:     #4f4a42;
+    --ink-3:     #6b6259;   /* 5.7:1 on the page ground — #857d72 measured 3.83 */
+    --line:      #e5ded4;
+    --accent:    #a8503a;
+    --accent-lo: #f2e6e0;
+    --data:      #4a6b76;
 
-    /* the whole page is built on this one unit — every vertical value is a
-       multiple of it, which is what keeps text sitting on the ruled lines */
-    --u: 2rem;            /* 30px at the 15px root — the whole grid scales with it */
-    /* the column IS the measure — the sheet is sized so a comfortable line
-       length fills it, rather than leaving a reserved strip down the side */
-    --measure: 100%;
-    /* the one ramp both reveal sweeps ride on */
-    --sweep: linear-gradient(96deg, #000 45%, rgba(0,0,0,.45) 53%, transparent 60%);
-    /* the strip of margin a dated entry reaches back into. it is narrower
-       than the sheet's 8.8rem padding so the labels stay on the paper. */
-    --gutter: 8.3rem;
+    --measure: 62ch;
+    /* one ramp everything scales on, so the page grows into a 4K screen
+       instead of stranding a fixed-width column in the middle of it */
+    --gap:  clamp(1.25rem, 1.6vw, 2.25rem);
+    --pad:  clamp(1.25rem, 4.5vw, 5.5rem);
+    --shell: min(96rem, 100% - var(--pad) * 2);
   }
   *{ box-sizing:border-box; }
-  /* proximity, not mandatory: a full-viewport snap area with mandatory snapping
-     re-snaps on every wheel event, so incremental scrolling oscillated and was
-     dragged back to the page you started on - measured 15 direction reversals
-     and a return to y=0 even on a hard flick. proximity still settles the deck
-     on a card but never takes the scroll away from you. */
-  html{ scroll-behavior:smooth; font-size:15px; scroll-snap-type:y proximity; }
-  @media (min-width:1500px){ html{ font-size:16px; } }
-  @media (min-width:1800px){ html{ font-size:17px; } }
-  @media (min-width:2200px){ html{ font-size:18.5px; } }
-  @media (max-width:820px){ html{ font-size:14.5px; } }
-  @media (max-width:400px){ html{ font-size:13.5px; } }
-  /* the page has to fit the screen, so the whole scale follows the height too */
-  /* the root must stay on a half-pixel so --u (2rem) lands on a whole pixel;
-     a fractional unit re-introduces sub-pixel drift in the ruled grid */
-  @media (max-height:820px){ html{ font-size:14px; } }
-  @media (max-height:700px){ html{ font-size:13px; } }
-  @media (max-height:600px){ html{ font-size:12px; } }
+  html{ scroll-behavior:smooth; -webkit-text-size-adjust:100%; font-size:16px; }
+  @media (min-width:2200px){ html{ font-size:18px; } }
+  @media (min-width:3000px){ html{ font-size:21px; } }
+  @media (min-width:3600px){ html{ font-size:24px; } }
   body{
-    margin:0; background:var(--desk); color:var(--graphite);
-    font-family:'Kalam','Segoe Print',cursive; font-size:1.06rem; line-height:var(--u);
-    -webkit-font-smoothing:antialiased;
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
+    font-size:clamp(1rem, .96rem + .18vw, 1.14rem);
+    line-height:1.62; -webkit-font-smoothing:antialiased;
+    font-feature-settings:"kern","liga","cv05";
   }
-  body::after{ /* paper tooth */
-    content:''; position:fixed; inset:0; pointer-events:none; z-index:60;
-    mix-blend-mode:multiply; opacity:.36;
-    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
-  }
-  .grain{ position:fixed; inset:0; pointer-events:none; z-index:0; opacity:.5; }
-  a{ color:var(--accent); text-decoration:none; }
+  ::selection{ background:var(--accent-lo); color:var(--ink); }
+  a{ color:inherit; }
+  h1,h2,h3{ font-family:'Fraunces',Georgia,serif; font-weight:400; margin:0; letter-spacing:-.012em; }
+  .shell{ width:var(--shell); margin-inline:auto; }
 
-    .stage{ position:relative; z-index:1; pointer-events:none; }
-  .page{
-    min-height:100svh; display:flex; align-items:center; justify-content:center;
-    padding:3.5vh 1.9rem; scroll-snap-align:center;
-    /* the index tabs are deliberately painted *behind* .stage so they tuck under
-       the sheet, which also meant this transparent full-width section was
-       swallowing every click aimed at them. the desk lets clicks through; the
-       sheet takes them back, so nothing inside the card loses interactivity. */
-    pointer-events:none;
+  /* skip link — the page is long and keyboard users should not wade through it */
+  .skip{
+    position:absolute; left:-9999px; top:0; z-index:100;
+    background:var(--ink); color:var(--bg); padding:.7rem 1.1rem; border-radius:0 0 .5rem 0;
   }
-  .page > .sheet{ width:100%; max-width:47rem; pointer-events:auto; }
+  .skip:focus{ left:0; }
+  :focus-visible{ outline:2.5px solid var(--accent); outline-offset:3px; border-radius:2px; }
 
-  /* ---------- the sheet ---------- */
-  .sheet{
-    position:relative; background:var(--sheet);
-    border:1.6px solid var(--graphite);
-    border-radius:16px 7px 14px 9px / 9px 14px 7px 16px;
-    /* two sheets peeking out behind turn the card into a short deck */
-    box-shadow:
-      5px 6px 0 -1px var(--sheet), 5px 6px 0 0 oklch(83% .012 76),
-      10px 12px 0 -1px var(--sheet), 10px 12px 0 0 oklch(86% .012 76),
-      14px 20px 34px oklch(40% .01 68 / .15);
-    transform:rotate(-.45deg);
-    padding:var(--u) 4.25rem var(--u) 8.8rem;
-    /* every card the same height, so scrolling the deck does not resize the
-       sheet under you; short sections just carry more blank ruled paper */
-    min-height:calc(var(--u) * 22);
+  /* ---------- the signal field ----------
+     the visual language is the data he actually works on: physiological traces
+     drifting, and every so often fanning out the way a forecast does when the
+     model grows unsure. abstract enough to read as texture, not a chart. */
+  .field{
+    position:absolute; inset:0; width:100%; height:100%;
+    z-index:0; pointer-events:none;
   }
-  /* the ruling is its own layer so it can be drawn down the page on load.
-     z-index:-1 keeps it above the sheet's paper but under the writing. */
-  .sheet::after{
-    content:''; position:absolute; inset:0; z-index:-1; pointer-events:none;
-    background-image:repeating-linear-gradient(to bottom,
-      transparent 0 calc(var(--u) - 1px), var(--rule) calc(var(--u) - 1px) var(--u));
-    background-position:0 1.4rem;   /* sits the rule just under the body baseline, at any scale */
-    -webkit-mask-image:linear-gradient(#000 0 0); mask-image:linear-gradient(#000 0 0);
-    -webkit-mask-repeat:no-repeat;  mask-repeat:no-repeat;
-    -webkit-mask-size:100% 0%;      mask-size:100% 0%;
-    animation:rule-page 1.15s ease-out .12s forwards;
+  .hero{
+    position:relative; isolation:isolate;
+    min-height:clamp(34rem, 90svh, 60rem);
+    display:grid; align-items:center;
+    padding-block:clamp(4rem,10vh,9rem) clamp(3rem,7vh,6rem);
+    border-bottom:1px solid var(--line);
+    overflow:hidden;
   }
-  .sheet::before{ /* the line gone over twice */
-    content:''; position:absolute; inset:3px 2px 2px 3px; pointer-events:none;
-    border:1.1px solid var(--graphite); opacity:.26;
-    border-radius:14px 9px 16px 7px / 7px 16px 9px 14px;
+  .hero::after{ /* keeps the traces off the type */
+    content:''; position:absolute; inset:0; z-index:1; pointer-events:none;
+    background:radial-gradient(78% 62% at 21% 46%, var(--bg) 26%, transparent 74%);
   }
-  /* an SVG is a replaced element: with width + top + bottom all set, the used
-     height comes from the viewBox ratio and `bottom` is dropped, which ran the
-     rule far below the card. an explicit height keeps it inside the sheet. */
-  .margin-rule{ position:absolute; left:6.4rem; top:1.2rem; width:.55rem; height:calc(100% - 2.4rem); opacity:.5; }
+  .hero .shell{ position:relative; z-index:2; }
+  /* the radial clears a wide screen's type but not a narrow one's, where the
+     traces ran straight through the standfirst — fade them down the page instead */
+  @media (max-width:820px){
+    .hero::after{
+      background:linear-gradient(180deg, var(--bg) 3%, rgb(250 248 245 / .9) 48%,
+                                 rgb(250 248 245 / .4) 74%, transparent 100%);
+    }
+  }
+  .hero-grid{
+    display:grid; gap:var(--gap) clamp(2rem,5vw,6rem);
+    grid-template-columns:minmax(0,1fr);
+    align-items:end;
+  }
+  @media (min-width:900px){ .hero-grid{ grid-template-columns:minmax(0,1.55fr) minmax(0,.95fr); } }
 
-  /* ---------- header ---------- */
-  header{ position:relative; padding-top:var(--u); }
-  /* sits beside the opening line, so the header reads as one block.
-     an explicit height keeps it on the grid now that it is in the flow. */
-  .head-row{ display:flex; gap:1.7rem; align-items:flex-start; margin-top:var(--u); }
-  .head-row .lead{ margin:0; flex:1 1 auto; }
-  .photo{
-    position:static; flex:0 0 auto; width:9.7rem; height:calc(var(--u) * 4);
-    margin:0; transform:rotate(3.2deg);
-    padding:.5rem; background:oklch(99% .004 90);
-    box-shadow:3px 5px 14px oklch(40% .01 68 / .18);
+  .eyebrow{
+    font-size:clamp(.72rem,.68rem + .12vw,.82rem); font-weight:500;
+    letter-spacing:.16em; text-transform:uppercase; color:var(--ink-3);
+    margin:0 0 clamp(1.1rem,2.4vh,2rem);
   }
-  .photo img{ height:calc(var(--u) * 4 - 1rem); }
-  .photo img{ display:block; width:100%; object-fit:cover; filter:grayscale(.6) contrast(1.05); }
-  .tape{
-    position:absolute; top:-.87rem; left:50%; width:5.2rem; height:1.73rem; transform:translateX(-50%) rotate(-4deg);
-    background:oklch(88% .045 92 / .72); border-left:1px dashed oklch(78% .05 92); border-right:1px dashed oklch(78% .05 92);
-  }
+  .eyebrow b{ color:var(--accent); font-weight:600; }
   h1{
-    font-family:'Caveat',cursive; font-weight:700; font-size:4.9rem; line-height:calc(var(--u) * 3);
-    /* explicit height keeps the display face from knocking the grid off */
-    height:calc(var(--u) * 3); margin:0; color:oklch(31% .012 66); white-space:nowrap;
+    font-size:clamp(3.1rem, 1.6rem + 6.6vw, 11.5rem);
+    line-height:.94; letter-spacing:-.028em; font-weight:300;
+    margin:0 0 clamp(1.3rem,3vh,2.4rem);
   }
-  .role{ font-size:1rem; line-height:var(--u); margin:0; color:var(--graphite-2); letter-spacing:.01em; }
-  .role b{ color:var(--accent); font-weight:700; }
+  h1 em{ font-style:italic; font-weight:400; }
   .lead{
-    font-family:'Caveat',cursive; font-weight:500; font-size:2.05rem; line-height:var(--u);
-    margin:var(--u) 0 0; color:oklch(34% .011 66);
+    font-size:clamp(1.18rem, 1.02rem + .62vw, 1.9rem);
+    line-height:1.42; color:var(--ink-2); max-width:32ch; margin:0;
+    font-weight:400;
   }
-  .lead em{ font-weight:600; color:var(--accent); }
+  .lead b{ color:var(--ink); font-weight:500; }
+  .portrait{
+    justify-self:start; width:clamp(140px,15vw,220px); aspect-ratio:1;
+    border-radius:50%; overflow:hidden; border:1px solid var(--line);
+    background:var(--bg-warm);
+  }
+  @media (min-width:900px){ .portrait{ justify-self:end; } }
+  .portrait img{ width:100%; height:100%; object-fit:cover; display:block; filter:grayscale(.25) contrast(1.03); }
 
-  .note{
-    position:relative; margin:var(--u) 0 0; padding:calc(var(--u) / 2) 1.35rem; max-width:25rem;
-    transform:rotate(-1.1deg); font-size:.94rem; line-height:var(--u);
+  /* ---------- shared section furniture ---------- */
+  section{ padding-block:clamp(3.5rem,8vh,7rem); }
+  section + section{ border-top:1px solid var(--line); }
+  .head{
+    display:flex; align-items:baseline; gap:1rem; flex-wrap:wrap;
+    margin:0 0 clamp(2rem,4vh,3.4rem);
   }
-  .note::before{   /* the paper itself, so its edge can be torn without moving the text */
-    content:''; position:absolute; inset:0; z-index:-1;
-    background:oklch(95.5% .035 96);
-    box-shadow:2px 4px 11px oklch(40% .01 68 / .13);
-    filter:url(#roughEdge2);
-  }
-  /* the handwritten face gets its own line — mixed inline faces align on
-     different baselines and expand the line box off the 30px grid */
-  .note b{ display:block; font-family:'Caveat',cursive; font-size:1.47rem; line-height:var(--u); color:var(--accent); font-weight:600; }
+  .head h2{ font-size:clamp(1.6rem,1.2rem + 1.1vw,2.5rem); font-weight:400; letter-spacing:-.02em; }
+  .head .count{ font-size:.82rem; color:var(--ink-3); letter-spacing:.1em; text-transform:uppercase; }
+  .rule{ flex:1 1 4rem; height:1px; background:var(--line); }
 
-  /* ---------- coffee ring ----------
-     baked to a PNG by make_stain.py — the deposit is modelled on the coffee-ring
-     effect (evaporation drags the solute to the pinned contact line, so nearly
-     all of it lands in a narrow band at the rim and the middle stays clean).
-     multiply lets it tint the paper and the ruled lines rather than sit on top.
-     an image also drops the two live feTurbulence passes this used to cost. */
-  .stain{
-    position:absolute; pointer-events:none; mix-blend-mode:multiply;
-    width:15rem; height:15rem; right:-1.5rem; top:1.5rem;
-    transform:rotate(-9deg);
+  /* ---------- now ---------- */
+  .now{
+    display:grid; gap:var(--gap);
+    grid-template-columns:repeat(auto-fit,minmax(min(15rem,100%),1fr));
   }
-  /* a second, fainter mark where the cup was set down again */
-  .stain.small{ --stain-o:.72; width:7.5rem; height:7.5rem; right:9rem; top:10rem; transform:rotate(148deg); }
+  .now div{ padding-left:1.1rem; border-left:2px solid var(--accent-lo); }
+  .now dt{ font-size:.78rem; letter-spacing:.13em; text-transform:uppercase; color:var(--accent); margin:0 0 .5rem; font-weight:600; }
+  .now dd{ margin:0; color:var(--ink-2); }
 
-  /* ---------- sections ---------- */
-  .sheet > .sect-head:first-of-type{ margin-top:0; }
-  header{ position:relative; padding-top:0; }
-  .sect-head{ margin:0 0 var(--u); }
-  .sect-head h2{
-    font-family:'Caveat',cursive; font-weight:600; font-size:2.53rem; line-height:var(--u);
-    margin:0; color:oklch(32% .012 66);
-  }
-  .sect-head svg{ display:block; width:14rem; height:var(--u); }
-  p{ margin:0 0 var(--u); max-width:var(--measure); color:var(--graphite-2); }
+  /* ---------- work ---------- */
+  .work{ display:grid; gap:var(--gap) clamp(2rem,4vw,4rem);
+         grid-template-columns:repeat(auto-fit,minmax(min(19rem,100%),1fr)); }
+  .work article h3{ font-size:clamp(1.15rem,1.05rem + .35vw,1.5rem); margin:0 0 .55rem; font-weight:500; }
+  .work article p{ margin:0; color:var(--ink-2); }
+  .work .n{ display:block; font-family:'Fraunces',serif; font-size:.95rem; color:var(--accent); margin-bottom:.9rem; }
 
-  /* handwritten list */
-  ul.hand{ list-style:none; margin:0 0 var(--u); padding:0; }
-  ul.hand li{ position:relative; padding-left:2.15rem; margin:0 0 var(--u); max-width:var(--measure); }
-  ul.hand li:last-child{ margin-bottom:0; }
-  ul.hand h3{ font-size:1.12rem; font-weight:700; line-height:var(--u); margin:0; color:var(--graphite); }
-  ul.hand p{ margin:0; }
-  ul.hand .tick{ position:absolute; left:0; top:.6rem; width:1.27rem; height:.87rem; color:var(--accent); }
+  /* ---------- papers ---------- */
+  .paper{
+    display:grid; gap:.55rem clamp(1.5rem,3vw,3rem); padding-block:clamp(1.5rem,3vh,2.4rem);
+    border-top:1px solid var(--line); grid-template-columns:minmax(0,1fr);
+  }
+  .paper:first-of-type{ border-top:0; padding-top:0; }
+  @media (min-width:860px){ .paper{ grid-template-columns:9rem minmax(0,1fr); } }
+  .paper .when{ font-family:'Fraunces',serif; color:var(--ink-3); font-size:1.05rem; }
+  .paper .when .first{
+    display:inline-block; margin-top:.45rem; padding:.16rem .5rem; border-radius:99px;
+    background:var(--accent-lo); color:var(--accent); font-family:'Inter',sans-serif;
+    font-size:.66rem; letter-spacing:.09em; text-transform:uppercase; font-weight:600;
+  }
+  .paper h3{ font-size:clamp(1.12rem,1.02rem + .42vw,1.45rem); font-weight:400; line-height:1.32; margin:0; }
+  .paper h3 a{ text-decoration:none; background-image:linear-gradient(var(--accent),var(--accent));
+    background-size:0% 1px; background-repeat:no-repeat; background-position:0 100%;
+    transition:background-size .35s cubic-bezier(.4,0,.2,1); padding-bottom:2px; }
+  .paper h3 a:hover{ background-size:100% 1px; color:var(--accent); }
+  .paper .who{ margin:.15rem 0 0; color:var(--ink-3); font-size:.94rem; }
+  .paper .venue{ color:var(--data); font-weight:500; }
 
-  /* margin-dated entries.
-     the block has to physically contain its margin label: the reveal sweep masks
-     each block to its own box, and a label sitting outside that box (at a negative
-     offset) is masked away completely — which quietly deleted every year on the
-     page. so the box reaches back into the margin and the label sits inside it. */
-  .entry{
-    position:relative; max-width:none;
-    margin:0 0 var(--u) calc(var(--gutter) * -1); padding-left:var(--gutter);
-  }
-  .entry:last-child{ margin-bottom:0; }
-  .entry h3{ font-size:1.12rem; font-weight:700; line-height:var(--u); margin:0; }
-  .entry h3 a{ color:inherit; border-bottom:1.5px solid var(--accent-soft); }
-  .entry h3 a:hover{ color:var(--accent); border-color:var(--accent); }
-  .entry p{ margin:0; font-size:1.02rem; }
-  .entry .yr{
-    position:absolute; left:0; top:0; width:6.95rem; text-align:right;
-    font-family:'Caveat',cursive; font-size:1.4rem; line-height:var(--u); color:var(--accent);
-    transform:rotate(-1.6deg);
-  }
+  /* ---------- two-column list block ---------- */
+  .cols{ display:grid; gap:clamp(2.5rem,6vh,4.5rem) clamp(2.5rem,6vw,6rem);
+         grid-template-columns:repeat(auto-fit,minmax(min(21rem,100%),1fr)); }
+  .entries{ list-style:none; margin:0; padding:0; }
+  .entries li{ display:grid; gap:.15rem 1.4rem; padding-block:.85rem;
+               border-top:1px solid var(--line); grid-template-columns:6.5rem minmax(0,1fr); }
+  .entries li:first-child{ border-top:0; padding-top:0; }
+  .entries .yr{ font-family:'Fraunces',serif; color:var(--ink-3); font-size:.95rem; padding-top:.12rem; }
+  .entries strong{ font-weight:500; }
+  .entries p{ margin:.1rem 0 0; color:var(--ink-2); font-size:.95rem; grid-column:2; }
+  .entries a{ text-decoration:none; border-bottom:1px solid var(--line); transition:border-color .2s, color .2s; }
+  .entries a:hover{ color:var(--accent); border-color:var(--accent); }
 
-  /* publications */
-  .pub{
-    position:relative; max-width:none;
-    margin:0 0 var(--u) calc(var(--gutter) * -1); padding-left:var(--gutter);
+  /* ---------- teaching ---------- */
+  .decks{ display:grid; gap:var(--gap);
+          grid-template-columns:repeat(auto-fit,minmax(min(17rem,100%),1fr)); }
+  .deck{
+    position:relative; display:flex; flex-direction:column; gap:.5rem;
+    padding:clamp(1.25rem,2vw,1.9rem); border:1px solid var(--line); border-radius:14px;
+    background:var(--bg); text-decoration:none; overflow:hidden;
+    transition:border-color .3s, transform .3s cubic-bezier(.2,.8,.3,1), box-shadow .3s;
   }
-  .pub h3{ font-size:1.12rem; font-weight:700; line-height:var(--u); margin:0; }
-  .pub h3 a{ color:inherit; border-bottom:1.5px solid var(--accent-soft); }
-  .pub h3 a:hover{ color:var(--accent); border-color:var(--accent); }
-  .pub .meta{ margin:0; font-size:.98rem; line-height:var(--u); color:var(--graphite-3); }
-  .pub .meta b{ color:var(--accent); font-weight:700; }
-  .flag{
-    position:absolute; left:0; top:var(--u); width:7.3rem; text-align:right;
-    font-family:'Caveat',cursive; font-size:1.33rem; line-height:1.75rem; color:var(--accent);
-    transform:rotate(-7deg);
+  .deck::before{ /* the tile lights from its own accent on approach */
+    content:''; position:absolute; inset:0; z-index:0; opacity:0;
+    background:radial-gradient(85% 70% at 12% 0%, var(--tint), transparent 70%);
+    transition:opacity .35s;
   }
-  .flag svg{ display:block; margin-left:auto; width:2.95rem; height:1.47rem; }
+  .deck > *{ position:relative; z-index:1; }
+  .deck:hover{ transform:translateY(-4px); border-color:var(--tint-2); box-shadow:0 14px 34px rgb(23 21 15 / .07); }
+  .deck:hover::before{ opacity:1; }
+  .deck .when{ font-size:.72rem; letter-spacing:.13em; text-transform:uppercase; color:var(--tint-2); font-weight:600; }
+  .deck h3{ font-size:clamp(1.1rem,1rem + .35vw,1.35rem); font-weight:500; line-height:1.25; }
+  .deck p{ margin:0; color:var(--ink-2); font-size:.93rem; }
+  .deck .go{ margin-top:auto; padding-top:.9rem; font-size:.86rem; color:var(--tint-2); font-weight:500; }
+  .deck .go span{ display:inline-block; transition:transform .3s cubic-bezier(.2,.8,.3,1); }
+  .deck:hover .go span{ transform:translateX(5px); }
 
-  /* workshop cards */
-  .cards{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:var(--u); }
-  /* a grid multiple as a floor, not a ceiling: the row still lands on the
-     ruling, but longer copy grows the box instead of spilling out of it */
-  .wk{
-    position:relative; display:block; min-height:calc(var(--u) * 7); color:inherit;
-    padding:1.15rem 1.4rem; transition:transform .18s ease;
-  }
-  /* the box is drawn, not printed: a border-only layer gets the wobble so the
-     text inside stays crisp — filtering the card itself would smear the words */
-  .wk::before{
-    content:''; position:absolute; inset:0; pointer-events:none;
-    border:1.7px solid var(--graphite);
-    border-radius:14px 6px 12px 8px / 8px 12px 6px 14px;
-    filter:url(#roughEdge);
-  }
-  .wk::after{           /* gone round a second time, as you do */
-    content:''; position:absolute; inset:3px 2px 2px 3px; pointer-events:none;
-    border:1.1px solid var(--graphite); opacity:.32;
-    border-radius:12px 8px 14px 6px / 6px 14px 8px 12px;
-    filter:url(#roughEdge2);
-  }
-  .wk:nth-child(odd){ transform:rotate(-.7deg); }
-  .wk:nth-child(even){ transform:rotate(.55deg); }
-  .wk:hover{ transform:rotate(0deg) translateY(-3px); }
-  .wk .mark{ display:block; width:1.85rem; height:1.85rem; color:var(--wk,var(--accent)); filter:url(#roughInk); }
-  .wk .kicker{ font-size:.78rem; letter-spacing:.09em; text-transform:uppercase; color:var(--wk,var(--accent)); font-weight:600; margin:.35rem 0 0; line-height:1.35rem; }
-  .wk h3{ font-family:'Caveat',cursive; font-size:1.9rem; line-height:1.95rem; margin:.1rem 0 0; color:oklch(30% .012 66); }
-  .wk .swash{ display:block; width:7.5rem; height:.55rem; margin:.15rem 0 .45rem; color:var(--wk,var(--accent)); }
-  .wk p{ font-size:.95rem; line-height:1.35rem; margin:0; color:var(--graphite-2); }
+  /* ---------- contact ---------- */
+  .contact-grid{ display:grid; gap:var(--gap) clamp(2rem,5vw,5rem);
+                 grid-template-columns:repeat(auto-fit,minmax(min(15rem,100%),1fr)); }
+  .contact-grid a, .contact-grid div{ text-decoration:none; display:block; }
+  .contact-grid dt{ font-size:.72rem; letter-spacing:.13em; text-transform:uppercase; color:var(--ink-3); margin-bottom:.4rem; font-weight:500; }
+  .contact-grid dd{ margin:0; font-size:clamp(1rem,.95rem + .2vw,1.14rem); }
+  .contact-grid a dd{ display:inline-block; border-bottom:1px solid var(--line); transition:border-color .2s,color .2s; }
+  .contact-grid a:hover dd{ color:var(--accent); border-color:var(--accent); }
 
-  /* contact */
-  .hello{ display:flex; flex-direction:column; max-width:var(--measure); }
-  .hello a, .hello div{ display:flex; align-items:center; gap:1.05rem; padding:0; height:calc(var(--u) * 2); color:inherit; }
-  .hello .ic{ width:1.35rem; height:1.35rem; color:var(--accent); flex:none; }
-  .hello .k{ font-size:.78rem; letter-spacing:.1em; text-transform:uppercase; color:var(--graphite-3); width:5.2rem; flex:none; }
-  .hello .v{ font-size:1.16rem; font-weight:700; }
-  .hello a:hover .v{ color:var(--accent); }
+  footer{ padding-block:clamp(2.5rem,5vh,4rem); border-top:1px solid var(--line);
+          color:var(--ink-3); font-size:.86rem; display:flex; gap:1rem; flex-wrap:wrap; justify-content:space-between; }
 
-  /* coloured markers slipped between the sheets: each one is tucked under the
-     card's right edge and only its tail shows, so they read as index tabs */
-  .tabs{
-    position:fixed; top:50%; transform:translateY(-50%);
-    /* 23.5rem is the sheet's half-width. the slab starts behind the sheet so
-       only its tail shows, but the tuck has to stay well under .tabs a's own
-       3.5rem padding-left, or the deck shadow eats the first letter. */
-    left:calc(50% + 23.5rem - 2.2rem);
-    z-index:0; display:flex; flex-direction:column; gap:.6rem;
-  }
-  .tabs a{
-    position:relative; display:block;
-    padding:.44rem 1.05rem .44rem 3.5rem;
-    font-family:'Caveat',cursive; font-size:1.2rem; line-height:1;
-    color:oklch(34% .06 var(--h));
-    transition:transform .18s cubic-bezier(.3,.9,.4,1), color .18s ease;
-  }
-  .tabs a::before{
-    content:''; position:absolute; inset:0; z-index:-1;
-    background:oklch(87% .085 var(--h) / .95);
-    border:1.3px solid oklch(60% .1 var(--h) / .75);
-    border-radius:.12rem .65rem .65rem .12rem;
-    box-shadow:2px 2px 6px oklch(40% .01 68 / .17);
-    /* deliberately unfiltered: .tabs is position:fixed, so a turbulence filter
-       here re-rasterises on every scroll frame. the uneven radius is enough. */
-  }
-  .tabs a:nth-child(1){ --h:38;  }
-  .tabs a:nth-child(2){ --h:145; }
-  .tabs a:nth-child(3){ --h:250; }
-  .tabs a:nth-child(4){ --h:305; }
-  .tabs a:nth-child(5){ --h:75;  }
-  .tabs a:nth-child(6){ --h:195; }
-  .tabs a:nth-child(7){ --h:15;  }
-  .tabs a:nth-child(8){ --h:110; }
-  .tabs a:nth-child(odd){ transform:translateX(0) rotate(-.8deg); }
-  .tabs a:nth-child(even){ transform:translateX(-.15rem) rotate(.6deg); }
-  .tabs a:hover{ transform:translateX(.7rem) rotate(0deg); color:oklch(28% .09 var(--h)); }
-  .tabs a.on{ transform:translateX(1.15rem) rotate(0deg); color:oklch(26% .1 var(--h)); }
-  .tabs a.on::before{ background:oklch(83% .12 var(--h) / .97); border-color:oklch(54% .13 var(--h) / .85); }
-
-  /* ---------- motion ----------
-     one orchestrated load: the page rules itself, the name is written on,
-     then the pinned photo drops in and the ink soaks through. */
-  @keyframes rise{ from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:translateY(0);} }
-  @keyframes scribe{ from{ -webkit-mask-position:100% 0; mask-position:100% 0; }
-                     to  { -webkit-mask-position:0% 0;   mask-position:0% 0;   } }
-  @keyframes rule-page{ to{ -webkit-mask-size:100% 100%; mask-size:100% 100%; } }
-  @keyframes draw-box{ to{ -webkit-mask-size:100% 100%; mask-size:100% 100%; } }
-  @keyframes draw{ to{ stroke-dashoffset:0; } }
-  @keyframes fade{ from{opacity:0;} to{opacity:1;} }
-  @keyframes write{
-    from{ clip-path:inset(-25% 102% -25% -3%); }
-    to  { clip-path:inset(-25% -3% -25% -3%); }
-  }
-  @keyframes tape-in{
-    from{ opacity:0; transform:rotate(7deg) translateY(-22px); }
-    to  { opacity:1; transform:rotate(3.2deg) translateY(0); }
-  }
-  @keyframes soak{ from{ opacity:0; } to{ opacity:var(--stain-o, 1); } }
-  @keyframes tick-draw{ from{ stroke-dashoffset:34; } to{ stroke-dashoffset:0; } }
-
-  /* a soft-edged mask swept left to right: the block appears the way a line
-     of handwriting does, rather than fading up as a whole.
-     the sweep angle has to stay near-horizontal. a gradient's length is
-     |W·sin| + |H·cos|, so a steep angle makes the ramp depend on the block's
-     height: tall blocks finished with their bottom-right still inside the
-     transparent tail and stayed faded for good. 96deg keeps a slight slant
-     while making the end state opaque for any height up to 6x the width. */
-  .reveal{
-    -webkit-mask-image:var(--sweep); mask-image:var(--sweep);
-    -webkit-mask-size:300% 100%; mask-size:300% 100%;
-    -webkit-mask-repeat:no-repeat; mask-repeat:no-repeat;
-    animation:scribe .58s cubic-bezier(.4,.1,.3,1) both;
-  }
-  .drawn{ stroke-dasharray:var(--l,240); stroke-dashoffset:var(--l,240); animation:draw .7s ease-out .1s forwards; }
-
-  /* the red margin rule is ruled down the page first */
-  .margin-rule path{ stroke-dasharray:1400; stroke-dashoffset:1400; animation:draw 1.3s ease-out .05s forwards; }
-  /* then the name is written across */
-  h1.reveal{
-    -webkit-mask-image:none; mask-image:none;
-    animation:write 1.05s cubic-bezier(.62,.05,.3,1) .5s both;
-  }
-  /* the photo is taped on afterwards */
-  .photo.reveal{
-    -webkit-mask-image:none; mask-image:none;
-    animation:tape-in .65s cubic-bezier(.2,.85,.3,1.08) 1.5s both;
-  }
-  /* ticks get checked off one at a time as each list scrolls in.
-     the hidden state lives on .reveal, so they stay visible if this never runs */
-  ul.hand.reveal .tick path{ stroke-dasharray:34; animation:tick-draw .4s ease-out both; }
-  ul.hand.reveal li:nth-child(1) .tick path{ animation-delay:.18s; }
-  ul.hand.reveal li:nth-child(2) .tick path{ animation-delay:.34s; }
-  ul.hand.reveal li:nth-child(3) .tick path{ animation-delay:.5s; }
-  header .role.reveal{ animation-delay:1.02s; }
-  header .lead.reveal{ animation-delay:1.2s; }
-  header .note.reveal{ animation-delay:1.55s; }
-
-  /* the boxes get drawn round rather than appearing */
-  .cards.reveal{ -webkit-mask-image:none; mask-image:none; animation:none; }
-  .cards.reveal .wk::before, .cards.reveal .wk::after{
-    -webkit-mask-image:linear-gradient(#000 0 0); mask-image:linear-gradient(#000 0 0);
-    -webkit-mask-repeat:no-repeat; mask-repeat:no-repeat;
-    -webkit-mask-size:0% 100%; mask-size:0% 100%;
-    animation:draw-box .65s ease-out both;
-  }
-  .cards.reveal .wk{ animation:scribe .55s cubic-bezier(.4,.1,.3,1) both;
-    -webkit-mask-image:var(--sweep); mask-image:var(--sweep);
-    -webkit-mask-size:300% 100%; mask-size:300% 100%; -webkit-mask-repeat:no-repeat; mask-repeat:no-repeat; }
-  .cards.reveal .wk:nth-child(1), .cards.reveal .wk:nth-child(1)::before, .cards.reveal .wk:nth-child(1)::after{ animation-delay:.05s; }
-  .cards.reveal .wk:nth-child(2), .cards.reveal .wk:nth-child(2)::before, .cards.reveal .wk:nth-child(2)::after{ animation-delay:.19s; }
-  .cards.reveal .wk:nth-child(3), .cards.reveal .wk:nth-child(3)::before, .cards.reveal .wk:nth-child(3)::after{ animation-delay:.33s; }
-  .cards.reveal .wk:nth-child(4), .cards.reveal .wk:nth-child(4)::before, .cards.reveal .wk:nth-child(4)::after{ animation-delay:.47s; }
-
-  /* the coffee soaks in rather than popping */
-  .stain{ animation:soak 1.9s ease-out 1.9s both; }
-  /* divider tabs settle in last */
-  .tabs a{ animation:fade .5s ease-out both; }
-  .tabs a:nth-child(1){ animation-delay:1.9s; } .tabs a:nth-child(2){ animation-delay:1.97s; }
-  .tabs a:nth-child(3){ animation-delay:2.04s; } .tabs a:nth-child(4){ animation-delay:2.11s; }
-  .tabs a:nth-child(5){ animation-delay:2.18s; } .tabs a:nth-child(6){ animation-delay:2.25s; }
-  .tabs a:nth-child(7){ animation-delay:2.32s; } .tabs a:nth-child(8){ animation-delay:2.39s; }
-
+  /* ---------- motion ---------- */
+  .rise{ opacity:0; transform:translateY(18px); }
   @media (prefers-reduced-motion:reduce){
     html{ scroll-behavior:auto; }
-    .reveal,.drawn,.stain,.tabs a,.margin-rule path,ul.hand .tick path,h1.reveal,.photo.reveal,
-    .sheet::after,.cards.reveal .wk,.cards.reveal .wk::before,.cards.reveal .wk::after{
-      animation:none !important; opacity:1 !important; stroke-dashoffset:0 !important;
-      clip-path:none !important; transform:none !important;
-      -webkit-mask-image:none !important; mask-image:none !important;
-      -webkit-mask-size:auto !important; mask-size:auto !important;
-    }
-    .photo{ transform:rotate(3.2deg) !important; }
-    .stain{ transform:rotate(-9deg) !important; }
-    .stain.small{ transform:rotate(14deg) !important; }
-  }
-
-  /* ---------- the pile ----------
-     GSAP drives the motion, so this only has to stack the cards on one spot.
-     The class is added by gsap.matchMedia() and taken off again on narrow
-     screens or when reduced motion is asked for, which also reverts the
-     inline transforms - so the plain vertical deck is the fallback and there
-     is no dependence on scroll-driven CSS, which Firefox still lacks. */
-  .stage.pile .page{
-    display:block; height:200svh; min-height:0; padding:0;
-    scroll-snap-align:start;
-  }
-  .stage.pile .page > .sheet{
-    position:fixed; left:50%; top:50%;
-    width:min(47rem, calc(100vw - 3.8rem));
-    will-change:transform, opacity;
-    /* every card sits on the same spot, so the seven that are not being read
-       would still swallow clicks - including the ones aimed at the index tabs
-       tucked under the card's right edge. The timeline hands this back to
-       whichever card is currently at the front. */
-    pointer-events:none;
-  }
-
-  /* responsive */
-  /* the cap has to stay centred: .tabs is fixed at 50% of the viewport, so a
-     left-aligned stage puts the card on the left and the tabs by themselves
-     out in the middle of a wide screen — 1340px apart at 3840. */
-  @media (min-width:2200px){ .stage{ max-width:58rem; margin-inline:auto; } }
-  /* Below the width where the markers can tuck against the card there was no
-     navigation at all - the only way to reach the last section was to scroll
-     the whole deck. They lie flat along the bottom instead, which also keeps
-     them attached to something rather than floating beside a moving card. */
-  @media (max-width:1180px){
-    .tabs{
-      top:auto; bottom:0; left:0; right:0; transform:none;
-      flex-direction:row; justify-content:flex-start; gap:.3rem;
-      padding:.4rem .7rem calc(.4rem + env(safe-area-inset-bottom,0px));
-      overflow-x:auto; overscroll-behavior-x:contain;
-      scrollbar-width:none;
-      background:oklch(92.4% .014 84 / .93);
-      border-top:1.2px solid oklch(84% .012 76);
-      z-index:50; pointer-events:auto;
-    }
-    .tabs::-webkit-scrollbar{ display:none; }
-    .tabs a{
-      flex:0 0 auto; padding:.26rem .62rem; font-size:1rem; line-height:1.35;
-    }
-    .tabs a::before{ border-radius:.45rem; }
-    .tabs a:nth-child(odd), .tabs a:nth-child(even){ transform:none; }
-    .tabs a:hover, .tabs a.on{ transform:translateY(-2px); }
-  }
-  @media (max-width:820px){
-    .page{ padding:2vh .85rem calc(2vh + 3rem); }
-    .sheet{ transform:none; padding:var(--u) 1.35rem calc(var(--u) * 2) 3.6rem; min-height:0; }
-    .margin-rule{ left:2.2rem; }
-    /* let it wrap on narrow phones, but only in whole grid steps */
-    h1{ font-size:3.1rem; line-height:calc(var(--u) * 2); height:auto; white-space:normal; }
-    .head-row{ flex-direction:column; gap:0; }
-    .photo{ width:9rem; margin:var(--u) 0 0; transform:rotate(-2deg); }
-    .lead{ font-size:1.3rem; }
-    .entry, .pub{ margin-left:0; padding-left:0; }
-    .entry .yr{ position:static; width:auto; text-align:left; transform:none; display:block; font-size:1.3rem; }
-    /* inline here, so it has to occupy whole grid steps like everything else */
-    .flag{ display:block; position:static; width:auto; text-align:left; transform:none; margin:0; line-height:var(--u); }
-    .flag svg{ display:none; }
-    /* two columns leave ~150px per card on a phone: the copy overflowed the
-       drawn boxes and ran across the cards below. one column at a time here. */
-    .cards{ max-width:none; grid-template-columns:1fr; }
-    .wk{ min-height:0; }
-    .wk:nth-child(odd), .wk:nth-child(even){ transform:none; }
-    .hello .k{ width:4.3rem; }
-  }
-  @media (max-width:430px){
-    /* the contact value gets its own line rather than pushing the row sideways —
-       two 1u lines still add up to the row's 2u height */
-    /* row-gap would be added between the wrapped lines and spill the row
-       into the next one, so the gap stays horizontal only */
-    .hello a, .hello div{ flex-wrap:wrap; align-content:center; row-gap:0; column-gap:1.05rem; }
-    .hello .k{ width:auto; line-height:var(--u); }
-    .hello .v{ flex:0 0 100%; font-size:1rem; line-height:var(--u); }
-  }
-  @media (max-width:820px){
-    /* the column is narrow here, so the ring pulls back to the corner and
-       lightens rather than sitting across the writing */
-    .stain{ --stain-o:.6; width:10.5rem; height:10.5rem; right:.7rem; top:auto; bottom:.7rem; }
-    .stain.small{ display:none; }
+    .rise{ opacity:1 !important; transform:none !important; }
+    .deck, .deck::before, .deck .go span{ transition:none !important; }
   }
 </style>
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
 
-<svg class="filters" width="0" height="0" aria-hidden="true" style="position:absolute">
-  <defs>
-    <!-- nudges every pixel by a little noise, so a straight border stops being straight -->
-    <filter id="roughEdge" x="-6%" y="-6%" width="112%" height="112%">
-      <feTurbulence type="fractalNoise" baseFrequency=".021" numOctaves="3" seed="7" result="n"/>
-      <feDisplacementMap in="SourceGraphic" in2="n" scale="3.4" xChannelSelector="R" yChannelSelector="G"/>
-    </filter>
-    <filter id="roughEdge2" x="-6%" y="-6%" width="112%" height="112%">
-      <feTurbulence type="fractalNoise" baseFrequency=".029" numOctaves="3" seed="29" result="n"/>
-      <feDisplacementMap in="SourceGraphic" in2="n" scale="2.6" xChannelSelector="R" yChannelSelector="G"/>
-    </filter>
-    <filter id="roughInk" x="-12%" y="-12%" width="124%" height="124%">
-      <feTurbulence type="fractalNoise" baseFrequency=".07" numOctaves="2" seed="13" result="n"/>
-      <feDisplacementMap in="SourceGraphic" in2="n" scale="1.1" xChannelSelector="R" yChannelSelector="G"/>
-    </filter>
-  </defs>
-</svg>
-
-<svg class="grain" width="100%" height="100%" preserveAspectRatio="none" viewBox="0 0 1440 900" aria-hidden="true">
-  <g fill="none" stroke="oklch(85% .015 72)" stroke-width="1.5" stroke-linecap="round">
-    <path d="M-20 78 Q360 70 720 82 Q1080 92 1460 76"/>
-    <path d="M-20 232 Q340 242 700 228 Q1060 216 1460 236"/>
-    <path d="M-20 386 Q380 374 740 390 Q1100 402 1460 382"/>
-    <path d="M-20 540 Q340 552 720 536 Q1080 524 1460 544"/>
-    <path d="M-20 694 Q380 682 760 698 Q1100 710 1460 690"/>
-    <path d="M-20 848 Q360 860 700 844 Q1080 832 1460 852"/>
-  </g>
-</svg>
-
-<nav class="tabs" aria-label="Sections">
-  <a href="#intro">intro</a>
-  <a href="#work">work</a>
-  <a href="#papers">papers</a>
-  <a href="#background">background</a>
-  <a href="#projects">projects</a>
-  <a href="#teaching">teaching</a>
-  <a href="#outside">outside</a>
-  <a href="#contact">contact</a>
-</nav>
-
-<div class="stage">
-  <section class="page" id="intro">
-    <div class="sheet">
-    <svg class="margin-rule" viewBox="0 0 8 600" preserveAspectRatio="none" aria-hidden="true">
-      <path d="M4 0 Q2.4 150 4 300 Q5.6 450 4 600" stroke="var(--margin-red)" stroke-width="1.8" fill="none"/>
-    </svg>
-    <header>
-    <h1 class="reveal">Richard Polzin</h1>
-    <p class="role reveal">AI Researcher · <b>JRC COMBINE</b> · Aachen, Germany</p>
-    <div class="head-row">
-      <p class="lead reveal">I build models that notice an intensive-care patient going downhill <em>before the numbers make it obvious.</em></p>
-      <figure class="photo reveal">
-        <span class="tape"></span>
-        <img src="./assets/images/my-avatar.png" alt="Richard Polzin">
+<header class="hero">
+  <canvas class="field" aria-hidden="true"></canvas>
+  <div class="shell">
+    <div class="hero-grid">
+      <div>
+        <p class="eyebrow rise">AI Researcher · <b>JRC COMBINE</b> · Aachen, Germany</p>
+        <h1 class="rise">Richard<br>Polzin</h1>
+        <p class="lead rise">I build models that notice an intensive-care patient going downhill <b>before the numbers make it obvious.</b></p>
+      </div>
+      <figure class="portrait rise" style="margin:0">
+        <img src="./assets/images/my-avatar.png" alt="Richard Polzin" width="220" height="220">
       </figure>
     </div>
-    <div class="note reveal">
-      <b>Right now</b>Preparing an ICU oxygenation model for external validation, teaching version control to research groups, and building out a home lab for local inference work.
-    </div>
-  </header>
-    </div>
-  </section>
-  <section class="page" id="work">
-    <div class="sheet">
-    <svg class="margin-rule" viewBox="0 0 8 600" preserveAspectRatio="none" aria-hidden="true">
-      <path d="M4 0 Q2.4 150 4 300 Q5.6 450 4 600" stroke="var(--margin-red)" stroke-width="1.8" fill="none"/>
-    </svg>
-    <div class="sect-head">
-      <h2>What I work on</h2>
-      <svg viewBox="0 0 210 30" fill="none" aria-hidden="true"><path class="drawn" style="--l:230" d="M4 14 Q56 8 108 12 Q160 16 205 9" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round"/></svg>
-    </div>
-    <ul class="hand">
-      <li>
-        <svg class="tick" viewBox="0 0 19 13" fill="none" aria-hidden="true"><path d="M2 7 L7 11 L17 2" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </div>
+</header>
+
+<main id="main">
+
+<section>
+  <div class="shell">
+    <div class="head rise"><h2>Right now</h2><span class="rule"></span></div>
+    <dl class="now rise">
+      <div><dt>Research</dt><dd>Preparing an ICU oxygenation model for external validation.</dd></div>
+      <div><dt>Teaching</dt><dd>Version control and reproducible workflows for research groups.</dd></div>
+      <div><dt>Building</dt><dd>A home lab for local inference and self-hosted infrastructure.</dd></div>
+    </dl>
+  </div>
+</section>
+
+<section>
+  <div class="shell">
+    <div class="head rise"><h2>What I work on</h2><span class="rule"></span></div>
+    <div class="work">
+      <article class="rise">
+        <span class="n">01</span>
         <h3>Predictive modelling for intensive care</h3>
         <p>Time-series models that forecast oxygenation deterioration up to 72 hours ahead — the subject of my PhD and my current paper.</p>
-      </li>
-      <li>
-        <svg class="tick" viewBox="0 0 19 13" fill="none" aria-hidden="true"><path d="M2 7 L7 11 L17 2" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </article>
+      <article class="rise">
+        <span class="n">02</span>
         <h3>Accessible high-performance computing</h3>
         <p>Supporting clinical research groups who have the data but not the cluster experience, through the NHR4CES Simulation and Data Lab.</p>
-      </li>
-      <li>
-        <svg class="tick" viewBox="0 0 19 13" fill="none" aria-hidden="true"><path d="M2 7 L7 11 L17 2" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </article>
+      <article class="rise">
+        <span class="n">03</span>
         <h3>Open tools and materials</h3>
         <p>Publishing the tools and teaching materials alongside the research, not only the papers.</p>
-      </li>
-    </ul>
+      </article>
     </div>
-  </section>
-  <section class="page" id="papers">
-    <div class="sheet">
-    <svg class="margin-rule" viewBox="0 0 8 600" preserveAspectRatio="none" aria-hidden="true">
-      <path d="M4 0 Q2.4 150 4 300 Q5.6 450 4 600" stroke="var(--margin-red)" stroke-width="1.8" fill="none"/>
-    </svg>
-    <div class="sect-head">
-      <h2>Papers</h2>
-      <svg viewBox="0 0 210 30" fill="none" aria-hidden="true"><path class="drawn" style="--l:230" d="M4 14 Q56 8 108 12 Q160 16 205 9" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round"/></svg>
-    </div>
-    <div class="pub">
-      <span class="flag">first author
-        <svg viewBox="0 0 44 22" fill="none" aria-hidden="true"><path d="M2 4 Q22 2 38 14 M38 14 L29 13 M38 14 L36 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </span>
-      <h3><a href="https://iopscience.iop.org/article/10.1088/3049-477X/ae7cfe/meta">Predicting a sudden decrease in oxygenation in mechanically ventilated adult intensive care patients</a></h3>
-      <p class="meta"><b>Machine Learning: Health</b> · 2026 · Polzin R, Fritsch S, Sharafutdinov K, Bickenbach J, Marx G, Schuppert A</p>
-    </div>
-    <div class="pub">
-      <h3><a href="https://bmjopen.bmj.com/content/11/4/e045589">Algorithmic surveillance of ICU patients with ARDS (ASIC): protocol for a multicentre stepped-wedge cluster randomised quality improvement strategy</a></h3>
-      <p class="meta"><b>BMJ Open</b> · 2021 · Marx G, Bickenbach J, Fritsch SJ, et al. — one of ~45 co-authors</p>
-    </div>
-    </div>
-  </section>
-  <section class="page" id="background">
-    <div class="sheet">
-    <svg class="margin-rule" viewBox="0 0 8 600" preserveAspectRatio="none" aria-hidden="true">
-      <path d="M4 0 Q2.4 150 4 300 Q5.6 450 4 600" stroke="var(--margin-red)" stroke-width="1.8" fill="none"/>
-    </svg>
-    <div class="sect-head">
-      <h2>Where I've been</h2>
-      <svg viewBox="0 0 210 30" fill="none" aria-hidden="true"><path class="drawn" style="--l:230" d="M4 14 Q56 8 108 12 Q160 16 205 9" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round"/></svg>
-    </div>
-    <div class="entry"><span class="yr">2024 →</span><h3>Postdoc, JRC COMBINE</h3><p>Continuing the ICU prediction work with Prof. Schuppert's group, focused on clinical applicability.</p></div>
-    <div class="entry"><span class="yr">2018 – 24</span><h3>Ph.D., JRC COMBINE</h3><p>Six years on ARDS prediction for intensive-care patients, working with routine clinical data.</p></div>
-    <div class="entry"><span class="yr">2016 – 18</span><h3>M.Sc., Maastricht University</h3><p>Natural language processing and machine learning — sentiment analysis, topic modelling, deep learning.</p></div>
-    <div class="entry"><span class="yr">2013 – 16</span><h3>B.Sc., Aachen</h3><p>Computer science and mathematics, alongside a first developer role at a CNC simulation company.</p></div>
-    </div>
-  </section>
-  <section class="page" id="projects">
-    <div class="sheet">
-    <svg class="margin-rule" viewBox="0 0 8 600" preserveAspectRatio="none" aria-hidden="true">
-      <path d="M4 0 Q2.4 150 4 300 Q5.6 450 4 600" stroke="var(--margin-red)" stroke-width="1.8" fill="none"/>
-    </svg>
-    <div class="sect-head">
-      <h2>Projects I'm part of</h2>
-      <svg viewBox="0 0 210 30" fill="none" aria-hidden="true"><path class="drawn" style="--l:230" d="M4 14 Q56 8 108 12 Q160 16 205 9" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round"/></svg>
-    </div>
-    <div class="entry"><span class="yr">2023 →</span><h3><a href="https://www.edith-csa.eu/">EDITH CSA</a></h3><p>Charting the road from single-organ models to whole-body digital twins.</p></div>
-    <div class="entry"><span class="yr">2023 →</span><h3><a href="https://www.nhr4ces.de/simulation-and-data-labs/sdl-digital-patient/">SDL Digital Patient</a></h3><p>Bringing high-performance computing capability to healthcare research groups.</p></div>
-    <div class="entry"><span class="yr">2023 →</span><h3><a href="https://www.ccls.rwth-aachen.de/">CCLS</a></h3><p>RWTH's push to bring computational methods to the life sciences.</p></div>
-    <div class="entry"><span class="yr">2018 – 23</span><h3><a href="https://www.smith.care/">SMITH</a></h3><p>The clinical data platform behind my PhD work on early warning for ARDS.</p></div>
-    </div>
-  </section>
-  <section class="page" id="teaching">
-    <div class="sheet">
-    <svg class="margin-rule" viewBox="0 0 8 600" preserveAspectRatio="none" aria-hidden="true">
-      <path d="M4 0 Q2.4 150 4 300 Q5.6 450 4 600" stroke="var(--margin-red)" stroke-width="1.8" fill="none"/>
-    </svg>
-    <div class="sect-head">
-      <h2>Workshops I've run</h2>
-      <svg viewBox="0 0 210 30" fill="none" aria-hidden="true"><path class="drawn" style="--l:230" d="M4 14 Q56 8 108 12 Q160 16 205 9" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round"/></svg>
-    </div>
-    <p>All materials are free to reuse — each entry opens the full slide deck.</p>
-    <div class="cards">
-      <a class="wk" href="version-control-for-researchers/" style="--wk:oklch(50% .13 38)">
-        <svg class="mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="6" r="2.5"/><circle cx="6" cy="18" r="2.5"/><circle cx="18" cy="9" r="2.5"/><path d="M6 8.5V15.5M6.9 16.9C9 15 12 14 15.6 10.4"/></svg>
-        <p class="kicker">Nov 2025</p>
-        <h3>Version Control for Researchers</h3>
-        <svg class="swash" viewBox="0 0 120 9" fill="none" aria-hidden="true"><path d="M3 6 Q32 2 62 5 Q92 8 117 4" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
-        <p>A practical introduction to version control for research code: branching, collaboration, and a history you can actually retrace.</p>
-      </a>
-      <a class="wk" href="syndata/" style="--wk:oklch(46% .1 145)">
-        <svg class="mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v6c0 1.7 3.6 3 8 3s8-1.3 8-3V6M4 12v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></svg>
-        <p class="kicker">Nov 2024</p>
-        <h3>Synthetic Data in Medicine</h3>
-        <svg class="swash" viewBox="0 0 120 9" fill="none" aria-hidden="true"><path d="M3 6 Q32 2 62 5 Q92 8 117 4" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
-        <p>When real patient data can't be shared — open-source tools for generating realistic medical datasets.</p>
-      </a>
-      <a class="wk" href="clusterintro/" style="--wk:oklch(45% .11 250)">
-        <svg class="mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="6" rx="1.5"/><rect x="4" y="14" width="16" height="6" rx="1.5"/><path d="M8 7h.01M8 17h.01"/></svg>
-        <p class="kicker">Nov 2024</p>
-        <h3>HPC for Researchers</h3>
-        <svg class="swash" viewBox="0 0 120 9" fill="none" aria-hidden="true"><path d="M3 6 Q32 2 62 5 Q92 8 117 4" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
-        <p>From SLURM fundamentals through to applying for time on national compute resources.</p>
-      </a>
-      <a class="wk" href="azurellm/" style="--wk:oklch(46% .13 305)">
-        <svg class="mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a4 4 0 0 0-4 4c0 1.3.6 2.4 1.5 3.1C8.6 11 8 12.1 8 13.5A4 4 0 0 0 12 17.5a4 4 0 0 0 4-4c0-1.4-.6-2.5-1.5-3.4A3.9 3.9 0 0 0 16 7a4 4 0 0 0-4-4Z"/><path d="M9 20.5h6M12 17.5v3"/></svg>
-        <p class="kicker">Oct 2024</p>
-        <h3>LLMs at CCLS</h3>
-        <svg class="swash" viewBox="0 0 120 9" fill="none" aria-hidden="true"><path d="M3 6 Q32 2 62 5 Q92 8 117 4" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
-        <p>Using large language models for research on CCLS infrastructure — worked examples and practical guidance.</p>
-      </a>
-    </div>
-    </div>
-  </section>
-  <section class="page" id="outside">
-    <div class="sheet">
-    <svg class="margin-rule" viewBox="0 0 8 600" preserveAspectRatio="none" aria-hidden="true">
-      <path d="M4 0 Q2.4 150 4 300 Q5.6 450 4 600" stroke="var(--margin-red)" stroke-width="1.8" fill="none"/>
-    </svg>
-    <img class="stain" src="./assets/images/coffee-stain.png" alt="" aria-hidden="true">
-    <img class="stain small" src="./assets/images/coffee-stain.png" alt="" aria-hidden="true">
-    <div class="sect-head">
-      <h2>Outside the lab</h2>
-      <svg viewBox="0 0 210 30" fill="none" aria-hidden="true"><path class="drawn" style="--l:230" d="M4 14 Q56 8 108 12 Q160 16 205 9" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round"/></svg>
-    </div>
-    <ul class="hand">
-      <li>
-        <svg class="tick" viewBox="0 0 19 13" fill="none" aria-hidden="true"><path d="M2 7 L7 11 L17 2" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        <h3>Home lab</h3>
-        <p>Self-hosted services, local LLM inference, and my own network infrastructure.</p>
-      </li>
-      <li>
-        <svg class="tick" viewBox="0 0 19 13" fill="none" aria-hidden="true"><path d="M2 7 L7 11 L17 2" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        <h3>Coffee roasting</h3>
-        <p>Roasting my own beans at home.</p>
-      </li>
-      <li>
-        <svg class="tick" viewBox="0 0 19 13" fill="none" aria-hidden="true"><path d="M2 7 L7 11 L17 2" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        <h3>Photography &amp; gaming</h3>
-        <p>Photography around Aachen, and co-op gaming when there is time.</p>
-      </li>
-    </ul>
-    </div>
-  </section>
-  <section class="page" id="contact">
-    <div class="sheet">
-    <svg class="margin-rule" viewBox="0 0 8 600" preserveAspectRatio="none" aria-hidden="true">
-      <path d="M4 0 Q2.4 150 4 300 Q5.6 450 4 600" stroke="var(--margin-red)" stroke-width="1.8" fill="none"/>
-    </svg>
-    <div class="sect-head">
-      <h2>Get in touch</h2>
-      <svg viewBox="0 0 210 30" fill="none" aria-hidden="true"><path class="drawn" style="--l:230" d="M4 14 Q56 8 108 12 Q160 16 205 9" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round"/></svg>
-    </div>
-    <p>The quickest ways to reach me.</p>
-    <div class="hello">
-      <a href="mailto:mail@richardpolzin.com">
-        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 6.5 8.5 6 8.5-6"/></svg>
-        <span class="k">Email</span><span class="v">mail@richardpolzin.com</span>
-      </a>
-      <a href="https://signal.me/#eu/Lap7ZFK-xjpQbNY1eeTPpWOEQ_UPCA6zLsA0XzUoX0f7VOnZqrpB2bR3tXfJVOqD">
-        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-8.9 8.4 8.7 8.7 0 0 1-3.4-.8L3 20l1-5a8.4 8.4 0 0 1-.9-3.8A8.4 8.4 0 0 1 12 3a8.4 8.4 0 0 1 9 8.5Z"/></svg>
-        <span class="k">Signal</span><span class="v">Start a chat</span>
-      </a>
-      <a href="https://orcid.org/0000-0001-6831-3001">
-        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.4 10.4v6.1M9.4 7.9v.01M12.9 16.5v-6.1h1.5a3.05 3.05 0 0 1 0 6.1Z"/></svg>
-        <span class="k">ORCID</span><span class="v">0000-0001-6831-3001</span>
-      </a>
-      <a href="https://github.com/DeastinY/">
-        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-4 1.4-4-2.2-6-2.7m12 5.2v-3.4c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6 0 0 0-1.3-3.2 4.3 4.3 0 0 0-.1-3.2s-1.1-.3-3.5 1.3a12 12 0 0 0-6.2 0C6.5 3.4 5.4 3.7 5.4 3.7a4.3 4.3 0 0 0-.1 3.2A4.6 4.6 0 0 0 4 10.1c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2v3.4"/></svg>
-        <span class="k">GitHub</span><span class="v">github.com/DeastinY</span>
-      </a>
+  </div>
+</section>
+
+<section>
+  <div class="shell">
+    <div class="head rise"><h2>Papers</h2><span class="count">Two</span><span class="rule"></span></div>
+    <article class="paper rise">
+      <div class="when">2026<br><span class="first">First author</span></div>
       <div>
-        <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6.1 7-11.5A7 7 0 0 0 5 9.5C5 14.9 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
-        <span class="k">Where</span><span class="v">Aachen, Germany</span>
+        <h3><a href="https://iopscience.iop.org/article/10.1088/3049-477X/ae7cfe/meta">Predicting a sudden decrease in oxygenation in mechanically ventilated adult intensive care patients</a></h3>
+        <p class="who"><span class="venue">Machine Learning: Health</span> · Polzin R, Fritsch S, Sharafutdinov K, Bickenbach J, Marx G, Schuppert A</p>
+      </div>
+    </article>
+    <article class="paper rise">
+      <div class="when">2021</div>
+      <div>
+        <h3><a href="https://bmjopen.bmj.com/content/11/4/e045589">Algorithmic surveillance of ICU patients with ARDS (ASIC): protocol for a multicentre stepped-wedge cluster randomised quality improvement strategy</a></h3>
+        <p class="who"><span class="venue">BMJ Open</span> · Marx G, Bickenbach J, Fritsch SJ, et al. — one of ~45 co-authors</p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section>
+  <div class="shell">
+    <div class="cols">
+      <div>
+        <div class="head rise"><h2>Where I've been</h2><span class="rule"></span></div>
+        <ul class="entries rise">
+          <li><span class="yr">2024 →</span><strong>Postdoc, JRC COMBINE</strong><p>Continuing the ICU prediction work with Prof. Schuppert's group, focused on clinical applicability.</p></li>
+          <li><span class="yr">2018 – 24</span><strong>Ph.D., JRC COMBINE</strong><p>Six years on ARDS prediction for intensive-care patients, working with routine clinical data.</p></li>
+          <li><span class="yr">2016 – 18</span><strong>M.Sc., Maastricht University</strong><p>Natural language processing and machine learning — sentiment analysis, topic modelling, deep learning.</p></li>
+          <li><span class="yr">2013 – 16</span><strong>B.Sc., Aachen</strong><p>Computer science and mathematics, alongside a first developer role at a CNC simulation company.</p></li>
+        </ul>
+      </div>
+      <div>
+        <div class="head rise"><h2>Projects I'm part of</h2><span class="rule"></span></div>
+        <ul class="entries rise">
+          <li><span class="yr">2023 →</span><strong><a href="https://www.edith-csa.eu/">EDITH CSA</a></strong><p>Charting the road from single-organ models to whole-body digital twins.</p></li>
+          <li><span class="yr">2023 →</span><strong><a href="https://www.nhr4ces.de/simulation-and-data-labs/sdl-digital-patient/">SDL Digital Patient</a></strong><p>Bringing high-performance computing capability to healthcare research groups.</p></li>
+          <li><span class="yr">2023 →</span><strong><a href="https://www.ccls.rwth-aachen.de/">CCLS</a></strong><p>RWTH's push to bring computational methods to the life sciences.</p></li>
+          <li><span class="yr">2018 – 23</span><strong><a href="https://www.smith.care/">SMITH</a></strong><p>The clinical data platform behind my PhD work on early warning for ARDS.</p></li>
+        </ul>
       </div>
     </div>
-    </div>
-  </section>
-</div>
+  </div>
+</section>
 
+<section>
+  <div class="shell">
+    <div class="head rise"><h2>Workshops I've run</h2><span class="count">Free to reuse</span><span class="rule"></span></div>
+    <div class="decks">
+      <a class="deck rise" href="version-control-for-researchers/" style="--tint:#f3e3dd;--tint-2:#a8503a">
+        <span class="when">Nov 2025</span>
+        <h3>Version Control for Researchers</h3>
+        <p>A practical introduction to version control for research code: branching, collaboration, and a history you can actually retrace.</p>
+        <span class="go">Open the deck <span>→</span></span>
+      </a>
+      <a class="deck rise" href="syndata/" style="--tint:#dfe9e0;--tint-2:#4a7250">
+        <span class="when">Nov 2024</span>
+        <h3>Synthetic Data in Medicine</h3>
+        <p>When real patient data can't be shared — open-source tools for generating realistic medical datasets.</p>
+        <span class="go">Open the deck <span>→</span></span>
+      </a>
+      <a class="deck rise" href="clusterintro/" style="--tint:#dde5ec;--tint-2:#3f6484">
+        <span class="when">Nov 2024</span>
+        <h3>HPC for Researchers</h3>
+        <p>From SLURM fundamentals through to applying for time on national compute resources.</p>
+        <span class="go">Open the deck <span>→</span></span>
+      </a>
+      <a class="deck rise" href="azurellm/" style="--tint:#e6e0ee;--tint-2:#5f5081">
+        <span class="when">Oct 2024</span>
+        <h3>LLMs at CCLS</h3>
+        <p>Using large language models for research on CCLS infrastructure — worked examples and practical guidance.</p>
+        <span class="go">Open the deck <span>→</span></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="shell">
+    <div class="head rise"><h2>Get in touch</h2><span class="rule"></span></div>
+    <dl class="contact-grid rise">
+      <a href="mailto:mail@richardpolzin.com"><dt>Email</dt><dd>mail@richardpolzin.com</dd></a>
+      <a href="https://signal.me/#eu/Lap7ZFK-xjpQbNY1eeTPpWOEQ_UPCA6zLsA0XzUoX0f7VOnZqrpB2bR3tXfJVOqD"><dt>Signal</dt><dd>Start a chat</dd></a>
+      <a href="https://orcid.org/0000-0001-6831-3001"><dt>ORCID</dt><dd>0000-0001-6831-3001</dd></a>
+      <a href="https://github.com/DeastinY/"><dt>GitHub</dt><dd>github.com/DeastinY</dd></a>
+      <div><dt>Where</dt><dd>Aachen, Germany</dd></div>
+    </dl>
+  </div>
+</section>
+
+</main>
+
+<footer class="shell">
+  <span>Richard Polzin — Aachen, Germany</span>
+  <span>Outside the lab: coffee roasting, photography, a home lab.</span>
+</footer>
 
 <script src="./assets/js/vendor/gsap.min.js"></script>
 <script src="./assets/js/vendor/ScrollTrigger.min.js"></script>
 <script>
 (function(){
-  // What gets watched is the section, never the card. In pile mode the cards are
-  // position:fixed, so they are all permanently in the viewport — observing them
-  // would fire every reveal at once on load. The sections stay in flow either
-  // way, so they are the honest signal for "this page is coming up".
-  var BLOCKS = '.sheet > *:not(.margin-rule):not(header):not(.stain)';
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  var io = new IntersectionObserver(function(es){
-    es.forEach(function(e){
-      if(!e.isIntersecting) return;
-      e.target.querySelectorAll(BLOCKS).forEach(function(el){ el.classList.add('reveal'); });
-      e.target.querySelectorAll('.drawn').forEach(function(el){ el.style.animationPlayState='running'; });
-      io.unobserve(e.target);
-    });
-  // fires while the page is still coming up rather than once it has arrived, so
-  // the writing lands with the card instead of trailing it.
-  }, { rootMargin:'0px 0px 22% 0px' });
+  /* ---------- the signal field ----------
+     Physiological traces drifting slowly, occasionally fanning apart the way a
+     forecast does as confidence drops. Canvas 2D rather than WebGL: it is a
+     texture behind type, not a centrepiece, and this costs a few hundred bytes
+     of maths instead of a renderer. */
+  var cv = document.querySelector('.field');
+  if (cv && !reduce){
+    var cx = cv.getContext('2d'), w = 0, h = 0, dpr = 1, raf = 0, t = 0;
+    var LINES = 34;
 
-  // the underlines hold at their un-drawn state until their section is reached
-  document.querySelectorAll('.drawn').forEach(function(el){ el.style.animationPlayState='paused'; });
-  document.querySelectorAll('.page').forEach(function(el){ io.observe(el); });
-
-  // highlight the current section in the index tabs
-  var links = Array.prototype.slice.call(document.querySelectorAll('.tabs a'));
-  var secs  = links.map(function(a){ return document.querySelector(a.getAttribute('href')); });
-  var io3 = new IntersectionObserver(function(es){
-    es.forEach(function(e){
-      if(!e.isIntersecting) return;
-      var i = secs.indexOf(e.target);
-      links.forEach(function(l,j){ l.classList.toggle('on', j===i); });
-    });
-  }, { rootMargin:'-45% 0px -50% 0px' });
-  secs.forEach(function(s){ if(s) io3.observe(s); });
-
-  /* ---------- the pile ----------
-     Each sheet is dealt off the top of the stack: it rises out of the pile,
-     sits square and still to be read, then is slid off to the side and tucked
-     in behind while the next one surfaces. Scrubbed, so it is the reader's own
-     scrolling that moves the card, with a little lag so it settles rather than
-     tracking the wheel notch for notch.
-
-     The window in which a sheet is visible at all has to stay inside one
-     page's worth of scrolling. Pages sit H apart and this range spans H plus a
-     viewport, so the budget is H/(H+viewport) — 58% at these sizes. 20%-80%
-     spends 60% of it, overlapping the neighbouring sheet just enough that the
-     desk never blinks empty, while the still stretch in the middle stays well
-     clear of its neighbour's. */
-  /* Crossing the whole deck by scroll alone is a long way. Paging keys jump a
-     card at a time. Left/Right and PageUp/Down only; Up/Down and Space are
-     left alone so ordinary scrolling still works, and anything typed into a
-     field is ignored. */
-  var pages = Array.prototype.slice.call(document.querySelectorAll('.page'));
-  function cardAt(y){
-    var mid = y + window.innerHeight / 2;
-    for (var i = 0; i < pages.length; i++){
-      if (pages[i].offsetTop <= mid && pages[i].offsetTop + pages[i].offsetHeight > mid) return i;
+    function size(){
+      var r = cv.getBoundingClientRect();
+      dpr = Math.min(devicePixelRatio || 1, 2);
+      w = r.width; h = r.height;
+      cv.width = Math.round(w * dpr); cv.height = Math.round(h * dpr);
+      cx.setTransform(dpr, 0, 0, dpr, 0, 0);
     }
-    return y <= 0 ? 0 : pages.length - 1;
-  }
-  function goToCard(i){
-    i = Math.max(0, Math.min(pages.length - 1, i));
-    window.scrollTo({ top: pages[i].offsetTop, behavior:'smooth' });
-  }
-  document.addEventListener('keydown', function(e){
-    if (e.defaultPrevented || e.metaKey || e.ctrlKey || e.altKey) return;
-    var t = e.target;
-    if (t && (t.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName))) return;
-    var i = cardAt(window.scrollY), handled = true;
-    switch (e.key){
-      case 'PageDown': case 'ArrowRight': goToCard(i + 1); break;
-      case 'PageUp':   case 'ArrowLeft':  goToCard(i - 1); break;
-      case 'Home':                        goToCard(0); break;
-      case 'End':                         goToCard(pages.length - 1); break;
-      default: handled = false;
+
+    function draw(){
+      cx.clearRect(0, 0, w, h);
+      for (var i = 0; i < LINES; i++){
+        var f = i / (LINES - 1);
+        // traces sit in a band across the lower half, tightest at the left
+        var baseY = h * (0.16 + f * 0.78);
+        var phase = t * (0.16 + f * 0.1) + i * 0.7;
+        cx.beginPath();
+        for (var x = 0; x <= w; x += 8){
+          var p = x / w;
+          // the fan: amplitude grows to the right, as a prediction loses its grip
+          var spread = Math.pow(p, 1.7) * (h * 0.075) * (0.35 + f * 0.9);
+          var y = baseY
+                + Math.sin(p * 5.2 + phase) * spread
+                + Math.sin(p * 11.3 - phase * 1.4) * spread * 0.38
+                + Math.sin(p * 2.1 + phase * 0.6) * spread * 0.5;
+          x === 0 ? cx.moveTo(x, y) : cx.lineTo(x, y);
+        }
+        var warm = i % 4 === 0;
+        cx.strokeStyle = warm ? 'rgba(168, 80, 58, .24)' : 'rgba(74, 107, 118, .19)';
+        cx.lineWidth = warm ? 1.3 : .95;
+        cx.stroke();
+      }
+      t += 0.006;
+      raf = requestAnimationFrame(draw);
     }
-    if (handled) e.preventDefault();
-  });
 
-  if (!window.gsap || !window.ScrollTrigger) return;
-  gsap.registerPlugin(ScrollTrigger);
+    var run = false;
+    function start(){ if (!run){ run = true; draw(); } }
+    function stop(){ run = false; cancelAnimationFrame(raf); }
 
-  var stage = document.querySelector('.stage');
-  gsap.matchMedia().add(
-    '(min-width:1181px) and (prefers-reduced-motion:no-preference)',
-    function(){
-      stage.classList.add('pile');
-      var built = gsap.utils.toArray('.page').map(function(page){
-        var sheet = page.querySelector('.sheet');
-        gsap.set(sheet, { xPercent:-50, yPercent:-50, transformOrigin:'50% 55%' });
-        return gsap.timeline({
-          scrollTrigger:{ trigger:page, start:'top bottom', end:'bottom top', scrub:.6 }
-        })
-        // Surfacing out of the pile. fromTo with immediateRender, not a set()
-        // at position 0: a scrubbed timeline is not rendered until its trigger
-        // comes into range, so cards further down the page kept the
-        // stylesheet's opacity and sat stacked on top of the one being read.
-        // the move and the fade are separate tweens on purpose: an out ease
-        // drives opacity almost to full in its first fifth, so the card used to
-        // arrive fast and then drift, which read as quick however far it moved.
-        // the fade runs flat while the move decelerates.
-        .fromTo(sheet,
-          { opacity:0, x:0, y:16, rotate:-2.6, scale:.93 },
-          { x:0, y:0, rotate:-.45, scale:1,
-            ease:'power2.out', duration:.20, immediateRender:true }, .10)
-        .to(sheet, { opacity:1, ease:'none', duration:.15 }, .10)
-        // The hold has to straddle the resting scroll position. A page rests
-        // at its own offsetTop, which is one viewport into a range spanning the
-        // page plus a viewport - 1/3 of the way through - so a hold starting
-        // later than that left every tab click and every snap resting on a card
-        // still on its way up.
-        // square and still, to be read — and the only one taking clicks
-        .set(sheet, { pointerEvents:'auto' }, .30)
-        .to(sheet, { duration:.28 }, .30)
-        .set(sheet, { pointerEvents:'none' }, .58)
-        // slid off the top and tucked in behind
-        .to(sheet, { x:'-23%', y:-10, rotate:-6.5, scale:.9,
-                     ease:'power2.in', duration:.20 }, .58)
-        .to(sheet, { opacity:0, ease:'none', duration:.15 }, .63)
-        // scrub maps the scroll range onto the timeline's real duration, so it
-        // has to be padded to a full 1 or every position above is stretched
-        .to(sheet, { duration:.22 }, .78);
+    size(); start();
+    addEventListener('resize', function(){ size(); }, { passive:true });
+    // the field is decoration — it must not burn a core once it is scrolled past
+    new IntersectionObserver(function(es){
+      es[0].isIntersecting ? start() : stop();
+    }, { threshold:0 }).observe(cv);
+    document.addEventListener('visibilitychange', function(){
+      document.hidden ? stop() : start();
+    });
+  }
+
+  /* ---------- entrances ---------- */
+  if (window.gsap && window.ScrollTrigger && !reduce){
+    gsap.registerPlugin(ScrollTrigger);
+    gsap.utils.toArray('.rise').forEach(function(el){
+      gsap.to(el, {
+        opacity:1, y:0, duration:.85, ease:'power2.out',
+        scrollTrigger:{ trigger:el, start:'top 88%', once:true }
       });
-      ScrollTrigger.refresh();
-      return function(){
-        stage.classList.remove('pile');
-        built.forEach(function(tl){ if(tl.scrollTrigger) tl.scrollTrigger.kill(); tl.kill(); });
-        gsap.set('.page > .sheet', { clearProps:'all' });
-      };
-    }
-  );
+    });
+  } else {
+    document.querySelectorAll('.rise').forEach(function(el){
+      el.style.opacity = 1; el.style.transform = 'none';
+    });
+  }
 })();
 </script>
 </body>
