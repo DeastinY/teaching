@@ -194,6 +194,10 @@
   .paper .who{ margin:.15rem 0 0; color:var(--ink-3); font-size:.94rem; }
   .paper .venue{ color:var(--data); font-weight:500; }
 
+  .orcid-note{ margin:clamp(1.4rem,3vh,2.2rem) 0 0; }
+  .orcid-note a{ color:var(--ink-3); text-decoration:none; border-bottom:1px solid var(--line); transition:color .2s,border-color .2s; }
+  .orcid-note a:hover{ color:var(--accent); border-color:var(--accent); }
+
   /* ---------- two-column list block ---------- */
   .cols{ display:grid; gap:clamp(2.5rem,6vh,4.5rem) clamp(2.5rem,6vw,6rem);
          grid-template-columns:repeat(auto-fit,minmax(min(21rem,100%),1fr)); }
@@ -357,12 +361,26 @@
 
 <section>
   <div class="shell">
-    <div class="head rise"><h2>Papers</h2><span class="count">Two</span><span class="rule"></span></div>
+    <div class="head rise"><h2>Papers</h2><span class="count">Four</span><span class="rule"></span></div>
     <article class="paper rise">
       <div class="when">2026<br><span class="first">First author</span></div>
       <div>
-        <h3><a href="https://iopscience.iop.org/article/10.1088/3049-477X/ae7cfe/meta">Predicting a sudden decrease in oxygenation in mechanically ventilated adult intensive care patients</a></h3>
+        <h3><a href="https://doi.org/10.1088/3049-477X/ae7cfe">Predicting a sudden decrease in oxygenation in mechanically ventilated adult intensive care patients</a></h3>
         <p class="who"><span class="venue">Machine Learning: Health</span> · Polzin R, Fritsch S, Sharafutdinov K, Bickenbach J, Marx G, Schuppert A</p>
+      </div>
+    </article>
+    <article class="paper rise">
+      <div class="when">2024</div>
+      <div>
+        <h3><a href="https://doi.org/10.1109/OJEMB.2023.3243190">Computational simulation of virtual patients reduces dataset bias and improves machine learning-based detection of ARDS from noisy heterogeneous ICU datasets</a></h3>
+        <p class="who"><span class="venue">IEEE Open Journal of Engineering in Medicine and Biology</span> · Sharafutdinov K, Fritsch SJ, Iravani M, Ghalati PF, Saffaran S, Bates DG, Hardman JG, Polzin R, Mayer H, Marx G, Bickenbach J, Schuppert A</p>
+      </div>
+    </article>
+    <article class="paper rise">
+      <div class="when">2023<br><span class="first">First author</span></div>
+      <div>
+        <h3><a href="https://doi.org/10.1016/j.softx.2023.101517">Diagnostic Expert Advisor: a platform for developing machine learning models on medical time-series data</a></h3>
+        <p class="who"><span class="venue">SoftwareX</span> · Polzin R, Fritsch S, Sharafutdinov K, Marx G, Schuppert A</p>
       </div>
     </article>
     <article class="paper rise">
@@ -372,6 +390,7 @@
         <p class="who"><span class="venue">BMJ Open</span> · Marx G, Bickenbach J, Fritsch SJ, et al. — one of ~45 co-authors</p>
       </div>
     </article>
+    <p class="rise orcid-note"><a href="https://orcid.org/0000-0001-6831-3001">The full record lives on ORCID →</a></p>
   </div>
 </section>
 
@@ -390,7 +409,7 @@
       <div>
         <div class="head rise"><h2>Projects I'm part of</h2><span class="rule"></span></div>
         <ul class="entries rise">
-          <li><span class="yr">2025 →</span><strong><a href="https://fairteiler-aachen.de/">Fairteiler Aachen</a></strong><p>A site for Aachen's Fairteiler — the public shelves and fridges where anyone can leave food they won't get through and anyone can take what they need. Built and run in my own time.</p></li>
+          <li><span class="yr">2025 →</span><strong><a href="https://fairteiler-aachen.de/">Fairteiler Aachen</a></strong><p>Is there anything in the Fairteiler right now? A live status board for Aachen's food-sharing points — anyone can report what's on the shelf in about ten seconds, no account, no app store. Built and run in my own time.</p></li>
           <li><span class="yr">2023 →</span><strong><a href="https://www.edith-csa.eu/">EDITH CSA</a></strong><p>Charting the road from single-organ models to whole-body digital twins.</p></li>
           <li><span class="yr">2023 →</span><strong><a href="https://www.nhr4ces.de/simulation-and-data-labs/sdl-digital-patient/">SDL Digital Patient</a></strong><p>Bringing high-performance computing capability to healthcare research groups.</p></li>
           <li><span class="yr">2023 →</span><strong><a href="https://www.ccls.rwth-aachen.de/">CCLS</a></strong><p>RWTH's push to bring computational methods to the life sciences.</p></li>
