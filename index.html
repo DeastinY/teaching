@@ -60,7 +60,7 @@
     --shell: min(96rem, 100% - var(--pad) * 2);
   }
   *{ box-sizing:border-box; }
-  html{ scroll-behavior:smooth; -webkit-text-size-adjust:100%; font-size:16px; }
+  html{ scroll-behavior:smooth; scroll-padding-top:2rem; -webkit-text-size-adjust:100%; font-size:16px; }
   @media (min-width:2200px){ html{ font-size:18px; } }
   @media (min-width:3000px){ html{ font-size:21px; } }
   @media (min-width:3600px){ html{ font-size:24px; } }
@@ -144,7 +144,42 @@
     background:var(--bg-warm);
   }
   @media (min-width:900px){ .portrait{ justify-self:end; } }
+  /* facts worth having before anyone scrolls */
+  .facts{ display:flex; flex-wrap:wrap; gap:clamp(1.4rem,3vw,3rem);
+          margin:clamp(1.8rem,4vh,2.8rem) 0 0; padding:0; list-style:none; }
+  .facts li{ min-width:6.5rem; }
+  .facts b{ display:block; font-family:'Fraunces',serif; font-weight:400;
+            font-size:clamp(1.7rem,1.3rem + 1.4vw,2.6rem); line-height:1; color:var(--accent); }
+  .facts span{ display:block; margin-top:.35rem; font-size:.82rem; color:var(--ink-3); line-height:1.35; }
+  .jump{ display:flex; flex-wrap:wrap; gap:.6rem; margin:clamp(1.6rem,3.5vh,2.4rem) 0 0; }
+  .jump a{ padding:.5rem 1rem; border:1px solid var(--line); border-radius:99px;
+           background:var(--bg); font-size:.9rem; text-decoration:none; color:var(--ink-2);
+           transition:border-color .2s,color .2s,transform .2s; }
+  .jump a:hover{ border-color:var(--accent); color:var(--accent); transform:translateY(-2px); }
+  .jump a.lead-cta{ background:var(--ink); border-color:var(--ink); color:var(--bg); }
+  .jump a.lead-cta:hover{ background:var(--accent); border-color:var(--accent); color:var(--bg); }
   .portrait img{ width:100%; height:100%; object-fit:cover; display:block; filter:grayscale(.25) contrast(1.03); }
+
+  /* ---------- the figure ----------
+     the research made visible rather than only described: hours observed, the
+     point the model forecasts from, and the range of what comes next widening
+     the further ahead it looks. */
+  .figure{ background:var(--bg-warm); border-top:1px solid var(--line); overflow:hidden; }
+  .figure .shell{ display:grid; gap:clamp(1.5rem,3vw,3.5rem); grid-template-columns:minmax(0,1fr); align-items:center; }
+  @media (min-width:1000px){ .figure .shell{ grid-template-columns:minmax(0,25rem) minmax(0,1fr); } }
+  .figure h2{ font-size:clamp(1.5rem,1.2rem + 1vw,2.2rem); margin:0 0 .8rem; }
+  .figure p{ margin:0 0 .7rem; color:var(--ink-2); font-size:clamp(.98rem,.95rem + .2vw,1.12rem); }
+  .figure .note{ color:var(--ink-3); font-size:.86rem; margin:0; }
+  .forecast{ width:100%; height:clamp(240px,32vh,380px); display:block; overflow:visible; }
+  .legend{ display:flex; gap:1.4rem; flex-wrap:wrap; margin:.9rem 0 0; padding:0; list-style:none;
+           font-size:.8rem; color:var(--ink-3); }
+  .legend li{ display:flex; align-items:center; gap:.45rem; }
+  .legend i{ width:18px; height:0; border-top:2px solid var(--ink); display:inline-block; }
+  .legend .f i{ border-top-color:var(--accent); }
+  .legend .t i{ border-top:1px dashed var(--ink-3); }
+
+  /* alternating grounds, so the page is not one flat field of off-white */
+  .tint{ background:var(--bg-warm); border-top:1px solid var(--line); }
 
   /* ---------- shared section furniture ---------- */
   section{ padding-block:clamp(3.5rem,8vh,7rem); }
@@ -261,6 +296,8 @@
   .life .em{ font-size:1.9rem; line-height:1; display:block; margin-bottom:.75rem; }
 
   /* ---------- contact ---------- */
+  .sign-off{ margin:0 0 clamp(2rem,4vh,3rem); color:var(--ink-2); max-width:52ch;
+             font-size:clamp(1.02rem,.98rem + .3vw,1.22rem); }
   .contact-grid{ display:grid; gap:var(--gap) clamp(2rem,5vw,5rem);
                  grid-template-columns:repeat(auto-fit,minmax(min(15rem,100%),1fr)); }
   .contact-grid a, .contact-grid div{ text-decoration:none; display:block; }
@@ -292,15 +329,60 @@
         <p class="eyebrow rise">AI Researcher · <b>JRC COMBINE</b> · Aachen, Germany</p>
         <h1 class="rise">Richard<br>Polzin</h1>
         <p class="lead rise">I build models that notice an intensive-care patient going downhill <b>before the numbers make it obvious.</b></p>
+        <nav class="jump rise" aria-label="Jump to">
+          <a class="lead-cta" href="#open">Open to work</a>
+          <a href="#papers">Papers</a>
+          <a href="#workshops">Workshops</a>
+          <a href="#contact">Get in touch</a>
+        </nav>
       </div>
-      <figure class="portrait rise" style="margin:0">
-        <img src="./assets/images/my-avatar.png" alt="Richard Polzin" width="220" height="220">
-      </figure>
+      <div>
+        <figure class="portrait rise" style="margin:0">
+          <img src="./assets/images/my-avatar.png" alt="Richard Polzin" width="220" height="220">
+        </figure>
+        <ul class="facts rise">
+          <li><b>72 h</b><span>forecast horizon</span></li>
+          <li><b>4</b><span>papers, two as first author</span></li>
+          <li><b>4</b><span>workshops, free to reuse</span></li>
+          <li><b>6 yrs</b><span>on ARDS prediction</span></li>
+        </ul>
+      </div>
     </div>
   </div>
 </header>
 
 <main id="main">
+
+<section class="figure">
+  <div class="shell">
+    <div>
+      <h2 class="rise">What the work looks like</h2>
+      <p class="rise">A patient's oxygenation, hour by hour. At the marker the model stops observing and starts forecasting — and the range of what might happen next widens the further ahead it looks.</p>
+      <p class="rise">The useful part is not the single line. It is knowing, early, that enough of those trajectories end up somewhere a clinician would want to act on.</p>
+      <p class="note rise">Illustrative — not patient data.</p>
+    </div>
+    <div class="rise">
+      <svg class="forecast" viewBox="0 0 1200 300" role="img" aria-labelledby="fc-t fc-d">
+  <title id="fc-t">How the model reads a patient</title>
+  <desc id="fc-d">An illustrative oxygenation trace. To the left, hours already observed. At the marked point the model forecasts forward, and the range of likely trajectories widens the further ahead it looks, with most of them crossing the level at which a clinician would want to act.</desc>
+  <line x1="0" y1="205" x2="1200" y2="205" stroke="var(--ink-3)" stroke-width="1" stroke-dasharray="3 6" opacity=".6"/>
+  <path d="M545,139.2 L553,139.4 L561,139.5 L569,139.7 L577,139.8 L585,140.0 L593,140.1 L601,140.3 L609,140.4 L617,140.5 L625,140.7 L633,140.8 L641,140.9 L649,141.0 L657,141.1 L665,141.2 L673,141.3 L681,141.3 L689,141.4 L697,141.4 L705,141.4 L713,141.4 L721,141.4 L729,141.4 L737,141.3 L745,141.3 L753,141.2 L761,141.0 L769,140.9 L777,140.7 L785,140.6 L793,140.3 L801,140.1 L809,139.9 L817,139.6 L825,139.3 L833,138.9 L841,138.6 L849,138.2 L857,137.8 L865,137.4 L873,136.9 L881,136.5 L889,136.0 L897,135.5 L905,135.0 L913,134.4 L921,133.9 L929,133.3 L937,132.7 L945,132.1 L953,131.5 L961,130.9 L969,130.3 L977,129.7 L985,129.1 L993,128.5 L1001,127.9 L1009,127.2 L1017,126.6 L1025,126.0 L1033,125.4 L1041,124.8 L1049,124.2 L1057,123.7 L1065,123.1 L1073,122.6 L1081,122.0 L1089,121.5 L1097,121.0 L1105,120.5 L1113,120.0 L1121,119.6 L1129,119.1 L1137,118.7 L1145,118.3 L1153,117.9 L1161,117.5 L1169,117.2 L1177,116.8 L1185,116.5 L1193,116.1 L1193,305.4 L1185,302.7 L1177,300.0 L1169,297.4 L1161,294.7 L1153,292.0 L1145,289.4 L1137,286.7 L1129,284.1 L1121,281.5 L1113,278.8 L1105,276.2 L1097,273.6 L1089,270.9 L1081,268.3 L1073,265.6 L1065,263.0 L1057,260.4 L1049,257.7 L1041,255.1 L1033,252.4 L1025,249.8 L1017,247.2 L1009,244.5 L1001,241.9 L993,239.3 L985,236.6 L977,234.0 L969,231.4 L961,228.8 L953,226.2 L945,223.6 L937,221.0 L929,218.5 L921,215.9 L913,213.4 L905,210.9 L897,208.4 L889,206.0 L881,203.5 L873,201.1 L865,198.8 L857,196.4 L849,194.1 L841,191.8 L833,189.6 L825,187.4 L817,185.2 L809,183.1 L801,181.0 L793,178.9 L785,176.9 L777,175.0 L769,173.0 L761,171.2 L753,169.3 L745,167.5 L737,165.8 L729,164.1 L721,162.4 L713,160.8 L705,159.3 L697,157.7 L689,156.3 L681,154.9 L673,153.5 L665,152.2 L657,150.9 L649,149.7 L641,148.5 L633,147.4 L625,146.3 L617,145.3 L609,144.3 L601,143.4 L593,142.6 L585,141.8 L577,141.1 L569,140.5 L561,139.9 L553,139.5 L545,139.2 Z" fill="var(--accent)" opacity=".08"/>
+  <path d="M545,139.2 L553,139.4 L561,139.5 L569,139.7 L577,139.8 L585,140.0 L593,140.1 L601,140.3 L609,140.4 L617,140.5 L625,140.7 L633,140.8 L641,140.9 L649,141.0 L657,141.1 L665,141.2 L673,141.3 L681,141.3 L689,141.4 L697,141.4 L705,141.4 L713,141.4 L721,141.4 L729,141.4 L737,141.3 L745,141.3 L753,141.2 L761,141.0 L769,140.9 L777,140.7 L785,140.6 L793,140.3 L801,140.1 L809,139.9 L817,139.6 L825,139.3 L833,138.9 L841,138.6 L849,138.2 L857,137.8 L865,137.4 L873,136.9 L881,136.5 L889,136.0 L897,135.5 L905,135.0 L913,134.4 L921,133.9 L929,133.3 L937,132.7 L945,132.1 L953,131.5 L961,130.9 L969,130.3 L977,129.7 L985,129.1 L993,128.5 L1001,127.9 L1009,127.2 L1017,126.6 L1025,126.0 L1033,125.4 L1041,124.8 L1049,124.2 L1057,123.7 L1065,123.1 L1073,122.6 L1081,122.0 L1089,121.5 L1097,121.0 L1105,120.5 L1113,120.0 L1121,119.6 L1129,119.1 L1137,118.7 L1145,118.3 L1153,117.9 L1161,117.5 L1169,117.2 L1177,116.8 L1185,116.5 L1193,116.1" fill="none" stroke="var(--accent)" stroke-width="1" opacity="0.10"/><path d="M545,139.2 L553,139.4 L561,139.6 L569,139.9 L577,140.1 L585,140.4 L593,140.6 L601,140.8 L609,141.1 L617,141.3 L625,141.5 L633,141.7 L641,141.9 L649,142.1 L657,142.3 L665,142.4 L673,142.6 L681,142.7 L689,142.8 L697,142.9 L705,143.0 L713,143.1 L721,143.1 L729,143.1 L737,143.1 L745,143.1 L753,143.1 L761,143.0 L769,143.0 L777,142.9 L785,142.8 L793,142.7 L801,142.6 L809,142.5 L817,142.3 L825,142.1 L833,142.0 L841,141.8 L849,141.6 L857,141.4 L865,141.2 L873,141.0 L881,140.8 L889,140.6 L897,140.4 L905,140.2 L913,140.0 L921,139.9 L929,139.7 L937,139.5 L945,139.3 L953,139.2 L961,139.0 L969,138.9 L977,138.8 L985,138.7 L993,138.6 L1001,138.5 L1009,138.4 L1017,138.4 L1025,138.3 L1033,138.3 L1041,138.3 L1049,138.3 L1057,138.3 L1065,138.4 L1073,138.4 L1081,138.5 L1089,138.6 L1097,138.6 L1105,138.7 L1113,138.8 L1121,138.9 L1129,139.0 L1137,139.1 L1145,139.2 L1153,139.3 L1161,139.4 L1169,139.5 L1177,139.6 L1185,139.6 L1193,139.7" fill="none" stroke="var(--accent)" stroke-width="1" opacity="0.12"/><path d="M545,139.2 L553,139.4 L561,139.7 L569,140.0 L577,140.2 L585,140.5 L593,140.8 L601,141.0 L609,141.3 L617,141.6 L625,141.8 L633,142.1 L641,142.3 L649,142.5 L657,142.8 L665,143.0 L673,143.2 L681,143.3 L689,143.5 L697,143.7 L705,143.9 L713,144.0 L721,144.2 L729,144.3 L737,144.4 L745,144.6 L753,144.7 L761,144.8 L769,144.9 L777,145.1 L785,145.2 L793,145.3 L801,145.4 L809,145.6 L817,145.7 L825,145.8 L833,146.0 L841,146.2 L849,146.3 L857,146.5 L865,146.7 L873,146.9 L881,147.1 L889,147.3 L897,147.6 L905,147.8 L913,148.1 L921,148.4 L929,148.7 L937,149.0 L945,149.3 L953,149.7 L961,150.0 L969,150.4 L977,150.8 L985,151.2 L993,151.6 L1001,152.0 L1009,152.4 L1017,152.8 L1025,153.3 L1033,153.7 L1041,154.1 L1049,154.6 L1057,155.0 L1065,155.5 L1073,155.9 L1081,156.3 L1089,156.7 L1097,157.1 L1105,157.5 L1113,157.9 L1121,158.2 L1129,158.6 L1137,158.9 L1145,159.2 L1153,159.5 L1161,159.7 L1169,160.0 L1177,160.2 L1185,160.4 L1193,160.5" fill="none" stroke="var(--accent)" stroke-width="1" opacity="0.14"/><path d="M545,139.2 L553,139.4 L561,139.6 L569,139.9 L577,140.2 L585,140.4 L593,140.7 L601,141.0 L609,141.3 L617,141.6 L625,141.9 L633,142.2 L641,142.5 L649,142.8 L657,143.1 L665,143.4 L673,143.8 L681,144.1 L689,144.4 L697,144.7 L705,145.1 L713,145.4 L721,145.8 L729,146.1 L737,146.5 L745,146.9 L753,147.3 L761,147.7 L769,148.1 L777,148.6 L785,149.0 L793,149.5 L801,149.9 L809,150.4 L817,151.0 L825,151.5 L833,152.0 L841,152.6 L849,153.1 L857,153.7 L865,154.3 L873,155.0 L881,155.6 L889,156.2 L897,156.9 L905,157.5 L913,158.2 L921,158.9 L929,159.6 L937,160.3 L945,161.0 L953,161.7 L961,162.4 L969,163.1 L977,163.8 L985,164.5 L993,165.2 L1001,165.8 L1009,166.5 L1017,167.2 L1025,167.8 L1033,168.5 L1041,169.1 L1049,169.7 L1057,170.3 L1065,170.8 L1073,171.4 L1081,171.9 L1089,172.4 L1097,172.9 L1105,173.4 L1113,173.8 L1121,174.2 L1129,174.6 L1137,174.9 L1145,175.3 L1153,175.6 L1161,175.9 L1169,176.1 L1177,176.4 L1185,176.6 L1193,176.8" fill="none" stroke="var(--accent)" stroke-width="1" opacity="0.17"/><path d="M545,139.2 L553,139.4 L561,139.6 L569,139.8 L577,140.1 L585,140.4 L593,140.8 L601,141.1 L609,141.5 L617,141.9 L625,142.3 L633,142.7 L641,143.2 L649,143.6 L657,144.1 L665,144.6 L673,145.1 L681,145.7 L689,146.2 L697,146.8 L705,147.4 L713,148.0 L721,148.6 L729,149.3 L737,149.9 L745,150.6 L753,151.3 L761,152.0 L769,152.8 L777,153.5 L785,154.3 L793,155.1 L801,155.9 L809,156.7 L817,157.6 L825,158.4 L833,159.3 L841,160.1 L849,161.0 L857,161.9 L865,162.8 L873,163.6 L881,164.5 L889,165.4 L897,166.3 L905,167.2 L913,168.1 L921,169.0 L929,169.8 L937,170.7 L945,171.6 L953,172.4 L961,173.2 L969,174.0 L977,174.9 L985,175.6 L993,176.4 L1001,177.2 L1009,177.9 L1017,178.6 L1025,179.3 L1033,180.0 L1041,180.7 L1049,181.4 L1057,182.0 L1065,182.6 L1073,183.2 L1081,183.8 L1089,184.3 L1097,184.9 L1105,185.4 L1113,186.0 L1121,186.5 L1129,187.0 L1137,187.5 L1145,188.0 L1153,188.5 L1161,188.9 L1169,189.4 L1177,189.9 L1185,190.4 L1193,190.9" fill="none" stroke="var(--accent)" stroke-width="1" opacity="0.19"/><path d="M545,139.2 L553,139.4 L561,139.6 L569,139.9 L577,140.3 L585,140.7 L593,141.1 L601,141.6 L609,142.1 L617,142.7 L625,143.3 L633,143.9 L641,144.5 L649,145.2 L657,145.8 L665,146.6 L673,147.3 L681,148.1 L689,148.9 L697,149.7 L705,150.5 L713,151.4 L721,152.2 L729,153.1 L737,154.0 L745,155.0 L753,155.9 L761,156.9 L769,157.8 L777,158.8 L785,159.8 L793,160.8 L801,161.8 L809,162.8 L817,163.8 L825,164.8 L833,165.8 L841,166.8 L849,167.8 L857,168.8 L865,169.8 L873,170.8 L881,171.8 L889,172.8 L897,173.8 L905,174.7 L913,175.7 L921,176.6 L929,177.5 L937,178.5 L945,179.4 L953,180.3 L961,181.2 L969,182.1 L977,182.9 L985,183.8 L993,184.6 L1001,185.5 L1009,186.3 L1017,187.2 L1025,188.0 L1033,188.8 L1041,189.6 L1049,190.5 L1057,191.3 L1065,192.1 L1073,193.0 L1081,193.8 L1089,194.6 L1097,195.5 L1105,196.4 L1113,197.3 L1121,198.2 L1129,199.1 L1137,200.0 L1145,201.0 L1153,201.9 L1161,202.9 L1169,204.0 L1177,205.0 L1185,206.1 L1193,207.2" fill="none" stroke="var(--accent)" stroke-width="1" opacity="0.21"/><path d="M545,139.2 L553,139.4 L561,139.8 L569,140.2 L577,140.7 L585,141.2 L593,141.8 L601,142.4 L609,143.1 L617,143.8 L625,144.5 L633,145.3 L641,146.1 L649,146.9 L657,147.8 L665,148.7 L673,149.6 L681,150.5 L689,151.5 L697,152.4 L705,153.4 L713,154.4 L721,155.4 L729,156.5 L737,157.5 L745,158.6 L753,159.6 L761,160.7 L769,161.8 L777,162.8 L785,163.9 L793,165.0 L801,166.1 L809,167.1 L817,168.2 L825,169.3 L833,170.4 L841,171.4 L849,172.5 L857,173.6 L865,174.6 L873,175.7 L881,176.8 L889,177.8 L897,178.9 L905,179.9 L913,181.0 L921,182.1 L929,183.1 L937,184.2 L945,185.3 L953,186.3 L961,187.4 L969,188.5 L977,189.6 L985,190.7 L993,191.9 L1001,193.0 L1009,194.2 L1017,195.3 L1025,196.5 L1033,197.7 L1041,199.0 L1049,200.2 L1057,201.5 L1065,202.8 L1073,204.2 L1081,205.6 L1089,207.0 L1097,208.4 L1105,209.8 L1113,211.3 L1121,212.9 L1129,214.4 L1137,216.0 L1145,217.7 L1153,219.3 L1161,221.0 L1169,222.7 L1177,224.5 L1185,226.3 L1193,228.1" fill="none" stroke="var(--accent)" stroke-width="1" opacity="0.19"/><path d="M545,139.2 L553,139.5 L561,139.9 L569,140.4 L577,141.0 L585,141.7 L593,142.3 L601,143.1 L609,143.9 L617,144.7 L625,145.5 L633,146.4 L641,147.3 L649,148.2 L657,149.2 L665,150.2 L673,151.2 L681,152.2 L689,153.2 L697,154.3 L705,155.3 L713,156.4 L721,157.5 L729,158.6 L737,159.7 L745,160.8 L753,161.9 L761,163.0 L769,164.2 L777,165.3 L785,166.4 L793,167.6 L801,168.8 L809,169.9 L817,171.1 L825,172.3 L833,173.5 L841,174.7 L849,175.9 L857,177.2 L865,178.4 L873,179.7 L881,180.9 L889,182.2 L897,183.5 L905,184.9 L913,186.2 L921,187.6 L929,189.0 L937,190.4 L945,191.8 L953,193.3 L961,194.8 L969,196.3 L977,197.9 L985,199.5 L993,201.1 L1001,202.7 L1009,204.4 L1017,206.1 L1025,207.9 L1033,209.6 L1041,211.5 L1049,213.3 L1057,215.2 L1065,217.1 L1073,219.1 L1081,221.1 L1089,223.1 L1097,225.1 L1105,227.2 L1113,229.3 L1121,231.5 L1129,233.6 L1137,235.8 L1145,238.0 L1153,240.3 L1161,242.5 L1169,244.8 L1177,247.1 L1185,249.4 L1193,251.7" fill="none" stroke="var(--accent)" stroke-width="1" opacity="0.17"/><path d="M545,139.2 L553,139.6 L561,140.0 L569,140.6 L577,141.2 L585,141.9 L593,142.6 L601,143.4 L609,144.2 L617,145.1 L625,146.0 L633,146.9 L641,147.8 L649,148.8 L657,149.8 L665,150.8 L673,151.9 L681,153.0 L689,154.0 L697,155.1 L705,156.3 L713,157.4 L721,158.6 L729,159.8 L737,161.0 L745,162.2 L753,163.4 L761,164.7 L769,166.0 L777,167.3 L785,168.6 L793,170.0 L801,171.3 L809,172.7 L817,174.1 L825,175.6 L833,177.1 L841,178.6 L849,180.1 L857,181.7 L865,183.3 L873,184.9 L881,186.5 L889,188.2 L897,190.0 L905,191.7 L913,193.5 L921,195.3 L929,197.2 L937,199.1 L945,201.0 L953,203.0 L961,205.0 L969,207.1 L977,209.1 L985,211.3 L993,213.4 L1001,215.6 L1009,217.8 L1017,220.0 L1025,222.3 L1033,224.6 L1041,226.9 L1049,229.3 L1057,231.6 L1065,234.0 L1073,236.4 L1081,238.9 L1089,241.3 L1097,243.8 L1105,246.2 L1113,248.7 L1121,251.2 L1129,253.7 L1137,256.2 L1145,258.7 L1153,261.2 L1161,263.7 L1169,266.2 L1177,268.7 L1185,271.2 L1193,273.6" fill="none" stroke="var(--accent)" stroke-width="1" opacity="0.14"/><path d="M545,139.2 L553,139.5 L561,140.0 L569,140.5 L577,141.1 L585,141.8 L593,142.6 L601,143.4 L609,144.2 L617,145.1 L625,146.0 L633,147.0 L641,148.0 L649,149.1 L657,150.1 L665,151.2 L673,152.4 L681,153.6 L689,154.8 L697,156.0 L705,157.3 L713,158.6 L721,159.9 L729,161.3 L737,162.7 L745,164.2 L753,165.6 L761,167.2 L769,168.7 L777,170.3 L785,171.9 L793,173.6 L801,175.3 L809,177.1 L817,178.8 L825,180.7 L833,182.5 L841,184.4 L849,186.4 L857,188.3 L865,190.3 L873,192.4 L881,194.5 L889,196.6 L897,198.8 L905,201.0 L913,203.2 L921,205.5 L929,207.8 L937,210.1 L945,212.5 L953,214.8 L961,217.3 L969,219.7 L977,222.2 L985,224.6 L993,227.1 L1001,229.7 L1009,232.2 L1017,234.7 L1025,237.3 L1033,239.9 L1041,242.4 L1049,245.0 L1057,247.6 L1065,250.2 L1073,252.8 L1081,255.4 L1089,258.0 L1097,260.6 L1105,263.2 L1113,265.8 L1121,268.3 L1129,270.9 L1137,273.5 L1145,276.0 L1153,278.6 L1161,281.1 L1169,283.6 L1177,286.1 L1185,288.6 L1193,291.1" fill="none" stroke="var(--accent)" stroke-width="1" opacity="0.12"/><path d="M545,139.2 L553,139.5 L561,139.9 L569,140.5 L577,141.1 L585,141.8 L593,142.6 L601,143.4 L609,144.3 L617,145.3 L625,146.3 L633,147.4 L641,148.5 L649,149.7 L657,150.9 L665,152.2 L673,153.5 L681,154.9 L689,156.3 L697,157.7 L705,159.3 L713,160.8 L721,162.4 L729,164.1 L737,165.8 L745,167.5 L753,169.3 L761,171.2 L769,173.0 L777,175.0 L785,176.9 L793,178.9 L801,181.0 L809,183.1 L817,185.2 L825,187.4 L833,189.6 L841,191.8 L849,194.1 L857,196.4 L865,198.8 L873,201.1 L881,203.5 L889,206.0 L897,208.4 L905,210.9 L913,213.4 L921,215.9 L929,218.5 L937,221.0 L945,223.6 L953,226.2 L961,228.8 L969,231.4 L977,234.0 L985,236.6 L993,239.3 L1001,241.9 L1009,244.5 L1017,247.2 L1025,249.8 L1033,252.4 L1041,255.1 L1049,257.7 L1057,260.4 L1065,263.0 L1073,265.6 L1081,268.3 L1089,270.9 L1097,273.6 L1105,276.2 L1113,278.8 L1121,281.5 L1129,284.1 L1137,286.7 L1145,289.4 L1153,292.0 L1161,294.7 L1169,297.4 L1177,300.0 L1185,302.7 L1193,305.4" fill="none" stroke="var(--accent)" stroke-width="1" opacity="0.10"/>
+  <path d="M545,139.2 L553,139.4 L561,139.6 L569,139.9 L577,140.3 L585,140.7 L593,141.1 L601,141.6 L609,142.1 L617,142.7 L625,143.3 L633,143.9 L641,144.5 L649,145.2 L657,145.8 L665,146.6 L673,147.3 L681,148.1 L689,148.9 L697,149.7 L705,150.5 L713,151.4 L721,152.2 L729,153.1 L737,154.0 L745,155.0 L753,155.9 L761,156.9 L769,157.8 L777,158.8 L785,159.8 L793,160.8 L801,161.8 L809,162.8 L817,163.8 L825,164.8 L833,165.8 L841,166.8 L849,167.8 L857,168.8 L865,169.8 L873,170.8 L881,171.8 L889,172.8 L897,173.8 L905,174.7 L913,175.7 L921,176.6 L929,177.5 L937,178.5 L945,179.4 L953,180.3 L961,181.2 L969,182.1 L977,182.9 L985,183.8 L993,184.6 L1001,185.5 L1009,186.3 L1017,187.2 L1025,188.0 L1033,188.8 L1041,189.6 L1049,190.5 L1057,191.3 L1065,192.1 L1073,193.0 L1081,193.8 L1089,194.6 L1097,195.5 L1105,196.4 L1113,197.3 L1121,198.2 L1129,199.1 L1137,200.0 L1145,201.0 L1153,201.9 L1161,202.9 L1169,204.0 L1177,205.0 L1185,206.1 L1193,207.2" fill="none" stroke="var(--accent)" stroke-width="2.2" opacity=".9"/>
+  <path d="M0,117.6 L5,117.7 L10,117.6 L15,117.5 L20,117.1 L25,116.5 L30,116.0 L35,116.0 L40,115.8 L45,115.3 L50,114.9 L55,115.7 L60,116.1 L65,116.5 L70,117.4 L75,117.7 L80,118.1 L85,118.9 L90,118.9 L95,119.0 L100,118.7 L105,118.4 L110,117.6 L115,117.3 L120,115.8 L125,114.7 L130,113.6 L135,112.4 L140,110.8 L145,110.4 L150,110.3 L155,110.7 L160,111.2 L165,112.1 L170,113.1 L175,114.7 L180,116.1 L185,117.7 L190,118.8 L195,119.8 L200,120.2 L205,120.6 L210,120.8 L215,120.6 L220,119.7 L225,118.4 L230,116.8 L235,114.7 L240,112.4 L245,110.2 L250,107.3 L255,104.0 L260,101.1 L265,99.0 L270,97.3 L275,95.9 L280,93.9 L285,92.7 L290,92.4 L295,92.2 L300,92.0 L305,91.2 L310,91.2 L315,90.9 L320,90.6 L325,89.6 L330,89.7 L335,89.3 L340,90.0 L345,89.8 L350,90.8 L355,91.3 L360,92.8 L365,93.7 L370,94.6 L375,96.3 L380,97.9 L385,99.6 L390,101.8 L395,104.2 L400,106.8 L405,110.4 L410,113.4 L415,116.1 L420,118.5 L425,121.1 L430,122.6 L435,124.2 L440,124.9 L445,124.6 L450,124.7 L455,125.2 L460,124.5 L465,124.0 L470,123.6 L475,123.0 L480,123.2 L485,123.4 L490,123.1 L495,124.0 L500,125.5 L505,126.6 L510,127.7 L515,129.1 L520,131.0 L525,133.7 L530,135.8 L535,136.7 L540,137.7 L545,139.2" fill="none" stroke="var(--ink)" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>
+  <line x1="545" y1="10" x2="545" y2="270" stroke="var(--ink-3)" stroke-width="1" stroke-dasharray="2 5" opacity=".65"/>
+  <circle cx="545" cy="139.2" r="4.6" fill="var(--bg)" stroke="var(--ink)" stroke-width="2.2"/>
+  <text x="536" y="288" text-anchor="end" fill="var(--ink-3)" font-size="15" font-family="Inter,sans-serif">now</text>
+  <text x="1196" y="288" text-anchor="end" fill="var(--ink-3)" font-size="15" font-family="Inter,sans-serif">+72 h</text>
+</svg>
+      <ul class="legend">
+        <li><i></i>Observed</li>
+        <li class="f"><i></i>Forecast, up to 72 h ahead</li>
+        <li class="t"><i></i>Level worth acting on</li>
+      </ul>
+    </div>
+  </div>
+</section>
 
 <section>
   <div class="shell">
@@ -336,7 +418,7 @@
   </div>
 </section>
 
-<section class="open">
+<section class="open" id="open">
   <div class="shell">
     <div class="open-grid">
       <div>
@@ -361,7 +443,7 @@
 
 <section>
   <div class="shell">
-    <div class="head rise"><h2>Papers</h2><span class="count">Four</span><span class="rule"></span></div>
+    <div class="head rise" id="papers"><h2>Papers</h2><span class="count">Four</span><span class="rule"></span></div>
     <article class="paper rise">
       <div class="when">2026<br><span class="first">First author</span></div>
       <div>
@@ -420,9 +502,9 @@
   </div>
 </section>
 
-<section>
+<section class="tint">
   <div class="shell">
-    <div class="head rise"><h2>Workshops I've run</h2><span class="count">Free to take and reuse</span><span class="rule"></span></div>
+    <div class="head rise" id="workshops"><h2>Workshops I've run</h2><span class="count">Free to take and reuse</span><span class="rule"></span></div>
     <div class="decks">
       <a class="deck rise" href="version-control-for-researchers/" style="--tint:#f3e3dd;--tint-2:#9d4a35">
         <span class="when">Nov 2025</span>
@@ -482,7 +564,8 @@
 
 <section>
   <div class="shell">
-    <div class="head rise"><h2>Get in touch</h2><span class="rule"></span></div>
+    <div class="head rise" id="contact"><h2>Get in touch</h2><span class="rule"></span></div>
+    <p class="sign-off rise">Email is the surest way to reach me, and I answer it. If you have a problem in reach of a model, a dataset nobody has been able to make sense of, or a research group that needs to get off a laptop and onto a cluster — I'd like to hear about it.</p>
     <dl class="contact-grid rise">
       <a href="mailto:richard.polzin@posteo.de"><dt>Email</dt><dd>richard.polzin@posteo.de</dd></a>
       <a href="https://signal.me/#eu/Lap7ZFK-xjpQbNY1eeTPpWOEQ_UPCA6zLsA0XzUoX0f7VOnZqrpB2bR3tXfJVOqD"><dt>Signal</dt><dd>Start a chat</dd></a>
