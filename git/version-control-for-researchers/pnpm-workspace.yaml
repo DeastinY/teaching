@@ -1,0 +1,9 @@
+# pnpm 11 replaced onlyBuiltDependencies/ignoredBuiltDependencies with allowBuilds,
+# and refuses to install while a dependency's build script is neither allowed nor
+# explicitly declined. Both decisions are recorded here so `pnpm build` runs clean.
+allowBuilds:
+  # only links the platform binary that is already installed as an optional dep
+  esbuild: true
+  # downloads a ~150MB browser used solely by `slidev export` (PDF/PNG).
+  # `slidev build` renders no pages itself, so it is not needed to deploy.
+  playwright-chromium: false
