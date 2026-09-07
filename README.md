@@ -12,7 +12,11 @@ This site combines a personal portfolio showcasing research work with interactiv
 
 ```
 ├── index.html                          # Main portfolio page (self-contained: CSS and JS inline)
+├── posts/                              # Blog posts, in markdown - the source
+├── blog/                               # ...and the pages built from them, which is what ships
+├── tools/build_blog.py                 # The generator that turns one into the other
 ├── assets/images/                      # The two images the homepage uses
+├── assets/css/blog.css                 # Stylesheet for the blog pages
 ├── reveal/                             # Shared Reveal.js library
 ├── azurellm/                           # LLMs at CCLS workshop
 ├── clusterintro/                       # HPC in Research workshop
@@ -20,6 +24,51 @@ This site combines a personal portfolio showcasing research work with interactiv
 ├── git/version-control-for-researchers/ # Version Control deck (Slidev source)
 └── version-control-for-researchers/    # ...and its build output, which is what ships
 ```
+
+## Blog
+
+Posts are markdown files in `posts/`, one file per post, with a small frontmatter
+block on top:
+
+```markdown
+---
+title: Why external validation is the only test that counts
+date: 2026-09-14
+summary: A model that works on the ward it was trained on has proved nothing.
+tags: icu, forecasting
+draft: true
+---
+
+The body, in ordinary markdown.
+```
+
+Only `title` and `date` are required. The filename sets the URL, with any leading
+date stripped: `2026-09-14-external-validation.md` publishes at
+`/blog/external-validation/`. `draft: true` keeps a post out of every build that
+is not `--drafts`, so you can leave half-written things lying around safely.
+
+```bash
+python3 tools/build_blog.py            # build (uv run tools/build_blog.py also works)
+python3 tools/build_blog.py --drafts   # include drafts, to preview locally
+python3 tools/build_blog.py --check    # exit 1 if blog/ is out of date; writes nothing
+```
+
+One markdown quirk worth knowing: nesting a list takes **four** spaces of
+indentation, not two. Two flattens the sub-list without complaining.
+
+The build writes `blog/index.html`, `blog/<slug>/index.html` and an RSS feed at
+`blog/feed.xml`, and refreshes the recent-posts list on the homepage between the
+`BLOG:START` / `BLOG:END` markers - don't edit that block by hand, a rebuild
+overwrites it. Renaming or deleting a post removes its old page.
+
+`posts/` is source and is never published; the generated `blog/` is committed,
+because GitHub Pages serves this repo as-is. `deploy.sh` rebuilds the blog before
+publishing, so a forgotten rebuild stops the deploy rather than shipping stale
+pages.
+
+There is a `draft: true` post in `posts/` that renders every markdown feature the
+build understands. Build with `--drafts` to look at it, copy it as a starting
+point, and delete it when you no longer want it.
 
 ## Workshops
 
@@ -54,8 +103,8 @@ does not change the live site.
 ```
 
 The script publishes what is *committed*, so commit first - including the
-rebuilt `version-control-for-researchers/`, which is a checked-in build
-artifact. `git/`, `tools/` and `deploy.sh` are never published.
+rebuilt `version-control-for-researchers/` and `blog/`, which are checked-in
+build artifacts. `git/`, `tools/`, `posts/` and `deploy.sh` are never published.
 
 ## License
 

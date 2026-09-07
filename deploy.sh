@@ -18,10 +18,20 @@ OUT=version-control-for-researchers
 DRY=${1:-}
 
 # paths that live in the repo but must never reach the published branch
-NOT_PUBLISHED=(git tools deploy.sh)
+NOT_PUBLISHED=(git tools posts deploy.sh)
 
 echo "==> building the deck"
 ( cd "$DECK" && pnpm install && pnpm build )
+
+# posts/ is source and never ships; blog/ is what the site actually serves, so
+# rebuild it here. If this changes anything, the dirty-tree check below stops
+# the deploy and asks for a commit — same contract as the deck.
+echo "==> building the blog"
+if python3 -c 'import markdown' >/dev/null 2>&1; then
+  python3 tools/build_blog.py
+else
+  uv run tools/build_blog.py
+fi
 
 echo "==> refreshing $OUT/"
 rm -rf "$OUT"
