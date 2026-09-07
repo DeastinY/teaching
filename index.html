@@ -9,6 +9,7 @@
 <link rel="canonical" href="https://www.richardpolzin.com/">
 <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml">
 <meta name="theme-color" content="#faf8f5">
+<link rel="alternate" type="application/rss+xml" title="Writing — Richard Polzin" href="https://www.richardpolzin.com/blog/feed.xml">
 
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://www.richardpolzin.com/">
@@ -247,6 +248,12 @@
   .entries a{ text-decoration:none; border-bottom:1px solid var(--line); transition:border-color .2s, color .2s; }
   .entries a:hover{ color:var(--accent); border-color:var(--accent); }
 
+  /* ---------- writing ----------
+     .entries elsewhere on the page sits inside .cols and is half a column wide;
+     this list spans the shell, so its summaries need a measure of their own */
+  .writing p{ max-width:74ch; }
+  .writing strong a{ font-weight:500; }
+
   /* ---------- teaching ---------- */
   .decks{ display:grid; gap:var(--gap);
           grid-template-columns:repeat(auto-fit,minmax(min(17rem,100%),1fr)); }
@@ -341,6 +348,7 @@
         <nav class="jump rise" aria-label="Jump to">
           <a class="lead-cta" href="#open">Open to work</a>
           <a href="#papers">Papers</a>
+          <a href="#writing">Writing</a>
           <a href="#workshops">Workshops</a>
           <a href="#contact">Get in touch</a>
         </nav>
@@ -562,6 +570,24 @@
         <span class="go">Open the deck <span>→</span></span>
       </a>
     </div>
+  </div>
+</section>
+
+<section>
+  <div class="shell">
+    <div class="head rise" id="writing"><h2>Writing</h2><span class="count">Notes from the work</span><span class="rule"></span></div>
+    <!-- The list below is generated from posts/*.md by tools/build_blog.py.
+         Edit the markdown, not this block — a rebuild overwrites it. -->
+<!-- BLOG:START -->
+      <ul class="entries writing rise">
+        <li>
+          <span class="yr">Sep 2026</span>
+          <strong><a href="./blog/sample-post/">A sample post, for checking the layout</a></strong>
+          <p>Not a real post — a stand-in with enough headings, code, tables and quotations in it to see whether the blog reads well before there is anything worth reading.</p>
+        </li>
+      </ul>
+      <p class="orcid-note rise"><a href="./blog/">The archive, and the feed &rarr;</a></p>
+<!-- BLOG:END -->
   </div>
 </section>
 
