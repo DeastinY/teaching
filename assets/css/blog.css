@@ -16,12 +16,29 @@
   --accent:    #9d4a35;
   --accent-lo: #f2e6e0;
   --data:      #4a6b76;
+  --shadow:    rgb(23 21 15 / .06);
 
   /* prose wants a slightly wider column than the homepage's card copy */
   --measure: 68ch;
   --gap:  clamp(1.25rem, 1.6vw, 2.25rem);
   --pad:  clamp(1.25rem, 4.5vw, 5.5rem);
   --shell: min(96rem, 100% - var(--pad) * 2);
+}
+/* dark: the same values as the homepage's dark block, re-measured for contrast
+   against both grounds (ink-3 6.5:1, accent 7.7:1) */
+@media (prefers-color-scheme:dark){
+  :root{
+    --bg:        #14120e;
+    --bg-warm:   #1c1914;
+    --ink:       #efe9df;
+    --ink-2:     #c8c0b4;
+    --ink-3:     #a0978a;
+    --line:      #2f2a22;
+    --accent:    #e3917b;
+    --accent-lo: #3a241c;
+    --data:      #8fb6c2;
+    --shadow:    rgb(0 0 0 / .35);
+  }
 }
 *{ box-sizing:border-box; }
 html{
@@ -56,7 +73,7 @@ img{ max-width:100%; height:auto; }
 /* ---------- masthead ---------- */
 .top{
   position:sticky; top:0; z-index:20;
-  background:rgb(250 248 245 / .86); backdrop-filter:saturate(1.4) blur(10px);
+  background:color-mix(in srgb, var(--bg) 86%, transparent); backdrop-filter:saturate(1.4) blur(10px);
   border-bottom:1px solid var(--line);
 }
 .top .shell{
@@ -278,6 +295,27 @@ img{ max-width:100%; height:auto; }
 .codehilite .gh, .codehilite .gu{ color:#4f4a42; font-weight:600; }
 .codehilite .err{ color:#8a4030; }
 
+/* the same roles on the dark ground; every colour clears 5.5:1 on #1c1914 */
+@media (prefers-color-scheme:dark){
+  .codehilite .c, .codehilite .c1, .codehilite .cm, .codehilite .cs,
+  .codehilite .cp, .codehilite .cpf, .codehilite .ch{ color:#9a9083; }
+  .codehilite .k, .codehilite .kn, .codehilite .kd, .codehilite .kc,
+  .codehilite .kr, .codehilite .kt, .codehilite .ow{ color:#e8977f; }
+  .codehilite .s, .codehilite .s1, .codehilite .s2, .codehilite .sb,
+  .codehilite .sd, .codehilite .se, .codehilite .sh, .codehilite .si,
+  .codehilite .sr, .codehilite .sx, .codehilite .ss{ color:#9ccaa9; }
+  .codehilite .m, .codehilite .mi, .codehilite .mf, .codehilite .mh,
+  .codehilite .mo, .codehilite .il{ color:#c6aae4; }
+  .codehilite .nf, .codehilite .fm,
+  .codehilite .nc, .codehilite .nn, .codehilite .ne{ color:#93b9db; }
+  .codehilite .nb, .codehilite .bp, .codehilite .nv, .codehilite .vi{ color:#8fb6c2; }
+  .codehilite .nd, .codehilite .na{ color:#c6aae4; }
+  .codehilite .o, .codehilite .p{ color:#b6ad9f; }
+  .codehilite .gd, .codehilite .err{ color:#e8977f; }
+  .codehilite .gi{ color:#9ccaa9; }
+  .codehilite .gh, .codehilite .gu{ color:#c8c0b4; }
+}
+
 /* ---------- article footer ---------- */
 .article-foot{
   width:min(var(--measure), 100% - var(--pad) * 2); margin:clamp(3rem,7vh,5rem) auto 0;
@@ -299,7 +337,7 @@ img{ max-width:100%; height:auto; }
   border:1px solid var(--line); border-radius:12px; background:var(--bg);
   transition:border-color .3s, transform .3s cubic-bezier(.2,.8,.3,1), box-shadow .3s;
 }
-.nearby a:hover{ border-color:var(--accent); transform:translateY(-3px); box-shadow:0 12px 30px rgb(23 21 15 / .06); }
+.nearby a:hover{ border-color:var(--accent); transform:translateY(-3px); box-shadow:0 12px 30px var(--shadow); }
 .nearby .dir{ display:block; font-size:.7rem; letter-spacing:.13em; text-transform:uppercase; color:var(--ink-3); margin-bottom:.45rem; }
 .nearby strong{ font-family:'Fraunces',Georgia,serif; font-weight:400; font-size:1.06rem; line-height:1.3; }
 
