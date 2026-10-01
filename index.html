@@ -61,7 +61,7 @@
     --shell: min(96rem, 100% - var(--pad) * 2);
   }
   *{ box-sizing:border-box; }
-  html{ scroll-behavior:smooth; scroll-padding-top:2rem; -webkit-text-size-adjust:100%; font-size:16px; }
+  html{ scroll-behavior:smooth; scroll-padding-top:4.5rem; -webkit-text-size-adjust:100%; font-size:16px; }
   @media (min-width:2200px){ html{ font-size:18px; } }
   @media (min-width:3000px){ html{ font-size:21px; } }
   @media (min-width:3600px){ html{ font-size:24px; } }
@@ -84,6 +84,36 @@
   }
   .skip:focus{ left:0; }
   :focus-visible{ outline:2.5px solid var(--accent); outline-offset:3px; border-radius:2px; }
+
+  /* ---------- section bar ----------
+     the hero's jump links scroll away with it, which left a long page with no
+     way around it. This bar matches the blog's masthead and only appears once
+     the hero is gone, so it never competes with the jump links it replaces. */
+  .bar{
+    position:fixed; inset:0 0 auto; z-index:30;
+    background:color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter:saturate(1.4) blur(10px); -webkit-backdrop-filter:saturate(1.4) blur(10px);
+    border-bottom:1px solid var(--line);
+    transform:translateY(-100%); visibility:hidden;
+    transition:transform .35s cubic-bezier(.2,.8,.3,1), visibility 0s linear .35s;
+  }
+  .bar.on{ transform:none; visibility:visible; transition:transform .35s cubic-bezier(.2,.8,.3,1); }
+  .bar .shell{ display:flex; align-items:center; justify-content:space-between; gap:1.5rem; padding-block:.8rem; }
+  .bar .home{ font-family:'Fraunces',Georgia,serif; font-size:1.02rem; text-decoration:none; white-space:nowrap; }
+  .bar ul{ display:flex; gap:clamp(1rem,2vw,1.8rem); margin:0; padding:0; list-style:none;
+           font-size:.9rem; color:var(--ink-3); overflow-x:auto; scrollbar-width:none; }
+  .bar ul::-webkit-scrollbar{ display:none; }
+  .bar li a{ display:block; white-space:nowrap; text-decoration:none; padding-bottom:1px;
+             border-bottom:1px solid transparent; transition:color .2s,border-color .2s; }
+  .bar li a:hover{ color:var(--accent); border-color:var(--accent); }
+  .bar li a[aria-current="true"]{ color:var(--ink); border-color:var(--ink-3); }
+  @media (max-width:640px){
+    .bar .home{ display:none; }
+    .bar .shell{ padding-block:.7rem; }
+    .bar ul{ font-size:.86rem; padding-inline:.75rem; margin-inline:-.75rem;
+             -webkit-mask-image:linear-gradient(90deg,transparent,#000 .75rem,#000 calc(100% - .75rem),transparent);
+                     mask-image:linear-gradient(90deg,transparent,#000 .75rem,#000 calc(100% - .75rem),transparent); }
+  }
 
   /* ---------- the signal field ----------
      the visual language is the data he actually works on: physiological traces
@@ -356,6 +386,7 @@
   @media (prefers-reduced-motion:reduce){
     html{ scroll-behavior:auto; }
     .rise{ opacity:1 !important; transform:none !important; }
+    .bar, .bar.on{ transition:none; }
     .deck, .deck::before, .deck .go span{ transition:none !important; }
   }
 </style>
@@ -363,7 +394,20 @@
 <body>
 <a class="skip" href="#main">Skip to content</a>
 
-<header class="hero">
+<nav class="bar" aria-label="Sections">
+  <div class="shell">
+    <a class="home" href="#top">Richard Polzin</a>
+    <ul>
+      <li><a href="#open">Open to work</a></li>
+      <li><a href="#papers">Papers</a></li>
+      <li><a href="#workshops">Workshops</a></li>
+      <li><a href="#writing">Writing</a></li>
+      <li><a href="#contact">Get in touch</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero" id="top">
   <canvas class="field" aria-hidden="true"></canvas>
   <div class="shell">
     <div class="hero-grid">
@@ -733,6 +777,35 @@
     document.addEventListener('visibilitychange', function(){
       document.hidden ? stop() : start();
     });
+  }
+
+  /* ---------- section bar ---------- */
+  var bar = document.querySelector('.bar'), hero = document.querySelector('.hero');
+  if (bar && hero && 'IntersectionObserver' in window){
+    new IntersectionObserver(function(es){
+      bar.classList.toggle('on', !es[0].isIntersecting);
+    }, { rootMargin:'-64px 0px 0px 0px' }).observe(hero);
+
+    // mark the section being read: whichever crosses the middle of the screen
+    var links = [].slice.call(bar.querySelectorAll('li a'));
+    var bySection = new Map();
+    links.forEach(function(a){
+      var t = document.querySelector(a.getAttribute('href'));
+      var sec = t && t.closest('section');
+      if (sec) bySection.set(sec, a);
+    });
+    var spy = new IntersectionObserver(function(es){
+      es.forEach(function(e){
+        if (!e.isIntersecting) return;
+        links.forEach(function(a){ a.removeAttribute('aria-current'); });
+        var a = bySection.get(e.target);
+        a.setAttribute('aria-current', 'true');
+        // keep the active link in view when the list scrolls sideways on a phone
+        var ul = a.parentNode.parentNode;
+        if (ul.scrollWidth > ul.clientWidth) ul.scrollTo({ left:a.offsetLeft - ul.offsetLeft - 28, behavior: reduce ? 'auto' : 'smooth' });
+      });
+    }, { rootMargin:'-45% 0px -50% 0px' });
+    bySection.forEach(function(_, sec){ spy.observe(sec); });
   }
 
   /* ---------- entrances ---------- */
