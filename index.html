@@ -139,16 +139,19 @@
     font-weight:400;
   }
   .lead b{ color:var(--ink); font-weight:500; }
+  /* portrait and facts are one block that shares a left edge and sits flush
+     with the right of the shell, rather than two things floating near it */
+  .hero-side{ width:100%; max-width:24rem; }
+  @media (min-width:900px){ .hero-side{ justify-self:end; } }
   .portrait{
-    justify-self:start; width:clamp(140px,15vw,220px); aspect-ratio:1;
+    margin:0; width:clamp(120px,12vw,200px); aspect-ratio:1;
     border-radius:50%; overflow:hidden; border:1px solid var(--line);
     background:var(--bg-warm);
   }
-  @media (min-width:900px){ .portrait{ justify-self:end; } }
   /* facts worth having before anyone scrolls */
-  .facts{ display:flex; flex-wrap:wrap; gap:clamp(1.4rem,3vw,3rem);
-          margin:clamp(1.8rem,4vh,2.8rem) 0 0; padding:0; list-style:none; }
-  .facts li{ min-width:6.5rem; }
+  .facts{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); column-gap:1.5rem;
+          margin:clamp(1.6rem,3.5vh,2.6rem) 0 0; padding:0; list-style:none; }
+  .facts li{ padding-block:.95rem; border-top:1px solid var(--line); }
   .facts b{ display:block; font-family:'Fraunces',serif; font-weight:400;
             font-size:clamp(1.7rem,1.3rem + 1.4vw,2.6rem); line-height:1; color:var(--accent); }
   .facts span{ display:block; margin-top:.35rem; font-size:.82rem; color:var(--ink-3); line-height:1.35; }
@@ -369,8 +372,8 @@
           <a href="#contact">Get in touch</a>
         </nav>
       </div>
-      <div>
-        <figure class="portrait rise" style="margin:0">
+      <div class="hero-side">
+        <figure class="portrait rise">
           <img src="./assets/images/my-avatar.png" alt="Richard Polzin" width="220" height="220">
         </figure>
         <ul class="facts rise">
