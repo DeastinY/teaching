@@ -157,6 +157,9 @@
     margin:0 0 clamp(1.1rem,2.4vh,2rem);
   }
   .eyebrow b{ color:var(--accent); font-weight:600; }
+  /* on a phone the location wrapped alone onto a second line; the contact
+     section already says where, so the eyebrow drops it */
+  @media (max-width:480px){ .eyebrow .where{ display:none; } }
   h1{
     font-size:clamp(3.1rem, 1.6rem + 6.6vw, 11.5rem);
     line-height:.94; letter-spacing:-.028em; font-weight:300;
@@ -412,7 +415,7 @@
   <div class="shell">
     <div class="hero-grid">
       <div>
-        <p class="eyebrow rise">AI Researcher · <b>JRC COMBINE</b> · Aachen, Germany</p>
+        <p class="eyebrow rise">AI Researcher · <b>JRC COMBINE</b><span class="where"> · Aachen, Germany</span></p>
         <h1 class="rise">Richard<br>Polzin</h1>
         <p class="lead rise">I build models that notice an intensive-care patient going downhill <b>before the numbers make it obvious.</b></p>
         <nav class="jump rise" aria-label="Jump to">
