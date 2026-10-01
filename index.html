@@ -265,8 +265,7 @@
   .writing strong a{ font-weight:500; }
 
   /* ---------- teaching ---------- */
-  .decks{ display:grid; gap:var(--gap);
-          grid-template-columns:repeat(auto-fit,minmax(min(17rem,100%),1fr)); }
+  .decks{ display:grid; gap:var(--gap); }
   .deck{
     position:relative; display:flex; flex-direction:column; gap:.5rem;
     padding:clamp(1.25rem,2vw,1.9rem); border:1px solid var(--line); border-radius:14px;
@@ -306,7 +305,6 @@
   }
   .tags li.key{ border-color:var(--accent); color:var(--accent); font-weight:500; }
   .skills{ display:grid; gap:clamp(1.6rem,3vw,2.6rem) clamp(2rem,4vw,4rem);
-           grid-template-columns:repeat(auto-fit,minmax(min(19rem,100%),1fr));
            margin:clamp(2.4rem,5vh,3.6rem) 0 0; }
   .skills article h3{ font-size:clamp(1.05rem,1rem + .3vw,1.28rem); font-weight:500; margin:0 0 .45rem; }
   .skills article p{ margin:0 0 .55rem; color:var(--ink-2); font-size:.97rem; max-width:38ch; }
@@ -315,8 +313,12 @@
   .skills .ev a:hover{ color:var(--accent); border-color:var(--accent); }
 
   /* ---------- outside the lab ---------- */
-  .life{ display:grid; gap:var(--gap) clamp(2rem,4vw,4rem);
-         grid-template-columns:repeat(auto-fit,minmax(min(16rem,100%),1fr)); }
+  .life{ display:grid; gap:var(--gap) clamp(2rem,4vw,4rem); }
+  /* the decks, the skills and the life list each hold four things, and auto-fit
+     kept dealing them three-and-one. One column, then two, then all four. */
+  .decks, .skills, .life{ grid-template-columns:minmax(0,1fr); }
+  @media (min-width:700px){ .decks, .skills, .life{ grid-template-columns:repeat(2,minmax(0,1fr)); } }
+  @media (min-width:1240px){ .decks, .skills, .life{ grid-template-columns:repeat(4,minmax(0,1fr)); } }
   .life article h3{ font-size:clamp(1.08rem,1rem + .3vw,1.3rem); font-weight:500; margin:0 0 .45rem; }
   .life article p{ margin:0; color:var(--ink-2); font-size:.96rem; }
   .life .em{ font-size:1.9rem; line-height:1; display:block; margin-bottom:.75rem; }
