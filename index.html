@@ -278,6 +278,15 @@
   .rule{ flex:1 1 4rem; height:1px; background:var(--line); }
 
   /* ---------- now ---------- */
+  /* a status that says when it was true, with a slow pulse like a monitor's
+     heartbeat light, so it reads as kept up rather than written once */
+  .live{ display:inline-flex; align-items:center; gap:.55rem; }
+  .live i{ position:relative; width:.5rem; height:.5rem; border-radius:50%; background:var(--accent); }
+  .live i::after{
+    content:''; position:absolute; inset:0; border-radius:50%; background:var(--accent);
+    animation:pulse 2.4s cubic-bezier(.2,.6,.4,1) infinite;
+  }
+  @keyframes pulse{ 0%{ transform:scale(1); opacity:.55; } 70%,100%{ transform:scale(3); opacity:0; } }
   .now{
     display:grid; gap:var(--gap);
     grid-template-columns:repeat(auto-fit,minmax(min(15rem,100%),1fr));
@@ -439,6 +448,7 @@
   @media (prefers-reduced-motion:reduce){
     html{ scroll-behavior:auto; }
     .rise{ opacity:1 !important; transform:none !important; }
+    .live i::after{ animation:none; display:none; }
     .bar, .bar.on{ transition:none; }
     .deck, .deck::before, .deck .go span, .deck .motif{ transition:none !important; }
   }
@@ -533,7 +543,8 @@
 
 <section>
   <div class="shell">
-    <div class="head rise"><h2>Right now</h2><span class="rule"></span></div>
+    <!-- bump the date whenever the three lines below change -->
+    <div class="head rise"><h2>Right now</h2><span class="count live"><i aria-hidden="true"></i>Updated <time datetime="2026-09">September 2026</time></span><span class="rule"></span></div>
     <dl class="now rise">
       <div><dt>Research</dt><dd>Getting an ICU oxygenation model ready for external validation — the real test of whether it travels.</dd></div>
       <div><dt>Teaching</dt><dd>Version control and reproducible workflows, for research groups who never got taught them.</dd></div>
