@@ -258,6 +258,13 @@
   .entries .yr{ font-family:'Fraunces',serif; color:var(--ink-3); font-size:.95rem; padding-top:.12rem; }
   .entries strong{ font-weight:500; }
   .entries p{ margin:.1rem 0 0; color:var(--ink-2); font-size:.95rem; grid-column:2; }
+  /* on a phone the date column cost a third of the width and squeezed every
+     description into a narrow ribbon, so the date moves above the entry */
+  @media (max-width:560px){
+    .entries li{ grid-template-columns:minmax(0,1fr); gap:.1rem; padding-block:1rem; }
+    .entries .yr{ font-size:.86rem; padding-top:0; }
+    .entries p{ grid-column:1; }
+  }
   .entries a{ text-decoration:none; border-bottom:1px solid var(--line); transition:border-color .2s, color .2s; }
   .entries a:hover{ color:var(--accent); border-color:var(--accent); }
 
