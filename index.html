@@ -733,7 +733,7 @@
      texture behind type, not a centrepiece, and this costs a few hundred bytes
      of maths instead of a renderer. */
   var cv = document.querySelector('.field');
-  if (cv && !reduce){
+  if (cv){
     var cx = cv.getContext('2d'), w = 0, h = 0, dpr = 1, raf = 0, t = 0;
     var LINES = 34;
 
@@ -745,7 +745,7 @@
       cx.setTransform(dpr, 0, 0, dpr, 0, 0);
     }
 
-    function draw(){
+    function paint(){
       cx.clearRect(0, 0, w, h);
       for (var i = 0; i < LINES; i++){
         var f = i / (LINES - 1);
@@ -768,6 +768,9 @@
         cx.lineWidth = warm ? 1.3 : .95;
         cx.stroke();
       }
+    }
+    function draw(){
+      paint();
       t += 0.006;
       raf = requestAnimationFrame(draw);
     }
@@ -776,6 +779,12 @@
     function start(){ if (!run){ run = true; draw(); } }
     function stop(){ run = false; cancelAnimationFrame(raf); }
 
+    // reduced motion still gets the traces, as one still frame from a moment
+    // where the fan has opened up, rather than a blank hero
+    if (reduce){
+      t = 2.4; size(); paint();
+      addEventListener('resize', function(){ size(); paint(); }, { passive:true });
+    } else {
     size(); start();
     addEventListener('resize', function(){ size(); }, { passive:true });
     // the field is decoration — it must not burn a core once it is scrolled past
@@ -785,6 +794,7 @@
     document.addEventListener('visibilitychange', function(){
       document.hidden ? stop() : start();
     });
+    }
   }
 
   /* ---------- section bar ---------- */
