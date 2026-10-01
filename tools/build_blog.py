@@ -59,7 +59,7 @@ AUTHOR = "Richard Polzin"
 EMAIL = "richard.polzin@posteo.de"
 BLOG_TITLE = "Writing — Richard Polzin"
 BLOG_TAGLINE = "Notes on machine learning in medicine, research computing, and the parts of the work that don’t fit in a paper."
-DEFAULT_IMAGE = f"{SITE}/assets/images/my-avatar.png"
+DEFAULT_IMAGE = f"{SITE}/assets/images/og-card.png"  # rendered by tools/make_og_card.mjs
 HOMEPAGE_POSTS = 4          # how many appear on the homepage
 WORDS_PER_MINUTE = 220
 

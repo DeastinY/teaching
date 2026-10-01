@@ -1,0 +1,67 @@
+<!doctype html>
+<!--
+  The social preview card, rendered to assets/images/og-card.png by
+  tools/make_og_card.mjs. The chart is not copied in here: the script lifts the
+  forecast figure out of index.html at render time, so the card always shows
+  the same drawing as the homepage. Open this file directly and the chart slot
+  is simply empty.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#faf8f5; --bg-warm:#f4f0ea; --ink:#17150f; --ink-2:#4f4a42; --ink-3:#6b6259;
+    --line:#e5ded4; --accent:#9d4a35;
+  }
+  *{ box-sizing:border-box; }
+  html, body{ margin:0; }
+  body{
+    width:1200px; height:630px; overflow:hidden; position:relative;
+    background:var(--bg); color:var(--ink);
+    font-family:'Inter',system-ui,sans-serif; -webkit-font-smoothing:antialiased;
+  }
+  .copy{ position:absolute; left:72px; top:58px; right:330px; }
+  .eyebrow{
+    margin:0 0 26px; font-size:17px; font-weight:500; letter-spacing:.16em;
+    text-transform:uppercase; color:var(--ink-3);
+  }
+  .eyebrow b{ color:var(--accent); font-weight:600; }
+  h1{
+    margin:0 0 26px; font-family:'Fraunces',Georgia,serif; font-weight:300;
+    font-size:112px; line-height:.94; letter-spacing:-.028em;
+  }
+  .lead{ margin:0; font-size:27px; line-height:1.38; color:var(--ink-2); max-width:30ch; }
+  .lead b{ color:var(--ink); font-weight:500; }
+  .portrait{
+    position:absolute; right:72px; top:72px; width:200px; height:200px; margin:0;
+    border-radius:50%; overflow:hidden; border:1px solid var(--line); background:var(--bg-warm);
+  }
+  .portrait img{ width:100%; height:100%; object-fit:cover; display:block; filter:grayscale(.25) contrast(1.03); }
+  .strip{
+    position:absolute; left:0; right:0; bottom:0; height:214px;
+    background:var(--bg-warm); border-top:1px solid var(--line);
+  }
+  /* the chart, lifted from index.html and cropped to the rows the data uses;
+     it stretches to its box the way it does there */
+  .strip .forecast{ position:absolute; left:0; top:12px; width:1200px; height:190px; }
+  .url{
+    position:absolute; right:72px; bottom:236px;
+    font-size:19px; font-weight:500; color:var(--ink-3); letter-spacing:.01em;
+  }
+</style>
+</head>
+<body>
+  <div class="copy">
+    <p class="eyebrow">AI Researcher · <b>JRC COMBINE</b> · Aachen</p>
+    <h1>Richard Polzin</h1>
+    <p class="lead">Models that notice an intensive-care patient going downhill <b>before the numbers make it obvious.</b></p>
+  </div>
+  <figure class="portrait"><img src="../assets/images/my-avatar.png" alt=""></figure>
+  <div class="strip" id="chart"></div>
+  <div class="url">richardpolzin.com</div>
+</body>
+</html>
