@@ -251,6 +251,11 @@ img{ max-width:100%; height:auto; }
     width:min(78ch, calc(100vw - var(--pad) * 2));
     margin-left:50%; transform:translateX(-50%);
   }
+  /* a side-by-side clip is unreadable at the measure, so it goes wider still */
+  .prose figure.wide{
+    width:min(96ch, calc(100vw - var(--pad) * 2));
+    margin-left:50%; transform:translateX(-50%);
+  }
 }
 .prose table{ border-collapse:collapse; width:100%; font-size:.94em; }
 .prose th, .prose td{
@@ -262,7 +267,20 @@ img{ max-width:100%; height:auto; }
 
 .prose figure{ margin:2em 0; }
 .prose figure img, .prose p > img{ display:block; border-radius:10px; border:1px solid var(--line); }
+.prose figure video{
+  display:block; width:100%; height:auto;
+  border-radius:10px; border:1px solid var(--line); background:var(--bg-warm);
+}
+/* an embedded map has no intrinsic height, so give it a shape to hold */
+.prose figure iframe{
+  display:block; width:100%; aspect-ratio:16/10;
+  border-radius:10px; border:1px solid var(--line);
+}
 .prose figcaption{ margin-top:.7rem; font-size:.84rem; color:var(--ink-3); }
+/* legend keys in a caption: the swatch names the colour, the word carries it */
+.prose figcaption .key{ display:inline-flex; align-items:center; gap:.35em; margin-right:.9em; white-space:nowrap; }
+.prose figcaption .key i{ width:.7em; height:.7em; border-radius:2px; flex:none; }
+.prose figcaption .key i.ramp{ width:3.2em; background:linear-gradient(90deg, #eae1d2, #2a78d6); }
 
 .prose .footnote-ref{ font-size:.8em; padding:0; background:none; text-decoration:none; }
 .prose .footnote hr{ display:none; }   /* the extension emits one; the border above is ours */
