@@ -15,7 +15,9 @@ This site combines a personal portfolio showcasing research work with interactiv
 ├── posts/                              # Blog posts, in markdown - the source
 ├── blog/                               # ...and the pages built from them, which is what ships
 ├── tools/build_blog.py                 # The generator that turns one into the other
-├── assets/images/                      # The two images the homepage uses
+├── tools/og-card.html                  # The social preview card, as a page...
+├── tools/make_og_card.mjs              # ...and the script that renders it to a PNG
+├── assets/images/                      # Portrait, and the social preview card
 ├── assets/css/blog.css                 # Stylesheet for the blog pages
 ├── reveal/                             # Shared Reveal.js library
 ├── azurellm/                           # LLMs at CCLS workshop
@@ -69,6 +71,19 @@ pages.
 There is a `draft: true` post in `posts/` that renders every markdown feature the
 build understands. Build with `--drafts` to look at it, copy it as a starting
 point, and delete it when you no longer want it.
+
+## Social preview card
+
+Links to the site and the blog unfurl with `assets/images/og-card.png`. It is
+rendered from `tools/og-card.html`, with the forecast chart lifted out of
+`index.html` at render time so the two never drift apart. After changing the
+chart, the name or the strapline, re-render and commit the PNG:
+
+```bash
+node tools/make_og_card.mjs     # needs the playwright package and a Chromium
+```
+
+A post can still set its own card with `image:` in its frontmatter.
 
 ## Workshops
 

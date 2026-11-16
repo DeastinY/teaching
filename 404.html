@@ -1,32 +1,108 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Page Not Found</title>
-<style>
-  body { font-family: sans-serif; text-align: center; padding: 4rem 1rem; }
-  a { color: inherit; }
-</style>
-</head>
-<body>
-<div id="fallback">
-  <h1>404 — Page Not Found</h1>
-  <p><a href="/">Go back home</a></p>
-</div>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Page not found — Richard Polzin</title>
+<meta name="robots" content="noindex">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#faf8f5" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#14120e" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <script>
   // GitHub Pages only serves a single root-level 404.html for any unmatched
   // path, so client-side-routed apps living in a subfolder (like the Slidev
-  // deck below) need their real app shell fetched in here rather than relying
-  // on their own nested 404.html, which GitHub Pages never actually serves.
+  // deck) need their real app shell fetched in here rather than relying on
+  // their own nested 404.html, which GitHub Pages never actually serves.
+  // The page stays hidden on those routes so it does not flash before the deck.
+  var DECK = "/version-control-for-researchers/";
+  if (location.pathname.indexOf(DECK) === 0) document.documentElement.className = "deck-route";
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  /* the palette is a copy of the homepage's, light and dark, like blog.css */
+  :root{
+    --bg:#faf8f5; --bg-warm:#f4f0ea; --ink:#17150f; --ink-2:#4f4a42; --ink-3:#6b6259;
+    --line:#e5ded4; --accent:#9d4a35; --accent-lo:#f2e6e0;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --bg:#14120e; --bg-warm:#1c1914; --ink:#efe9df; --ink-2:#c8c0b4; --ink-3:#a0978a;
+      --line:#2f2a22; --accent:#e3917b; --accent-lo:#3a241c;
+    }
+  }
+  .deck-route body{ visibility:hidden; }
+  *{ box-sizing:border-box; }
+  body{
+    margin:0; min-height:100svh; display:grid; place-items:center;
+    background:var(--bg); color:var(--ink);
+    font-family:'Inter',system-ui,-apple-system,'Segoe UI',sans-serif;
+    font-size:clamp(1rem,.96rem + .18vw,1.14rem); line-height:1.6; -webkit-font-smoothing:antialiased;
+  }
+  main{ width:min(40rem, 100% - 2.5rem); padding-block:3rem; }
+  .trace-wrap{ position:relative; margin:0 0 2.2rem; }
+  .trace{ display:block; width:100%; height:auto; overflow:visible; }
+  .trace .beat{ fill:none; stroke:var(--ink); stroke-width:1.6; stroke-linejoin:round; stroke-linecap:round; }
+  .trace .lost{ fill:none; stroke:var(--ink-3); stroke-width:1.2; stroke-dasharray:3 6; }
+  /* HTML rather than SVG text, so it stays readable when the drawing shrinks */
+  .lost-label{
+    position:absolute; right:0; bottom:calc(16.4% + .45rem);
+    font-size:.7rem; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:var(--accent);
+  }
+  .code{
+    margin:0 0 .9rem; font-size:.78rem; font-weight:600; letter-spacing:.16em;
+    text-transform:uppercase; color:var(--accent);
+  }
+  h1{
+    margin:0 0 1rem; font-family:'Fraunces',Georgia,serif; font-weight:300;
+    font-size:clamp(2.2rem,1.6rem + 2.6vw,3.6rem); line-height:1.04; letter-spacing:-.024em;
+  }
+  p{ margin:0; color:var(--ink-2); max-width:44ch; }
+  nav{ display:flex; flex-wrap:wrap; gap:.6rem; margin-top:2rem; }
+  nav a{
+    padding:.5rem 1rem; border:1px solid var(--line); border-radius:99px;
+    font-size:.9rem; text-decoration:none; color:var(--ink-2); transition:border-color .2s,color .2s;
+  }
+  nav a:hover{ border-color:var(--accent); color:var(--accent); }
+  nav a.home{ background:var(--ink); border-color:var(--ink); color:var(--bg); }
+  nav a.home:hover{ background:var(--accent); border-color:var(--accent); color:var(--bg); }
+  :focus-visible{ outline:2.5px solid var(--accent); outline-offset:3px; border-radius:99px; }
+</style>
+</head>
+<body>
+<main>
+  <div class="trace-wrap">
+  <svg class="trace" viewBox="0 0 600 110" role="img" aria-label="A pulse trace that drops out into a dashed line, the way a monitor shows a lost signal">
+    <path class="beat" d="M0,76.7 L2,73.9 L4,66.4 L6,53.3 L8,40.2 L10,36.9 L12,45.4 L14,57.7 L16,65.7 L18,68.5 L20,68.8 L22,68.3 L24,67.4 L26,65.7 L28,62.7 L30,59.2 L32,57.3 L34,58.9 L36,63.6 L38,69.0 L40,73.2 L42,75.5 L44,76.7 L46,77.2 L48,77.6 L50,77.7 L52,77.9 L54,77.9 L56,78.0 L58,78.0 L60,78.0 L62,78.0 L64,78.0 L66,78.0 L68,78.0 L70,78.0 L72,78.0 L74,78.0 L76,78.0 L78,76.7 L80,73.9 L82,66.4 L84,53.3 L86,40.2 L88,36.9 L90,45.4 L92,57.7 L94,65.7 L96,68.5 L98,68.8 L100,68.3 L102,67.4 L104,65.7 L106,62.7 L108,59.2 L110,57.3 L112,58.9 L114,63.6 L116,69.0 L118,73.2 L120,75.5 L122,76.7 L124,77.2 L126,77.6 L128,77.7 L130,77.9 L132,77.9 L134,78.0 L136,78.0 L138,78.0 L140,78.0 L142,78.0 L144,78.0 L146,78.0 L148,78.0 L150,78.0 L152,78.0 L154,78.0 L156,76.7 L158,73.9 L160,66.4 L162,53.3 L164,40.2 L166,36.9 L168,45.4 L170,57.7 L172,65.7 L174,68.5 L176,68.8 L178,68.3 L180,67.4 L182,65.7 L184,62.7 L186,59.2 L188,57.3 L190,58.9 L192,63.6 L194,69.0 L196,73.2 L198,75.5 L200,76.7 L202,77.2 L204,77.6 L206,77.7 L208,77.9 L210,77.9 L212,78.0 L214,78.0 L216,78.0 L218,78.0 L220,78.0 L222,78.0 L224,78.0 L226,78.0 L228,78.0 L230,78.0 L232,78.0 L234,76.7 L236,73.9 L238,66.4 L240,53.3 L242,40.2 L244,36.9 L246,45.4 L248,57.7 L250,65.7 L252,68.5 L254,68.8 L256,68.3 L258,67.4 L260,65.7 L262,62.7 L264,59.2 L266,57.3 L268,58.9 L270,63.6 L272,69.0 L274,73.2 L276,75.5 L278,76.7 L280,77.2 L282,77.6 L284,77.7 L286,77.9 L288,77.9 L290,78.0 L292,78.0 L294,78.0 L296,78.0 L298,78.0 L300,78.0 L302,78.0 L304,78.0 L306,78.0 L308,78.0 L310,78.0 L312,76.7 L314,73.9 L316,66.4 L318,53.3 C326,78 330,92 340,92"/>
+    <path class="lost" d="M340,92 H600"/>
+  </svg>
+  <span class="lost-label" aria-hidden="true">Signal lost</span>
+  </div>
+  <p class="code">404 · Page not found</p>
+  <h1>This page has lost its signal.</h1>
+  <p>The address may be mistyped, or the page has moved since the link was made. Everything that still exists is a step away.</p>
+  <nav aria-label="Ways back">
+    <a class="home" href="/">The homepage</a>
+    <a href="/blog/">Writing</a>
+    <a href="/#workshops">Workshops</a>
+    <a href="/#contact">Get in touch</a>
+  </nav>
+</main>
+<script>
   (async () => {
-    if (location.pathname.startsWith("/version-control-for-researchers/")) {
-      const res = await fetch("/version-control-for-researchers/404.html");
+    if (location.pathname.indexOf(DECK) !== 0) return;
+    try {
+      const res = await fetch(DECK + "404.html");
       if (res.ok) {
         document.open();
         document.write(await res.text());
         document.close();
+        return;
       }
-    }
+    } catch (e) {}
+    document.documentElement.className = "";   // no deck shell: show this page after all
   })();
 </script>
 </body>
