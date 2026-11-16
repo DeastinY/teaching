@@ -25,3 +25,12 @@ Thumbs.db
 # Logs
 *.log
 npm-debug.log*
+
+# Claude Code's local settings
+.claude/
+
+# Workshop participant data. gh-pages publishes anything committed outside the
+# NOT_PUBLISHED list in deploy.sh, and 21 named people with skill ratings is not
+# something to put on a public site.
+llmworkshop/participants.csv
+llmworkshop/backup_teams.md
